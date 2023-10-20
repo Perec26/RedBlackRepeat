@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 
 @Composable
-fun ColumnScope.SpacerHeight(height: Int, modifier: Modifier = Modifier) =
-    Spacer(modifier = modifier.height(height.dp))
+fun ColumnScope.SpacerHeight(height: Dp, modifier: Modifier = Modifier) =
+    Spacer(modifier = modifier.height(height))
 
 @Composable
-fun RowScope.SpacerWidth(width: Int, modifier: Modifier = Modifier) =
-    Spacer(modifier = modifier.width(width.dp))
+fun RowScope.SpacerWidth(width: Dp, modifier: Modifier = Modifier) =
+    Spacer(modifier = modifier.width(width))

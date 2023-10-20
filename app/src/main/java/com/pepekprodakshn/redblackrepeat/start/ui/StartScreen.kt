@@ -1,5 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.start.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,13 @@ fun StartScreen(
 @Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, showSystemUi = true)
 @Composable
 fun StartScreenPreview() {
+    RedBlackRepeatTheme {
+        StartScreen() {}
+    }
+}
+@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, showSystemUi = true, uiMode =  Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun StartScreenPreviewDark() {
     RedBlackRepeatTheme {
         StartScreen() {}
     }
