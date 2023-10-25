@@ -6,32 +6,34 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FrameViewModel @Inject constructor() : BaseViewModel<FrameUiState>(FrameUiState()) {
-
-    fun selectPlayer(selectedPlayer: SelectedPlayer) {
-        _state.value = state.value.copy(selectedPlayer = selectedPlayer)
+class FrameViewModel @Inject constructor() : BaseViewModel<FrameUiState, FrameEvent>(
+    initialState = FrameUiState()
+) {
+    override fun onEvent(event: FrameEvent) = when (event) {
+        is FrameEvent.OnBallClick -> onBallClick(event.ballVO)
+        is FrameEvent.OnFoulClick -> onFoulCLick(event.foul)
+        is FrameEvent.OnRemoveClick -> onRemoveCLick(event.remove)
+        is FrameEvent.OnSelectPlayer -> updateState { selectPlayer(selectedPlayer) }
     }
 
-
-
-    fun onBallClick(ballVO: BallVO){
-        when(state.value.selectedPlayer){
-            SelectedPlayer.FIRST -> _state.value = state.value.addFirstPlayerPoints(ballVO.value)
-            SelectedPlayer.SECOND -> _state.value = state.value.addSecondPlayerPoints(ballVO.value)
+    private fun onBallClick(ballVO: BallVO) {
+        when (viewState.selectedPlayer) {
+            SelectedPlayer.FIRST -> updateState { addFirstPlayerPoints(ballVO.value) }
+            SelectedPlayer.SECOND -> updateState { addSecondPlayerPoints(ballVO.value) }
         }
     }
 
-    fun onFoulCLick(foul: Int){
-        when(state.value.selectedPlayer){
-            SelectedPlayer.FIRST -> _state.value = state.value.addSecondPlayerPoints(foul)
-            SelectedPlayer.SECOND -> _state.value = state.value.addFirstPlayerPoints(foul)
+    private fun onFoulCLick(foul: Int) {
+        when (viewState.selectedPlayer) {
+            SelectedPlayer.FIRST -> updateState { addSecondPlayerPoints(foul) }
+            SelectedPlayer.SECOND -> updateState { addFirstPlayerPoints(foul) }
         }
     }
 
-    fun onRemoveCLick(remove: Int){
-        when(state.value.selectedPlayer){
-            SelectedPlayer.FIRST -> _state.value = state.value.addFirstPlayerPoints(remove)
-            SelectedPlayer.SECOND -> _state.value = state.value.addSecondPlayerPoints(remove)
+    private fun onRemoveCLick(remove: Int) {
+        when (viewState.selectedPlayer) {
+            SelectedPlayer.FIRST -> updateState { addFirstPlayerPoints(remove) }
+            SelectedPlayer.SECOND -> updateState { addSecondPlayerPoints(remove) }
         }
     }
 }

@@ -1,8 +1,12 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui
 
+import androidx.compose.runtime.Stable
+
+@Stable
 data class FrameUiState(
-    val firstPlayerVO: PlayerVO = PlayerVO("Виталя"),
-    val secondPlayerVO: PlayerVO = PlayerVO("Валера"),
+    val firstPlayerUI: PlayerUI = PlayerUI(1, "Виталя"),
+    val secondPlayerUI: PlayerUI = PlayerUI(2,
+        "Валера"),
     val firstPlayerPoints: Int = 0,
     val secondPlayerPoints: Int = 0,
     val selectedPlayer: SelectedPlayer = SelectedPlayer.FIRST,
@@ -15,10 +19,15 @@ data class FrameUiState(
     fun addSecondPlayerPoints(points: Int) = copy(
         secondPlayerPoints = secondPlayerPoints + points
     )
+
+    fun selectPlayer(selectedPlayer: SelectedPlayer) = copy(
+        selectedPlayer = selectedPlayer
+    )
 }
 
 enum class SelectedPlayer { FIRST, SECOND }
 
-data class PlayerVO(
+data class PlayerUI(
+    val id: Int,
     val name: String,
 )

@@ -30,7 +30,7 @@ fun FoulsWidget(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.surfaceContainerLow,
                 shape = RoundedCornerShape(topStart = 28.dp, bottomStart = 28.dp)
             ),
         horizontalAlignment = Alignment.CenterHorizontally

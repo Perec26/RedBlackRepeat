@@ -2,6 +2,7 @@ package com.pepekprodakshn.redblackrepeat.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -11,6 +12,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -46,6 +48,13 @@ private val LightColorScheme = lightColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
+    surfaceBright = md_theme_light_surfaceBright,
+    surfaceContainer = md_theme_light_surfaceContainer,
+    surfaceContainerHigh = md_theme_light_surfaceContainerHigh,
+    surfaceContainerHighest = md_theme_light_surfaceContainerHighest,
+    surfaceContainerLow = md_theme_light_surfaceContainerLow,
+    surfaceContainerLowest = md_theme_light_surfaceContainerLowest,
+    surfaceDim = md_theme_light_surfaceDim,
 )
 
 
@@ -79,6 +88,13 @@ private val DarkColorScheme = darkColorScheme(
     surfaceTint = md_theme_dark_surfaceTint,
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
+    surfaceBright = md_theme_dark_surfaceBright,
+    surfaceContainer = md_theme_dark_surfaceContainer,
+    surfaceContainerHigh = md_theme_dark_surfaceContainerHigh,
+    surfaceContainerHighest = md_theme_dark_surfaceContainerHighest,
+    surfaceContainerLow = md_theme_dark_surfaceContainerLow,
+    surfaceContainerLowest = md_theme_dark_surfaceContainerLowest,
+    surfaceDim = md_theme_dark_surfaceDim,
 )
 
 @Composable
@@ -111,7 +127,7 @@ fun RedBlackRepeatTheme(
         colorScheme = colorScheme,
         typography = RBRTypography,
     ) {
-        Surface {
+        Surface(modifier = Modifier.background(color = colorScheme.background)) {
             content()
         }
     }

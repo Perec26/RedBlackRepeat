@@ -9,7 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.ChoosePlayerScreen
 import com.pepekprodakshn.redblackrepeat.frame.ui.FrameScreen
+import com.pepekprodakshn.redblackrepeat.newPlayer.ui.NewPlayerScreen
 import com.pepekprodakshn.redblackrepeat.start.ui.StartScreen
 
 
@@ -25,15 +27,31 @@ fun RedBlackRepeatApp() {
 fun RedBlackRepeatNavHost(
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = "start") {
-        composable("start") {
+
+    NavHost(navController = navController, startDestination = Destinations.Start) {
+        composable(Destinations.Start) {
             StartScreen(
-                onNavigationEvent = {
-                    navController.navigate("frame")
+                onNavigation = {
+                    navController.navigate(Destinations.ChoosePlayer)
                 }
             )
         }
-        composable("frame") {
+        composable(Destinations.ChoosePlayer) {
+            ChoosePlayerScreen(
+                onNavigation = {
+                    navController.navigate(Destinations.NewPlayer)
+                }
+            )
+        }
+
+        composable(Destinations.NewPlayer) {
+            NewPlayerScreen(
+                onNavigation = {
+                    navController.navigate(Destinations.Frame)
+                }
+            )
+        }
+        composable(Destinations.Frame) {
             FrameScreen(
                 onNavigation = {}
             )

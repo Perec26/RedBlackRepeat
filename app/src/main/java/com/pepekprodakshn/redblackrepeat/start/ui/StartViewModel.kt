@@ -6,5 +6,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor() :
-    BaseViewModel<StartUiState>(initialState = StartUiState()) {
+    BaseViewModel<StartUiState, StartEvent>(initialState = StartUiState()) {
+
+    override fun onEvent(event: StartEvent) {
+        when (event) {
+            StartEvent.ButtonClick -> {
+                //  navController.navigate(Destinations.ChoosePlayer)
+            }
+        }
+    }
 }

@@ -4,10 +4,18 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-open class BaseViewModel<STATE : Any>(
-    initialState: STATE
+abstract class BaseViewModel<STATE : Any, EVENT : Any>(
+    initialState: STATE,
 ) : ViewModel() {
 
-    val _state = MutableStateFlow(initialState)
+    private val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
+    val viewState = state.value
+
+    abstract fun onEvent(event: EVENT)
+
+    protected fun updateState(block: STATE.() -> STATE) {
+        _state.value = block.invoke(_state.value)
+    }
+
 }

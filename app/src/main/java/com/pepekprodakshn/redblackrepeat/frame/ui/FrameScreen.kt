@@ -36,7 +36,7 @@ fun FrameScreen(
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .weight(1f),
-                onClick = viewModel::onBallClick
+                onClick = { viewModel.onEvent(FrameEvent.OnBallClick(it)) }
             )
 
             SpacerWidth(width = 136.dp)
@@ -45,19 +45,19 @@ fun FrameScreen(
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .weight(1f),
-                onFoulClick = viewModel::onFoulCLick,
-                onRemoveClick = viewModel::onRemoveCLick,
+                onFoulClick = { viewModel.onEvent(FrameEvent.OnFoulClick(it)) },
+                onRemoveClick = { viewModel.onEvent(FrameEvent.OnRemoveClick(it)) },
             )
         }
 
         SpacerHeight(height = 0.dp, modifier = Modifier.weight(1f))
         PlayersCounters(
-            firstPlayerVO = state.firstPlayerVO,
+            firstPlayerUI = state.firstPlayerUI,
             firstPlayerPoints = state.firstPlayerPoints,
-            secondPlayerVO = state.secondPlayerVO,
+            secondPlayerUI = state.secondPlayerUI,
             secondPlayerPoints = state.secondPlayerPoints,
             selectedPlayer = state.selectedPlayer,
-            onCLick = viewModel::selectPlayer
+            onCLick = { viewModel.onEvent(FrameEvent.OnSelectPlayer(it)) }
         )
         SpacerHeight(height = 16.dp)
     }

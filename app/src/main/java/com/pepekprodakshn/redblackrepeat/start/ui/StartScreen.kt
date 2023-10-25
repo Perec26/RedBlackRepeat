@@ -16,13 +16,13 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun StartScreen(
-    viewModel: StartViewModel = viewModel(),
-    onNavigationEvent: () -> Unit
+    viewModel: StartViewModel = hiltViewModel(),
+    onNavigation: () -> Unit,
 ) {
     val state = viewModel.state.collectAsState().value
 
@@ -36,7 +36,7 @@ fun StartScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = onNavigationEvent) {
+            Button(onClick = onNavigation) {
                 Text(
                     modifier = Modifier.padding(32.dp),
                     text = "Start",
@@ -58,13 +58,19 @@ fun StartScreen(
 @Composable
 fun StartScreenPreview() {
     RedBlackRepeatTheme {
-        StartScreen() {}
+        StartScreen {}
     }
 }
-@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, showSystemUi = true, uiMode =  Configuration.UI_MODE_NIGHT_YES)
+
+@Preview(
+    showBackground = true,
+    device = Devices.AUTOMOTIVE_1024p,
+    showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 fun StartScreenPreviewDark() {
     RedBlackRepeatTheme {
-        StartScreen() {}
+        StartScreen {}
     }
 }

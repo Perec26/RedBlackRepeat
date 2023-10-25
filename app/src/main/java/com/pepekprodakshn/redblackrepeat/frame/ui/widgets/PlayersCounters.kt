@@ -12,17 +12,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerWidth
-import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerVO
+import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
 import com.pepekprodakshn.redblackrepeat.frame.ui.SelectedPlayer
-import com.pepekprodakshn.redblackrepeat.frame.ui.firstPlayerVoMock
-import com.pepekprodakshn.redblackrepeat.frame.ui.secondPlayerVoMock
+import com.pepekprodakshn.redblackrepeat.frame.ui.firstPlayerUIMock
+import com.pepekprodakshn.redblackrepeat.frame.ui.secondPlayerUIMock
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun PlayersCounters(
-    firstPlayerVO: PlayerVO,
+    firstPlayerUI: PlayerUI,
     firstPlayerPoints: Int,
-    secondPlayerVO: PlayerVO,
+    secondPlayerUI: PlayerUI,
     secondPlayerPoints: Int,
     selectedPlayer: SelectedPlayer,
     onCLick: (SelectedPlayer) -> Unit,
@@ -35,7 +35,7 @@ fun PlayersCounters(
         PlayerLabel(
             modifier = Modifier.weight(1f),
             isActive = selectedPlayer == SelectedPlayer.FIRST,
-            name = firstPlayerVO.name,
+            name = firstPlayerUI.name,
             points = firstPlayerPoints,
             difference = firstPlayerPoints - secondPlayerPoints,
             isFirst = true,
@@ -48,7 +48,7 @@ fun PlayersCounters(
         PlayerLabel(
             modifier = Modifier.weight(1f),
             isActive = selectedPlayer == SelectedPlayer.SECOND,
-            name = secondPlayerVO.name,
+            name = secondPlayerUI.name,
             points = secondPlayerPoints,
             difference = secondPlayerPoints - firstPlayerPoints,
             isFirst = false,
@@ -78,9 +78,9 @@ private fun PlayersCountersPreviewDark() {
 private fun PlayersCountersContent() {
     Column {
         PlayersCounters(
-            firstPlayerVO = firstPlayerVoMock,
+            firstPlayerUI = firstPlayerUIMock,
             firstPlayerPoints = 102,
-            secondPlayerVO = secondPlayerVoMock,
+            secondPlayerUI = secondPlayerUIMock,
             secondPlayerPoints = 77,
             selectedPlayer = SelectedPlayer.FIRST,
         ) {}
@@ -88,9 +88,9 @@ private fun PlayersCountersContent() {
         SpacerHeight(height = 16.dp)
 
         PlayersCounters(
-            firstPlayerVO = firstPlayerVoMock,
+            firstPlayerUI = firstPlayerUIMock,
             firstPlayerPoints = 102,
-            secondPlayerVO = secondPlayerVoMock,
+            secondPlayerUI = secondPlayerUIMock,
             secondPlayerPoints = 77,
             selectedPlayer = SelectedPlayer.SECOND,
         ) {}
@@ -98,9 +98,9 @@ private fun PlayersCountersContent() {
         SpacerHeight(height = 16.dp)
 
         PlayersCounters(
-            firstPlayerVO = firstPlayerVoMock,
+            firstPlayerUI = firstPlayerUIMock,
             firstPlayerPoints = 77,
-            secondPlayerVO = secondPlayerVoMock,
+            secondPlayerUI = secondPlayerUIMock,
             secondPlayerPoints = 102,
             selectedPlayer = SelectedPlayer.SECOND,
         ) {}

@@ -1,9 +1,11 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui
 
-val firstPlayerVoMock = PlayerVO(
+val firstPlayerUIMock = PlayerUI(
+    id = 1,
     name = "Ronnie O'Sullivan"
 )
 
-val secondPlayerVoMock = PlayerVO(
+val secondPlayerUIMock = PlayerUI(
+    id = 2,
     name = "Mark Selby"
 )

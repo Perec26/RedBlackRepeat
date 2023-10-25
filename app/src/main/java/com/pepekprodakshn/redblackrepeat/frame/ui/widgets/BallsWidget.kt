@@ -27,7 +27,7 @@ fun BallsWidget(modifier: Modifier = Modifier, onClick: (BallVO) -> Unit) {
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = MaterialTheme.colorScheme.surfaceContainerLow,
                 shape = RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
             ),
         horizontalAlignment = Alignment.CenterHorizontally

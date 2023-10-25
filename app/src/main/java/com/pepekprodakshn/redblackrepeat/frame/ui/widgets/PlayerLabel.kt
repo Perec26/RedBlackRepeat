@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -56,7 +57,7 @@ fun PlayerLabel(
     val (backgroundColor, textColor) = if (isActive) {
         MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
     } else {
-        MaterialTheme.colorScheme.inverseOnSurface to MaterialTheme.colorScheme.onSurfaceVariant
+        MaterialTheme.colorScheme.surfaceContainerLow to MaterialTheme.colorScheme.onSurface
     }
 
     val backgroundShape = RoundedCornerShape(
