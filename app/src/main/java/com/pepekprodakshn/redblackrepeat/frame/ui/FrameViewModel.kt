@@ -1,19 +1,44 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui
 
+import androidx.lifecycle.viewModelScope
 import com.pepekprodakshn.redblackrepeat.base.ui.BaseViewModel
+import com.pepekprodakshn.redblackrepeat.frame.domain.GetPlayerUseCase
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallVO
+import com.pepekprodakshn.redblackrepeat.navigation.FIRST_PLAYER_ID
+import com.pepekprodakshn.redblackrepeat.navigation.RBRNavController
+import com.pepekprodakshn.redblackrepeat.navigation.SECOND_PLAYER_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FrameViewModel @Inject constructor() : BaseViewModel<FrameUiState, FrameEvent>(
+class FrameViewModel @Inject constructor(
+    private val navController: RBRNavController,
+    private val getPlayerUseCase: GetPlayerUseCase,
+) : BaseViewModel<FrameUiState, FrameEvent>(
     initialState = FrameUiState()
 ) {
+
+    init {
+        val firstPlayerId = navController.getIntArg(FIRST_PLAYER_ID) ?: error("Can't find argument")
+        val secondPlayerId =
+            navController.getIntArg(SECOND_PLAYER_ID) ?: error("Can't find argument")
+        getPlayers(firstPlayerId, secondPlayerId)
+    }
+
+    private fun getPlayers(firstPlayerId: Int, secondPlayerId: Int) {
+        viewModelScope.launch {
+            val firstPlayer = getPlayerUseCase.execute(firstPlayerId)
+            val secondPlayer = getPlayerUseCase.execute(secondPlayerId)
+            updateState { initPlayers(firstPlayer, secondPlayer) }
+        }
+    }
+
     override fun onEvent(event: FrameEvent) = when (event) {
         is FrameEvent.OnBallClick -> onBallClick(event.ballVO)
         is FrameEvent.OnFoulClick -> onFoulCLick(event.foul)
         is FrameEvent.OnRemoveClick -> onRemoveCLick(event.remove)
-        is FrameEvent.OnSelectPlayer -> updateState { selectPlayer(selectedPlayer) }
+        is FrameEvent.OnSelectPlayer -> updateState { selectPlayer(event.selectedPlayer) }
     }
 
     private fun onBallClick(ballVO: BallVO) {

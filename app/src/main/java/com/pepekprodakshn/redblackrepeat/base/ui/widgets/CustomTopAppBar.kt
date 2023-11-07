@@ -3,13 +3,17 @@ package com.pepekprodakshn.redblackrepeat.base.ui.widgets
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,9 +27,14 @@ import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 fun CustomTopAppBar(
     title: String,
     onNavigationClick: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         title = { Title(title = title) },
+        actions = actions,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
+        ),
         navigationIcon = {
             onNavigationClick?.let {
                 IconButton(onClick = it) {
@@ -35,7 +44,6 @@ fun CustomTopAppBar(
                     )
                 }
             }
-
         }
     )
 }
@@ -65,6 +73,18 @@ private fun CustomTopAppBarPreviewContent() {
             CustomTopAppBar("Title") {}
             SpacerHeight(height = 8.dp)
             CustomTopAppBar("Title")
+            SpacerHeight(height = 8.dp)
+            CustomTopAppBar(
+                title = "Title",
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = ""
+                        )
+                    }
+                }
+            )
         }
     }
 }

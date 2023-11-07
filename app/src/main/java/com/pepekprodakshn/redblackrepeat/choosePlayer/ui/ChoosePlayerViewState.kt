@@ -6,6 +6,9 @@ private const val MAX_PLAYERS = 2
 
 data class ChoosePlayerViewState(
     val players: List<PlayerUI> = emptyList(),
+    val showNewPlayerBottomSheet: Boolean = false,
+    val newPlayerName: String = "",
+    val isNewPlayerError: Boolean = false,
     val selectedPlayers: List<PlayerUI> = emptyList(),
 ) {
 
@@ -20,4 +23,18 @@ data class ChoosePlayerViewState(
         }
         return copy(selectedPlayers = newList)
     }
+
+    fun toShowNewPlayerBottomSheet(show: Boolean) = copy(showNewPlayerBottomSheet = show)
+
+    fun toUpdateNewPlayerName(newName: String) = copy(
+        newPlayerName = newName,
+        isNewPlayerError = false
+    )
+
+    fun toNewNameValidationError() = copy(isNewPlayerError = true)
+
+    fun toEmptyNewPlayer() = copy(
+        newPlayerName = "",
+        showNewPlayerBottomSheet = false
+    )
 }

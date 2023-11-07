@@ -3,4 +3,8 @@
     <string name="frame_fouls">Fouls</string>
     <string name="frame_balls">Balls</string>
     <string name="frame_remove">Remove</string>
+    <string name="start_start">Start</string>
+    <string name="choose_players_title">Choose players</string>
+    <string name="choose_players_start_match">Start match</string>
+    <string name="new_player_validation_error">Invalid name</string>
 </resources>

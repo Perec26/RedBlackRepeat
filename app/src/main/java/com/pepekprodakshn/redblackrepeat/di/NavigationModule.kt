@@ -1,14 +1,22 @@
 package com.pepekprodakshn.redblackrepeat.di
 
-import androidx.navigation.NavController
-import dagger.Binds
+import android.content.Context
+import com.pepekprodakshn.redblackrepeat.navigation.RBRNavController
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-abstract class NavigationModule {
 
-    fun provideNavController() = NavController
+@Module
+@InstallIn(SingletonComponent::class)
+class NavigationModule {
+
+    @Singleton
+    @Provides
+    fun provideNavController(@ApplicationContext context: Context): RBRNavController =
+        RBRNavController(context)
 
 }

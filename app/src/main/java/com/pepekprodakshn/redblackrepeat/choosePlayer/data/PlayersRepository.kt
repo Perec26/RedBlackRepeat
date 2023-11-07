@@ -10,4 +10,6 @@ class PlayersRepository @Inject constructor(
     suspend fun getAllPlayers() = dao.getAll()
 
     suspend fun addPlayer(playerEntity: PlayerEntity) = dao.addPlayer(playerEntity)
+
+    suspend fun getPlayer(id: Int) = dao.getPlayer(id)
 }

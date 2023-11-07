@@ -10,7 +10,8 @@ abstract class BaseViewModel<STATE : Any, EVENT : Any>(
 
     private val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
-    val viewState = state.value
+    val viewState: STATE
+        get() = state.value
 
     abstract fun onEvent(event: EVENT)
 

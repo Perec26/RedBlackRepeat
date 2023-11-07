@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices.AUTOMOTIVE_1024p
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerWidth
 import com.pepekprodakshn.redblackrepeat.frame.ui.widgets.BallsWidget
@@ -22,8 +22,7 @@ import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun FrameScreen(
-    viewModel: FrameViewModel = viewModel(),
-    onNavigation: () -> Unit,
+    viewModel: FrameViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value
     Column {
@@ -67,7 +66,7 @@ fun FrameScreen(
 @Composable
 fun FrameScreenPreview() {
     RedBlackRepeatTheme {
-        FrameScreen() {}
+        FrameScreen()
     }
 }
 
@@ -80,6 +79,6 @@ fun FrameScreenPreview() {
 @Composable
 fun FrameScreenPreviewDark() {
     RedBlackRepeatTheme {
-        FrameScreen() {}
+        FrameScreen()
     }
 }

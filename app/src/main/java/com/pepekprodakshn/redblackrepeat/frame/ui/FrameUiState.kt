@@ -4,9 +4,8 @@ import androidx.compose.runtime.Stable
 
 @Stable
 data class FrameUiState(
-    val firstPlayerUI: PlayerUI = PlayerUI(1, "Виталя"),
-    val secondPlayerUI: PlayerUI = PlayerUI(2,
-        "Валера"),
+    val firstPlayerUI: PlayerUI = PlayerUI(0, ""),
+    val secondPlayerUI: PlayerUI = PlayerUI(0, ""),
     val firstPlayerPoints: Int = 0,
     val secondPlayerPoints: Int = 0,
     val selectedPlayer: SelectedPlayer = SelectedPlayer.FIRST,
@@ -22,6 +21,14 @@ data class FrameUiState(
 
     fun selectPlayer(selectedPlayer: SelectedPlayer) = copy(
         selectedPlayer = selectedPlayer
+    )
+
+    fun initPlayers(
+        firstPlayerUI: PlayerUI,
+        secondPlayerUI: PlayerUI,
+    ) = copy(
+        firstPlayerUI = firstPlayerUI,
+        secondPlayerUI = secondPlayerUI
     )
 }
 

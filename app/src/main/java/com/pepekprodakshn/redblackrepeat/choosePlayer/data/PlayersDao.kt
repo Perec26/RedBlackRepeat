@@ -13,4 +13,7 @@ interface PlayersDao {
 
     @Insert
     suspend fun addPlayer(playerEntity: PlayerEntity)
+
+    @Query("SELECT * FROM Players WHERE id = :playerId LIMIT 1")
+    suspend fun getPlayer(playerId: Int): PlayerEntity
 }

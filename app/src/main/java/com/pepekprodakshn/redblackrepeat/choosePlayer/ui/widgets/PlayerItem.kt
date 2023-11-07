@@ -37,7 +37,7 @@ fun PlayerItem(
                 enabled = enabled || isSelected,
                 onClick = onClick
             )
-            .background(color = MaterialTheme.colorScheme.surface),
+            .background(color = MaterialTheme.colorScheme.surfaceContainer),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -53,7 +53,7 @@ fun PlayerItem(
         ) {
             Text(
                 modifier = Modifier.padding(8.dp),
-                text = player.name.first().uppercase(),
+                text = player.name.firstOrNull()?.uppercase() ?: "R",
                 style = RBRTypography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -61,7 +61,7 @@ fun PlayerItem(
 
         Text(
             modifier = Modifier.weight(1f),
-            text = player.name + " " + player.id,
+            text = player.name,
             style = RBRTypography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface
         )

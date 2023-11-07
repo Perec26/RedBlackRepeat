@@ -12,17 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.redblackrepeat.R
+import com.pepekprodakshn.redblackrepeat.base.ui.LANDSCAPE_DEVICE
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun StartScreen(
     viewModel: StartViewModel = hiltViewModel(),
-    onNavigation: () -> Unit,
 ) {
     val state = viewModel.state.collectAsState().value
 
@@ -30,16 +31,15 @@ fun StartScreen(
         modifier = Modifier.fillMaxSize(),
     ) {
 
-
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = onNavigation) {
+            Button(onClick = { viewModel.onEvent(StartEvent.ButtonClick) }) {
                 Text(
                     modifier = Modifier.padding(32.dp),
-                    text = "Start",
+                    text = stringResource(R.string.start_start),
                     fontSize = 36.sp
                 )
             }
@@ -54,23 +54,23 @@ fun StartScreen(
     }
 }
 
-@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, showSystemUi = true)
+@Preview(showBackground = true, device = LANDSCAPE_DEVICE, showSystemUi = true)
 @Composable
 fun StartScreenPreview() {
     RedBlackRepeatTheme {
-        StartScreen {}
+        StartScreen()
     }
 }
 
 @Preview(
     showBackground = true,
-    device = Devices.AUTOMOTIVE_1024p,
+    device = LANDSCAPE_DEVICE,
     showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
 fun StartScreenPreviewDark() {
     RedBlackRepeatTheme {
-        StartScreen {}
+        StartScreen ()
     }
 }
