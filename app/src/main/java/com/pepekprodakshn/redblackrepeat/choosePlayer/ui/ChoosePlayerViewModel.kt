@@ -40,8 +40,8 @@ class ChoosePlayerViewModel @Inject constructor(
             ChoosePlayerEvent.OnStartMatchClick -> {
                 navController.navigateTo(
                     destination = Destinations.Frame,
-                    viewState.players.first().id,
-                    viewState.players.last().id
+                    viewState.selectedPlayers.first().id,
+                    viewState.selectedPlayers.last().id
                 )
             }
         }

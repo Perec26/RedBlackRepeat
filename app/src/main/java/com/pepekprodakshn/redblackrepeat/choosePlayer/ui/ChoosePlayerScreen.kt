@@ -1,6 +1,9 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -85,23 +88,27 @@ private fun ChoosePlayerContent(
                 item { SpacerHeight(height = 60.dp) }
             }
         }
-
-        FloatingActionButton(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp),
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            onClick = { onEvent(ChoosePlayerEvent.OnStartMatchClick) }
+        AnimatedVisibility(
+            modifier = Modifier.align(Alignment.BottomEnd),
+            visible = !state.isEnabled,
+            enter = scaleIn(),
+            exit = scaleOut(),
         ) {
 
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = ""
-            )
+            FloatingActionButton(
+                modifier = Modifier.padding(16.dp),
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                onClick = { onEvent(ChoosePlayerEvent.OnStartMatchClick) }
+            ) {
 
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = ""
+                )
+
+            }
         }
-
     }
 
     if (state.showNewPlayerBottomSheet) {
