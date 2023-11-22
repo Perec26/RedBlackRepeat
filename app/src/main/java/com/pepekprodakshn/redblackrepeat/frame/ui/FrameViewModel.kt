@@ -3,7 +3,6 @@ package com.pepekprodakshn.redblackrepeat.frame.ui
 import androidx.lifecycle.viewModelScope
 import com.pepekprodakshn.redblackrepeat.base.ui.BaseViewModel
 import com.pepekprodakshn.redblackrepeat.frame.domain.GetPlayerUseCase
-import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallVO
 import com.pepekprodakshn.redblackrepeat.navigation.FIRST_PLAYER_ID
 import com.pepekprodakshn.redblackrepeat.navigation.RBRNavController
 import com.pepekprodakshn.redblackrepeat.navigation.SECOND_PLAYER_ID
@@ -35,17 +34,10 @@ class FrameViewModel @Inject constructor(
     }
 
     override fun onEvent(event: FrameEvent) = when (event) {
-        is FrameEvent.OnBallClick -> onBallClick(event.ballVO)
+        is FrameEvent.OnBallClick -> updateState { onBallPotted(event.ballUI) }
         is FrameEvent.OnFoulClick -> onFoulCLick(event.foul)
         is FrameEvent.OnRemoveClick -> onRemoveCLick(event.remove)
         is FrameEvent.OnSelectPlayer -> updateState { selectPlayer(event.selectedPlayer) }
-    }
-
-    private fun onBallClick(ballVO: BallVO) {
-        when (viewState.selectedPlayer) {
-            SelectedPlayer.FIRST -> updateState { addFirstPlayerPoints(ballVO.value) }
-            SelectedPlayer.SECOND -> updateState { addSecondPlayerPoints(ballVO.value) }
-        }
     }
 
     private fun onFoulCLick(foul: Int) {

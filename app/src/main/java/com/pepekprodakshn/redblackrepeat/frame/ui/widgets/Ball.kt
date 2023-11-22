@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,18 +20,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.pepekprodakshn.redblackrepeat.R
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerWidth
-import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallVO
+import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallUI
+import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun Ball(
-    ball: BallVO,
+    ball: BallUI,
     modifier: Modifier = Modifier,
     size: Dp = 64.dp,
-    onClick: (BallVO) -> Unit = {},
+    count: Int = 0,
+    showCount: Boolean = false,
+    onClick: (BallUI) -> Unit = {},
 ) {
 
     Box(
@@ -53,6 +58,15 @@ fun Ball(
             tint = ball.color,
             contentDescription = ""
         )
+
+        val textSize = 24.sp / (64.dp / size)
+        if (showCount) {
+            Text(
+                text = count.toString(),
+                color = ball.textColor,
+                style = RBRTypography.titleMedium.copy(fontSize = textSize)
+            )
+        }
     }
 
 }
@@ -80,9 +94,9 @@ private fun BallPreviewContent() {
         SpacerHeight(8.dp)
 
         Row {
-            BallVO.values().forEach {
+            BallUI.values().forEach {
                 SpacerWidth(8.dp)
-                Ball(it)
+                Ball(it, count = it.value * 2, size = 24.dp)
             }
             SpacerWidth(8.dp)
         }

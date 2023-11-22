@@ -18,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -178,28 +177,26 @@ private fun PlayerText(modifier: Modifier = Modifier, text: String, color: Color
 @Preview(showBackground = true)
 @Composable
 private fun PlayerLabelPreview() {
-    RedBlackRepeatTheme {
-        PlayerLabelPreviewContent()
-    }
+    PlayerLabelPreviewContent()
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PlayerLabelPreviewDark() {
-    RedBlackRepeatTheme {
-        PlayerLabelPreviewContent()
-    }
+    PlayerLabelPreviewContent()
 }
 
 @Composable
 private fun PlayerLabelPreviewContent() {
-    Column {
-        PlayerLabel {}
-        SpacerHeight(height = 8.dp)
-        PlayerLabel(isActive = true, difference = 29) {}
-        SpacerHeight(height = 8.dp)
-        PlayerLabel(isFirst = false, difference = 29) {}
-        SpacerHeight(height = 8.dp)
-        PlayerLabel(isFirst = false, isActive = true) {}
+    RedBlackRepeatTheme {
+        Column {
+            PlayerLabel {}
+            SpacerHeight(height = 8.dp)
+            PlayerLabel(isActive = true, difference = 29) {}
+            SpacerHeight(height = 8.dp)
+            PlayerLabel(isFirst = false, difference = 29) {}
+            SpacerHeight(height = 8.dp)
+            PlayerLabel(isFirst = false, isActive = true) {}
+        }
     }
 }

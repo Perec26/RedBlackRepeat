@@ -7,4 +7,5 @@
     <string name="choose_players_title">Choose players</string>
     <string name="choose_players_start_match">Start match</string>
     <string name="new_player_validation_error">Invalid name</string>
+    <string name="frame_break">Break: %1$s</string>
 </resources>

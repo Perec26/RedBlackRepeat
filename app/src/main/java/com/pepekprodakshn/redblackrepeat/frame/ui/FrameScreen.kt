@@ -25,6 +25,18 @@ fun FrameScreen(
     viewModel: FrameViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value
+
+    FrameScreenContent(
+        state = state,
+        onEvent = viewModel::onEvent
+    )
+}
+
+@Composable
+fun FrameScreenContent(
+    state: FrameUiState,
+    onEvent: (FrameEvent) -> Unit,
+) {
     Column {
 
         Row(
@@ -35,7 +47,7 @@ fun FrameScreen(
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .weight(1f),
-                onClick = { viewModel.onEvent(FrameEvent.OnBallClick(it)) }
+                onClick = { onEvent(FrameEvent.OnBallClick(it)) }
             )
 
             SpacerWidth(width = 136.dp)
@@ -44,8 +56,8 @@ fun FrameScreen(
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .weight(1f),
-                onFoulClick = { viewModel.onEvent(FrameEvent.OnFoulClick(it)) },
-                onRemoveClick = { viewModel.onEvent(FrameEvent.OnRemoveClick(it)) },
+                onFoulClick = { onEvent(FrameEvent.OnFoulClick(it)) },
+                onRemoveClick = { onEvent(FrameEvent.OnRemoveClick(it)) },
             )
         }
 
@@ -56,7 +68,8 @@ fun FrameScreen(
             secondPlayerUI = state.secondPlayerUI,
             secondPlayerPoints = state.secondPlayerPoints,
             selectedPlayer = state.selectedPlayer,
-            onCLick = { viewModel.onEvent(FrameEvent.OnSelectPlayer(it)) }
+            breakUI = state.breakUI,
+            onCLick = { onEvent(FrameEvent.OnSelectPlayer(it)) }
         )
         SpacerHeight(height = 16.dp)
     }
@@ -65,9 +78,7 @@ fun FrameScreen(
 @Preview(showBackground = true, device = AUTOMOTIVE_1024p, showSystemUi = true)
 @Composable
 fun FrameScreenPreview() {
-    RedBlackRepeatTheme {
-        FrameScreen()
-    }
+    FrameScreenPreviewContent()
 }
 
 @Preview(
@@ -78,7 +89,12 @@ fun FrameScreenPreview() {
 )
 @Composable
 fun FrameScreenPreviewDark() {
+    FrameScreenPreviewContent()
+}
+
+@Composable
+private fun FrameScreenPreviewContent() {
     RedBlackRepeatTheme {
-        FrameScreen()
+        FrameScreenContent(state = frameUiStateMock) {}
     }
 }

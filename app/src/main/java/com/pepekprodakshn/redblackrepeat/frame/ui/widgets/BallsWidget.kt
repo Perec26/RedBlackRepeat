@@ -17,12 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.redblackrepeat.R
-import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallVO
+import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallUI
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
-fun BallsWidget(modifier: Modifier = Modifier, onClick: (BallVO) -> Unit) {
+fun BallsWidget(modifier: Modifier = Modifier, onClick: (BallUI) -> Unit) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -44,10 +44,10 @@ fun BallsWidget(modifier: Modifier = Modifier, onClick: (BallVO) -> Unit) {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Ball(ball = BallVO.RED, onClick = onClick)
-            Ball(ball = BallVO.YELLOW, onClick = onClick)
-            Ball(ball = BallVO.GREEN, onClick = onClick)
-            Ball(ball = BallVO.BROWN, onClick = onClick)
+            Ball(ball = BallUI.RED, onClick = onClick)
+            Ball(ball = BallUI.YELLOW, onClick = onClick)
+            Ball(ball = BallUI.GREEN, onClick = onClick)
+            Ball(ball = BallUI.BROWN, onClick = onClick)
         }
         Row(
             modifier = Modifier
@@ -55,9 +55,9 @@ fun BallsWidget(modifier: Modifier = Modifier, onClick: (BallVO) -> Unit) {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Ball(ball = BallVO.BLUE, onClick = onClick)
-            Ball(ball = BallVO.PINK, onClick = onClick)
-            Ball(ball = BallVO.BLACK, onClick = onClick)
+            Ball(ball = BallUI.BLUE, onClick = onClick)
+            Ball(ball = BallUI.PINK, onClick = onClick)
+            Ball(ball = BallUI.BLACK, onClick = onClick)
         }
     }
 
