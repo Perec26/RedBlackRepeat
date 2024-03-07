@@ -1,6 +1,5 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,8 +19,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.redblackrepeat.R
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
@@ -81,15 +80,15 @@ private fun NewPlayerBottomSheetContent(
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            TextField(
+            OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
                     .weight(1f),
                 value = name,
                 isError = isError,
@@ -108,8 +107,11 @@ private fun NewPlayerBottomSheetContent(
                 ),
                 singleLine = true,
             )
+
             IconButton(
-                onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) }) {
+                modifier = Modifier.padding(vertical = 8.dp),
+                onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) }
+            ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = ""
@@ -134,21 +136,10 @@ private fun ErrorSupportingText(text: String) {
     )
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun NewPlayerBottomSheetPreview() {
-    NewPlayerBottomSheetPreviewContent()
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun NewPlayerBottomSheetPreviewDark() {
-    NewPlayerBottomSheetPreviewContent()
-}
-
-@Composable
-private fun NewPlayerBottomSheetPreviewContent() {
     RedBlackRepeatTheme {
-        NewPlayerBottomSheetContent() {}
+        NewPlayerBottomSheetContent {}
     }
 }

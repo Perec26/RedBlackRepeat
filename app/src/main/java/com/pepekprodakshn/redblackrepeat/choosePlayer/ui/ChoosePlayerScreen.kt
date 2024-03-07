@@ -67,7 +67,6 @@ private fun ChoosePlayerContent(
                         contentDescription = ""
                     )
                 }
-
             }
 
             LazyVerticalGrid(
@@ -106,7 +105,6 @@ private fun ChoosePlayerContent(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = ""
                 )
-
             }
         }
     }
@@ -142,9 +140,6 @@ private fun ChoosePlayerScreenPreviewDark() {
 @Composable
 private fun ChoosePlayerScreenPreviewContent() {
     RedBlackRepeatTheme {
-        ChoosePlayerContent(
-            state = choosePlayerViewStateMock,
-            onEvent = {},
-        )
+        ChoosePlayerContent(state = choosePlayerViewStateMock) {}
     }
 }

@@ -8,5 +8,4 @@ class GetAllPlayersUseCase @Inject constructor(
 ) {
 
     suspend fun execute() = repository.getAllPlayers().toUI()
-
 }

@@ -1,8 +1,12 @@
 package com.pepekprodakshn.redblackrepeat.base.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<STATE : Any, EVENT : Any>(
     initialState: STATE,
@@ -19,4 +23,7 @@ abstract class BaseViewModel<STATE : Any, EVENT : Any>(
         _state.value = block.invoke(_state.value)
     }
 
+    fun launch(block: suspend CoroutineScope.() -> Unit): Job {
+        return viewModelScope.launch { block.invoke(this) }
+    }
 }

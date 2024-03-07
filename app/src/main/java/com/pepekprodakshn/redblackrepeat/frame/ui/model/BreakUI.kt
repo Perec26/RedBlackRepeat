@@ -2,12 +2,11 @@ package com.pepekprodakshn.redblackrepeat.frame.ui.model
 
 data class BreakUI(
     val balls: List<BallUI> = emptyList(),
+    val isFreeBall: Boolean = false,
+    val freeBallScore: Int = 0,
 ) {
 
-    val sum: Int
-        get() {
-            return balls.sumOf(BallUI::value)
-        }
+    val sum = balls.sumOf(BallUI::value) + freeBallScore
 
     val reds = balls.count { it == BallUI.RED }
     val yellows = balls.count { it == BallUI.YELLOW }

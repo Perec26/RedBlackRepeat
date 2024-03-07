@@ -1,11 +1,22 @@
 <resources>
     <string name="app_name">RedBlackRepeat</string>
-    <string name="frame_fouls">Fouls</string>
-    <string name="frame_balls">Balls</string>
-    <string name="frame_remove">Remove</string>
     <string name="start_start">Start</string>
     <string name="choose_players_title">Choose players</string>
-    <string name="choose_players_start_match">Start match</string>
     <string name="new_player_validation_error">Invalid name</string>
+    <string name="frame_fouls">Fouls</string>
+    <string name="frame_foul">Foul</string>
+    <string name="frame_undo">Undo</string>
+    <string name="frame_add_reds">Add reds</string>
+    <string name="frame_remove_reds">Remove reds</string>
+    <string name="frame_restart">Restart</string>
+    <string name="frame_more">More</string>
+    <string name="frame_add">Add</string>
+    <string name="frame_remove">Remove</string>
+    <string name="frame_cancel">Cancel</string>
+    <string name="frame_options">Options</string>
+    <string name="frame_balls">Balls</string>
     <string name="frame_break">Break: %1$s</string>
+    <string name="frame_miss">Miss</string>
+    <string name="frame_free_ball">Free ball</string>
+    <string name="frame_reds">Reds:</string>
 </resources>

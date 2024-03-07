@@ -1,6 +1,5 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui.widgets
 
-import android.content.res.Configuration
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -25,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
@@ -53,10 +52,16 @@ fun PlayerLabel(
         )
     )
 
-    val (backgroundColor, textColor) = if (isActive) {
-        MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
+    val backgroundColor = if (isActive) {
+        MaterialTheme.colorScheme.secondaryContainer
     } else {
-        MaterialTheme.colorScheme.surfaceContainerLow to MaterialTheme.colorScheme.onSurface
+        MaterialTheme.colorScheme.surfaceContainerLow
+    }
+
+    val textColor = if (isActive) {
+        MaterialTheme.colorScheme.onSecondaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSurface
     }
 
     val backgroundShape = RoundedCornerShape(
@@ -174,20 +179,9 @@ private fun PlayerText(modifier: Modifier = Modifier, text: String, color: Color
     )
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun PlayerLabelPreview() {
-    PlayerLabelPreviewContent()
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun PlayerLabelPreviewDark() {
-    PlayerLabelPreviewContent()
-}
-
-@Composable
-private fun PlayerLabelPreviewContent() {
     RedBlackRepeatTheme {
         Column {
             PlayerLabel {}

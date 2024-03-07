@@ -27,6 +27,18 @@ fun StartScreen(
 ) {
     val state = viewModel.state.collectAsState().value
 
+    StartScreenContent(
+        state = state,
+        onEvent = viewModel::onEvent
+    )
+
+}
+
+@Composable
+private fun StartScreenContent(
+    state: StartUiState,
+    onEvent: (StartEvent) -> Unit,
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -36,7 +48,7 @@ fun StartScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = { viewModel.onEvent(StartEvent.ButtonClick) }) {
+            Button(onClick = { onEvent(StartEvent.ButtonClick) }) {
                 Text(
                     modifier = Modifier.padding(32.dp),
                     text = stringResource(R.string.start_start),
@@ -56,9 +68,9 @@ fun StartScreen(
 
 @Preview(showBackground = true, device = LANDSCAPE_DEVICE, showSystemUi = true)
 @Composable
-fun StartScreenPreview() {
+private fun StartScreenPreview() {
     RedBlackRepeatTheme {
-        StartScreen()
+        StartScreenContent(StartUiState()) {}
     }
 }
 
@@ -69,8 +81,8 @@ fun StartScreenPreview() {
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
-fun StartScreenPreviewDark() {
+private fun StartScreenPreviewDark() {
     RedBlackRepeatTheme {
-        StartScreen ()
+        StartScreenContent(StartUiState()) {}
     }
 }

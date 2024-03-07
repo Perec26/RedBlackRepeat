@@ -14,9 +14,9 @@ data class ChoosePlayerViewState(
 
     val isEnabled = selectedPlayers.size < MAX_PLAYERS
 
-    fun toInitial(players: List<PlayerUI>) = copy(players = players)
+    fun updatePlayers(players: List<PlayerUI>) = copy(players = players)
 
-    fun toSelectPlayerChange(player: PlayerUI): ChoosePlayerViewState {
+    fun changePlayerSelection(player: PlayerUI): ChoosePlayerViewState {
         val isSelected = selectedPlayers.contains(player)
         val newList = selectedPlayers.toMutableList().apply {
             if (isSelected) remove(player) else add(player)
@@ -24,16 +24,18 @@ data class ChoosePlayerViewState(
         return copy(selectedPlayers = newList)
     }
 
-    fun toShowNewPlayerBottomSheet(show: Boolean) = copy(showNewPlayerBottomSheet = show)
+    fun openNewPlayerBottomSheet() = copy(showNewPlayerBottomSheet = true)
 
-    fun toUpdateNewPlayerName(newName: String) = copy(
+    fun closeNewPlayerBottomSheet() = copy(showNewPlayerBottomSheet = false)
+
+    fun updateNewPlayerName(newName: String) = copy(
         newPlayerName = newName,
         isNewPlayerError = false
     )
 
-    fun toNewNameValidationError() = copy(isNewPlayerError = true)
+    fun showNewNameValidationError() = copy(isNewPlayerError = true)
 
-    fun toEmptyNewPlayer() = copy(
+    fun setEmptyNewPlayerState() = copy(
         newPlayerName = "",
         showNewPlayerBottomSheet = false
     )

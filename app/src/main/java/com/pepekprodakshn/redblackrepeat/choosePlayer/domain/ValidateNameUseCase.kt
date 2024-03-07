@@ -10,5 +10,4 @@ class ValidateNameUseCase @Inject constructor() {
 
         return ValidationResult.Success
     }
-
 }
