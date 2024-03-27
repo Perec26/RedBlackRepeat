@@ -23,7 +23,13 @@ android {
         }
     }
 
+
+
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -51,6 +57,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions.unitTests.all {
+        it.useJUnitPlatform()
+    }
+
 }
 
 dependencies {
@@ -68,6 +79,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation("androidx.compose.material:material-icons-extended:1.6.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
 
     val roomVersion = "2.6.1"
@@ -83,6 +95,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.7")
 
+
+    testImplementation("io.kotest:kotest-runner-junit5:5.8")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
