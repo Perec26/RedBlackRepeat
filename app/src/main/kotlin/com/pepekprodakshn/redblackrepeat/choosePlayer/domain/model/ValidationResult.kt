@@ -1,6 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.domain.model
 
 sealed class ValidationResult {
-    object Success : ValidationResult()
-    object Error : ValidationResult()
+    data object Success : ValidationResult()
+    data object Error : ValidationResult()
 }

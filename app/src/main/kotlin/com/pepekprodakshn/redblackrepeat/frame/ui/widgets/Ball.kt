@@ -132,7 +132,7 @@ private fun BallRowPreview(isEnabled: Boolean) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        BallUI.values().forEach {
+        BallUI.entries.forEach {
             Ball(
                 ball = it,
                 count = it.value * 2,

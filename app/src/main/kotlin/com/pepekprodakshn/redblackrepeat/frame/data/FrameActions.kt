@@ -5,5 +5,5 @@ sealed class FrameActionsDTO {
     data class Foul(val foul: FoulDTO) : FrameActionsDTO()
     data class AddReds(val count: Int) : FrameActionsDTO()
     data class RemoveReds(val count: Int) : FrameActionsDTO()
-    object BreakEnded : FrameActionsDTO()
+    data object BreakEnded : FrameActionsDTO()
 }

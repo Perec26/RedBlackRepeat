@@ -1,3 +1,5 @@
+@file:Suppress("UnusedReceiverParameter")
+
 package com.pepekprodakshn.redblackrepeat.base.ui.widgets
 
 import androidx.compose.foundation.layout.ColumnScope

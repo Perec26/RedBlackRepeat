@@ -67,7 +67,7 @@ fun FrameOptions(
             },
         ) {
 
-            FrameOptionUI.values().forEach {
+            FrameOptionUI.entries.forEach {
                 FrameOption(
                     name = it.text,
                     iconImageVector = it.icon,

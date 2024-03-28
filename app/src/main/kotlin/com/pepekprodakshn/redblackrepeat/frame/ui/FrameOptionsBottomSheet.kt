@@ -55,7 +55,7 @@ private fun FrameOptionsBottomSheetContent(
 private fun FrameOptionsBottomSheetPreview() {
     RedBlackRepeatTheme {
         FrameOptionsBottomSheetContent(
-            FrameOptionUI.values().toList()
+            FrameOptionUI.entries.toList()
         ) {}
     }
 }

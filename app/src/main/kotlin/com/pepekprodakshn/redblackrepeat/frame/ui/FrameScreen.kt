@@ -95,7 +95,7 @@ fun FrameScreenContent(
 
     if (state.showOptionsBottomSheet) {
         FrameOptionsBottomSheet(
-            options = FrameOptionUI.values().toList().drop(state.optionElementsOnScreen),
+            options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
             onEvent = onEvent
         )
     }

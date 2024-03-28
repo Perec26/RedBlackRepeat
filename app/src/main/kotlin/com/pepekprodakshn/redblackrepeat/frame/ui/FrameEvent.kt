@@ -10,30 +10,30 @@ sealed class FrameEvent {
     //Foul Events
 
     data class OnFoulPointClick(val points: Int) : FrameEvent()
-    object OnFoulIsFreeBallClick : FrameEvent()
-    object OnFoulIsMissClick : FrameEvent()
-    object OnFoulRemoveRedsClick : FrameEvent()
-    object OnFoulConfirmClick : FrameEvent()
-    object OnFoulAddRedsClick : FrameEvent()
-    object OnFoulBottomSheetClosed : FrameEvent()
+    data object OnFoulIsFreeBallClick : FrameEvent()
+    data object OnFoulIsMissClick : FrameEvent()
+    data object OnFoulRemoveRedsClick : FrameEvent()
+    data object OnFoulConfirmClick : FrameEvent()
+    data object OnFoulAddRedsClick : FrameEvent()
+    data object OnFoulBottomSheetClosed : FrameEvent()
 
     //AddRemove Events
 
-    object OnAddRemoveRedsDialogClose : FrameEvent()
-    object OnAddRedsDialogClick : FrameEvent()
-    object OnRemoveRedsDialogClick : FrameEvent()
-    object OnAddRemoveRedsMinusClick : FrameEvent()
-    object OnAddRemoveRedsPlusClick : FrameEvent()
+    data object OnAddRemoveRedsDialogClose : FrameEvent()
+    data object OnAddRedsDialogClick : FrameEvent()
+    data object OnRemoveRedsDialogClick : FrameEvent()
+    data object OnAddRemoveRedsMinusClick : FrameEvent()
+    data object OnAddRemoveRedsPlusClick : FrameEvent()
 
     //FrameOptions Events
 
     data class OnOptionsElementsCounted(val count: Int) : FrameEvent()
-    object OnFoulClick : FrameEvent()
-    object OnUndoClick : FrameEvent()
-    object OnAddRedsClick : FrameEvent()
-    object OnRemoveRedsClick : FrameEvent()
-    object OnRestartClick : FrameEvent()
-    object OnMoreClick : FrameEvent()
-    object OnFrameOptionsBottomSheetClose : FrameEvent()
+    data object OnFoulClick : FrameEvent()
+    data object OnUndoClick : FrameEvent()
+    data object OnAddRedsClick : FrameEvent()
+    data object OnRemoveRedsClick : FrameEvent()
+    data object OnRestartClick : FrameEvent()
+    data object OnMoreClick : FrameEvent()
+    data object OnFrameOptionsBottomSheetClose : FrameEvent()
 
 }

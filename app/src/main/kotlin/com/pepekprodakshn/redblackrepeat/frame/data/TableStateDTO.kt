@@ -12,8 +12,9 @@ data class TableStateDTO(
 
     val pointOnTable: Int
         get() {
-            return redsCount * 8 + BallDTO.values()
-                .sumOf { if (it.value > lowestPriceBall.value) it.value else 0 }
+            return redsCount * 8 + BallDTO.entries.sumOf {
+                if (it.value > lowestPriceBall.value) it.value else 0
+            }
         }
 
     fun onBallPotted(ball: BallDTO): TableStateDTO {
@@ -54,7 +55,7 @@ data class TableStateDTO(
         )
         return copy(
             breakDTO = newBreak,
-            lowestPriceBall = lowestPriceBall,
+            nextIsColor = redsCount != 0,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
         )
