@@ -1,11 +1,13 @@
+@file:Suppress("unused")
+
 package com.pepekprodakshn.redblackrepeat.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val BallRed= Color(0xFFff1908)
-val BallYellow= Color(0xFFfffd15)
-val BallGreen= Color(0xFF03be08)
-val BallBrown= Color(0xFF9a6634)
+val BallRed = Color(0xFFff1908)
+val BallYellow = Color(0xFFfffd15)
+val BallGreen = Color(0xFF03be08)
+val BallBrown = Color(0xFF9a6634)
 val BallBlue = Color(0xFF0021fe)
 val BallPink = Color(0xFFfc6387)
 val BallBlack = Color(0xFF000000)
@@ -83,7 +85,6 @@ val md_theme_dark_surfaceContainerHighest = Color(0xFF343531)
 val md_theme_dark_surfaceContainerLow = Color(0xFF1A1C18)
 val md_theme_dark_surfaceContainerLowest = Color(0xFF0D0F0B)
 val md_theme_dark_surfaceDim = Color(0xFF121410)
-
 
 val seed = Color(0xFF443022)
 val Red = Color(0xFFFF1908)

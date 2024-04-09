@@ -7,12 +7,12 @@ import com.pepekprodakshn.redblackrepeat.frame.ui.model.TableStateUI
 
 val firstPlayerUIMock = PlayerUI(
     id = 1,
-    name = "Ronnie O'Sullivan"
+    name = "Ronnie O'Sullivan",
 )
 
 val secondPlayerUIMock = PlayerUI(
     id = 2,
-    name = "Mark Selby"
+    name = "Mark Selby",
 )
 
 val ballsState = BallsStateUI()
@@ -28,7 +28,7 @@ val breakMock = BreakUI(
         BallUI.GREEN,
         BallUI.PINK,
         BallUI.BLUE,
-    )
+    ),
 )
 
 val frameUiStateMock = FrameUiState(

@@ -18,10 +18,12 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext app: Context) = Room.databaseBuilder(
+    fun provideDatabase(
+        @ApplicationContext app: Context,
+    ) = Room.databaseBuilder(
         context = app,
         klass = RBRDatabase::class.java,
-        name = DATABASE_NAME
+        name = DATABASE_NAME,
     ).build()
 
     @Singleton

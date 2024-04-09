@@ -27,7 +27,7 @@ data class FrameUiState(
         secondPlayerUI: PlayerUI,
     ) = copy(
         firstPlayerUI = firstPlayerUI,
-        secondPlayerUI = secondPlayerUI
+        secondPlayerUI = secondPlayerUI,
     )
 
     fun updateTableState(tableState: TableStateUI) = copy(
@@ -40,8 +40,8 @@ data class FrameUiState(
         showOptionsBottomSheet = false,
         foulUI = FoulUI(
             showRemoveReds = tableState.ballState.redsCount > 0,
-            lowestBallValue = maxOf(tableState.ballState.lowestPriceBall.value, LOWEST_FOUL_VALUE)
-        )
+            lowestBallValue = maxOf(tableState.ballState.lowestPriceBall.value, LOWEST_FOUL_VALUE),
+        ),
     )
 
     fun closeFoulBottomSheet() = copy(showFoulBottomSheet = false)
@@ -52,28 +52,28 @@ data class FrameUiState(
         foulUI = foulUI.copy(
             isMiss = !foulUI.isMiss,
             isFreeBall = false,
-        )
+        ),
     )
 
     fun setFoulFreeBall() = copy(
         foulUI = foulUI.copy(
             isFreeBall = !foulUI.isFreeBall,
             isMiss = false,
-        )
+        ),
     )
 
     fun addFoulRedBall() = copy(
         foulUI = foulUI.copy(
             removeReds = foulUI.removeReds + 1,
             canAddReds = foulUI.removeReds + 1 < tableState.ballState.redsCount,
-        )
+        ),
     )
 
     fun removeFoulRedBall() = copy(
         foulUI = foulUI.copy(
             removeReds = foulUI.removeReds - 1,
-            canAddReds = foulUI.removeReds - 1 < tableState.ballState.redsCount
-        )
+            canAddReds = foulUI.removeReds - 1 < tableState.ballState.redsCount,
+        ),
     )
 
     fun openAddRedsDialog() = copy(
@@ -87,7 +87,7 @@ data class FrameUiState(
     fun openRemoveRedsDialog() = copy(
         addRemoveDialogState = AddRemoveDialogState(
             redsOnTable = tableState.ballState.redsCount,
-            isAdd = false
+            isAdd = false,
         ),
         showAddRemoveDialog = true,
         showOptionsBottomSheet = false,
@@ -99,13 +99,13 @@ data class FrameUiState(
 
     fun plusAddRemoveRedsDialog() = copy(
         addRemoveDialogState = addRemoveDialogState.copy(
-            redsCount = addRemoveDialogState.redsCount + 1
+            redsCount = addRemoveDialogState.redsCount + 1,
         ),
     )
 
     fun minusAddRemoveRedsDialog() = copy(
         addRemoveDialogState = addRemoveDialogState.copy(
-            redsCount = addRemoveDialogState.redsCount - 1
+            redsCount = addRemoveDialogState.redsCount - 1,
         ),
     )
 
@@ -114,7 +114,6 @@ data class FrameUiState(
     fun showOptionsBottomSheet() = copy(showOptionsBottomSheet = true)
 
     fun hideOptionsBottomSheet() = copy(showOptionsBottomSheet = false)
-
 }
 
 data class PlayerUI(

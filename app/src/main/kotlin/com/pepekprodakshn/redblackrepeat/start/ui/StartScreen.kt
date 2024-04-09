@@ -29,9 +29,8 @@ fun StartScreen(
 
     StartScreenContent(
         state = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
     )
-
 }
 
 @Composable
@@ -46,13 +45,13 @@ private fun StartScreenContent(
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Button(onClick = { onEvent(StartEvent.ButtonClick) }) {
                 Text(
                     modifier = Modifier.padding(32.dp),
                     text = stringResource(R.string.start_start),
-                    fontSize = 36.sp
+                    fontSize = 36.sp,
                 )
             }
         }
@@ -61,7 +60,7 @@ private fun StartScreenContent(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(8.dp),
-            text = state.version
+            text = state.version,
         )
     }
 }
@@ -78,7 +77,7 @@ private fun StartScreenPreview() {
     showBackground = true,
     device = LANDSCAPE_DEVICE,
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
 )
 @Composable
 private fun StartScreenPreviewDark() {

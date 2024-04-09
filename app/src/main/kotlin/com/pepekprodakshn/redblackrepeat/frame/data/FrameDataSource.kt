@@ -10,18 +10,13 @@ class FrameDataSource @Inject constructor() {
 
     fun potBall(ballDTO: BallDTO) = actions.add(FrameActionsDTO.BallPotted(ballDTO))
 
-
     fun foul(foulDTO: FoulDTO) = actions.add(FrameActionsDTO.Foul(foulDTO))
-
 
     fun endBreak() = actions.add(FrameActionsDTO.BreakEnded)
 
-
     fun undoAction() = actions.removeLast()
 
-
     fun addReds(count: Int) = actions.add(FrameActionsDTO.AddReds(count))
-
 
     fun removeReds(count: Int) = actions.add(FrameActionsDTO.RemoveReds(count))
 

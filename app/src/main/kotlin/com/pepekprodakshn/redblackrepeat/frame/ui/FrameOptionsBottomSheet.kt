@@ -43,11 +43,10 @@ private fun FrameOptionsBottomSheetContent(
             FrameOption(
                 name = it.text,
                 iconImageVector = it.icon,
-                onClick = { onEvent(it.event) }
+                onClick = { onEvent(it.event) },
             )
         }
     }
-
 }
 
 @PreviewLightDark
@@ -55,7 +54,7 @@ private fun FrameOptionsBottomSheetContent(
 private fun FrameOptionsBottomSheetPreview() {
     RedBlackRepeatTheme {
         FrameOptionsBottomSheetContent(
-            FrameOptionUI.entries.toList()
+            FrameOptionUI.entries.toList(),
         ) {}
     }
 }

@@ -53,17 +53,15 @@ fun PlayerWidgetWithBreakInfo(
             )
         }
 
-
         PlayerLabel(
             isActive = isActive,
             name = name,
             points = points,
             difference = difference,
             isFirst = isFirst,
-            onClick = onClick
+            onClick = onClick,
         )
     }
-
 }
 
 @PreviewLightDark
@@ -71,7 +69,7 @@ fun PlayerWidgetWithBreakInfo(
 private fun PlayerWidgetWithBreakInfoPreview() {
     RedBlackRepeatTheme {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             PlayerWidgetWithBreakInfo(breakUI = breakMock) {}
             PlayerWidgetWithBreakInfo(breakUI = breakMock, isActive = true, difference = 29) {}

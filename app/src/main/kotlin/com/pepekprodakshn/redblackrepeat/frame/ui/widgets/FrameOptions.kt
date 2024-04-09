@@ -25,7 +25,6 @@ import com.pepekprodakshn.redblackrepeat.frame.ui.model.FrameOptionUI
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
-
 @Composable
 fun FrameOptions(
     modifier: Modifier = Modifier,
@@ -36,9 +35,9 @@ fun FrameOptions(
         modifier = modifier
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerLow,
-                shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)
+                shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
             )
-            .width(IntrinsicSize.Max)
+            .width(IntrinsicSize.Max),
     ) {
         Text(
             modifier = Modifier
@@ -46,23 +45,20 @@ fun FrameOptions(
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             text = stringResource(R.string.frame_options),
-            style = RBRTypography.titleMedium
+            style = RBRTypography.titleMedium,
         )
-
 
         ColumnWithMoreElement(
             modifier = Modifier
                 .width(IntrinsicSize.Max)
                 .clip(RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)),
-
             onElementsCounted = { onEvent(FrameEvent.OnOptionsElementsCounted(it)) },
-
             moreElement = {
                 FrameOption(
                     modifier = Modifier.padding(bottom = 8.dp),
                     name = R.string.frame_more,
                     iconImageVector = Icons.Filled.MoreHoriz,
-                    onClick = { onEvent(FrameEvent.OnMoreClick) }
+                    onClick = { onEvent(FrameEvent.OnMoreClick) },
                 )
             },
         ) {
@@ -71,7 +67,7 @@ fun FrameOptions(
                 FrameOption(
                     name = it.text,
                     iconImageVector = it.icon,
-                    onClick = { onEvent(it.event) }
+                    onClick = { onEvent(it.event) },
                 )
             }
         }

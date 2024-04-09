@@ -22,7 +22,6 @@ import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerWidth
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
-
 @Composable
 fun FrameOption(
     modifier: Modifier = Modifier,
@@ -35,13 +34,13 @@ fun FrameOption(
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
+        horizontalArrangement = Arrangement.Start,
     ) {
 
         Icon(
             imageVector = iconImageVector,
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            contentDescription = ""
+            contentDescription = "",
         )
 
         SpacerWidth(width = 8.dp)

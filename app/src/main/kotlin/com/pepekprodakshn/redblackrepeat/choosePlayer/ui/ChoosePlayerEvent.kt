@@ -8,7 +8,7 @@ sealed class ChoosePlayerEvent {
     data object OnAddPlayerClick : ChoosePlayerEvent()
     data object OnStartMatchClick : ChoosePlayerEvent()
 
-    //NewPlayerBottomSheet
+    // NewPlayerBottomSheet
 
     data class OnNameChanged(val name: String) : ChoosePlayerEvent()
     data object OnNewPlayerBottomSheetClosed : ChoosePlayerEvent()

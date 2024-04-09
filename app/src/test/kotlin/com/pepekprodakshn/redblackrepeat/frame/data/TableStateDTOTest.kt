@@ -28,7 +28,6 @@ class TableStateDTOTest : FreeSpec({
                             lowestPriceBall shouldBe BallDTO.RED
                             breakDTO shouldBe null
                             isFirstPlayerSelected shouldBe false
-
                         }
                     }
                 }
@@ -118,7 +117,6 @@ class TableStateDTOTest : FreeSpec({
                         }
                     }
                 }
-
             }
 
             "Given: prefinal TableStateDTO" - {
@@ -242,9 +240,7 @@ class TableStateDTOTest : FreeSpec({
                     }
                 }
 
-
                 "When: regular foul with remove reds" - {
-
                     state = state.onFoul(foulWithRemoveReds)
 
                     "Then: state should be correct" {
@@ -294,5 +290,4 @@ class TableStateDTOTest : FreeSpec({
             }
         }
     }
-
 })

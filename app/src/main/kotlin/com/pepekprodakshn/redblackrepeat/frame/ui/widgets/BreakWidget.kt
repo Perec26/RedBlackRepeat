@@ -50,19 +50,19 @@ fun BreakWidget(
             .padding(start = startPadding, end = endPadding)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                shape = shape
+                shape = shape,
             ),
-        horizontalAlignment = if (isRight) Alignment.Start else Alignment.End
+        horizontalAlignment = if (isRight) Alignment.Start else Alignment.End,
     ) {
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp),
             text = stringResource(R.string.frame_break, breakUI?.sum ?: 0),
-            style = RBRTypography.labelLarge
+            style = RBRTypography.labelLarge,
         )
 
         Row(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             if (breakUI != null) {
                 if (breakUI.isFreeBall) FreeBallLabel()
@@ -82,7 +82,10 @@ fun BreakWidget(
 }
 
 @Composable
-private fun BreakBall(count: Int, ballUI: BallUI) {
+private fun BreakBall(
+    count: Int,
+    ballUI: BallUI,
+) {
     if (count > 0) {
         Ball(ball = ballUI, size = 28.dp, count = count, showCount = count > 1)
     }
@@ -95,17 +98,16 @@ private fun FreeBallLabel() {
             .height(28.dp)
             .background(
                 color = Color.White,
-                shape = RoundedCornerShape(28.dp)
+                shape = RoundedCornerShape(28.dp),
             ),
-        contentAlignment = Alignment.Center
-    )
-    {
+        contentAlignment = Alignment.Center,
+    ) {
         Text(
             modifier = Modifier.padding(horizontal = 8.dp),
             text = stringResource(id = R.string.frame_free_ball),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.scrim,
-            style = RBRTypography.titleMedium
+            style = RBRTypography.titleMedium,
         )
     }
 }
@@ -115,24 +117,24 @@ private fun FreeBallLabel() {
 private fun BreakWidgetPreview() {
     RedBlackRepeatTheme {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             BreakWidget(
                 breakUI = breakMock,
-                isRight = true
+                isRight = true,
             )
             BreakWidget(
                 breakUI = breakMock,
-                isRight = false
+                isRight = false,
             )
 
             BreakWidget(
                 breakUI = breakMock.copy(balls = emptyList(), isFreeBall = true),
-                isRight = false
+                isRight = false,
             )
             BreakWidget(
                 breakUI = breakMock.copy(balls = emptyList(), freeBallScore = 4),
-                isRight = false
+                isRight = false,
             )
         }
     }

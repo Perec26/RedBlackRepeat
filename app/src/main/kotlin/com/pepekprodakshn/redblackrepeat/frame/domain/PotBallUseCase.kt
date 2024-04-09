@@ -9,5 +9,5 @@ class PotBallUseCase @Inject constructor(
     private val repository: FrameRepository,
 ) {
 
-     fun execute(ballUI: BallUI) = repository.potBall(ballUI.toDTO())
+    fun execute(ballUI: BallUI) = repository.potBall(ballUI.toDTO())
 }

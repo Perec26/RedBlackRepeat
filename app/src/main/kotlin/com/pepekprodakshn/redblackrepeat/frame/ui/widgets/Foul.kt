@@ -41,10 +41,10 @@ fun Foul(
             .border(
                 width = 2.dp,
                 color = color,
-                shape = CircleShape
+                shape = CircleShape,
             )
             .clickable(onClick = { onClick(foulValue) }),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             modifier = Modifier,
@@ -65,7 +65,7 @@ private fun FoulPreview() {
                 .background(color = MaterialTheme.colorScheme.surfaceContainerHigh)
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             (4..7).forEach {
                 Foul(

@@ -46,9 +46,8 @@ fun PlayersCounters(
             isFirst = true,
             breakUI = breakUI,
             previousBreakUI = previousBreakUI,
-            onClick = { onCLick(true) }
+            onClick = { onCLick(true) },
         )
-
 
         PlayerWidgetWithBreakInfo(
             modifier = Modifier.weight(1f),
@@ -59,7 +58,7 @@ fun PlayersCounters(
             isFirst = false,
             breakUI = breakUI,
             previousBreakUI = previousBreakUI,
-            onClick = { onCLick(false) }
+            onClick = { onCLick(false) },
         )
     }
 }
@@ -84,7 +83,7 @@ private fun PlayersCountersPreviewDark() {
 private fun PlayersCountersContent() {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         PlayersCounters(
             firstPlayerUI = firstPlayerUIMock,
@@ -94,7 +93,6 @@ private fun PlayersCountersContent() {
             isFirstPlayerSelected = true,
         ) {}
 
-
         PlayersCounters(
             firstPlayerUI = firstPlayerUIMock,
             firstPlayerPoints = 102,
@@ -102,7 +100,6 @@ private fun PlayersCountersContent() {
             secondPlayerPoints = 77,
             isFirstPlayerSelected = false,
         ) {}
-
 
         PlayersCounters(
             firstPlayerUI = firstPlayerUIMock,
@@ -112,7 +109,6 @@ private fun PlayersCountersContent() {
             isFirstPlayerSelected = false,
         ) {}
 
-
         PlayersCounters(
             firstPlayerUI = firstPlayerUIMock,
             firstPlayerPoints = 102,
@@ -121,7 +117,6 @@ private fun PlayersCountersContent() {
             breakUI = breakMock,
             isFirstPlayerSelected = true,
         ) {}
-
 
         PlayersCounters(
             firstPlayerUI = firstPlayerUIMock,

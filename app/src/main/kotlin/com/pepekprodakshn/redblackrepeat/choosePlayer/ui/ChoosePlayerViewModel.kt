@@ -18,7 +18,7 @@ class ChoosePlayerViewModel @Inject constructor(
     private val validateNameUseCase: ValidateNameUseCase,
     private val navController: RBRNavController,
 ) : BaseViewModel<ChoosePlayerViewState, ChoosePlayerEvent>(
-    initialState = ChoosePlayerViewState()
+    initialState = ChoosePlayerViewState(),
 ) {
     init {
         launch { updateList() }
@@ -26,11 +26,17 @@ class ChoosePlayerViewModel @Inject constructor(
 
     override fun onEvent(event: ChoosePlayerEvent) {
         when (event) {
-            is ChoosePlayerEvent.OnPlayerClick -> updateState { changePlayerSelection(event.player) }
+            is ChoosePlayerEvent.OnPlayerClick -> {
+                updateState { changePlayerSelection(event.player) }
+            }
+
             is ChoosePlayerEvent.OnNameChanged -> updateState { updateNewPlayerName(event.name) }
             ChoosePlayerEvent.OnBackPressed -> navController.navigateUp()
             ChoosePlayerEvent.OnAddPlayerClick -> updateState { openNewPlayerBottomSheet() }
-            ChoosePlayerEvent.OnNewPlayerBottomSheetClosed -> updateState { closeNewPlayerBottomSheet() }
+            ChoosePlayerEvent.OnNewPlayerBottomSheetClosed -> {
+                updateState { closeNewPlayerBottomSheet() }
+            }
+
             ChoosePlayerEvent.OnNewPlayerDoneClick -> onAddPlayerClick()
             ChoosePlayerEvent.OnStartMatchClick -> onStartMatchClick()
         }
@@ -40,7 +46,7 @@ class ChoosePlayerViewModel @Inject constructor(
         navController.navigateTo(
             destination = Destinations.Frame,
             viewState.selectedPlayers.first().id,
-            viewState.selectedPlayers.last().id
+            viewState.selectedPlayers.last().id,
         )
     }
 

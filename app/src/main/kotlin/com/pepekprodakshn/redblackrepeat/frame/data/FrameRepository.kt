@@ -12,9 +12,9 @@ class FrameRepository @Inject constructor(
 
     fun undo() = dataSource.undoAction()
 
-    fun addReds(count:Int) = dataSource.addReds(count)
+    fun addReds(count: Int) = dataSource.addReds(count)
 
-    fun removeReds(count:Int) = dataSource.removeReds(count)
+    fun removeReds(count: Int) = dataSource.removeReds(count)
 
     fun endBreak() = dataSource.endBreak()
 

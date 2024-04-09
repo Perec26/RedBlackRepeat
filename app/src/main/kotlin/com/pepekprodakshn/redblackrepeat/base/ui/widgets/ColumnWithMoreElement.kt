@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
-
 @Composable
 fun ColumnWithMoreElement(
     modifier: Modifier = Modifier,
@@ -80,7 +79,6 @@ fun ColumnWithMoreElement(
             }
         }
     }
-
 }
 
 @PreviewLightDark
@@ -90,36 +88,35 @@ fun ColumnWithMoreElementPreview() {
         Box(modifier = Modifier.fillMaxSize()) {
             ColumnWithMoreElement(
                 elements = { (1..8).forEach { GetPreviewElement(it) } },
-                moreElement = { Text(text = "more") }
+                moreElement = { Text(text = "more") },
             )
         }
     }
 }
 
 @Composable
-fun GetPreviewElement(
-    i: Int,
-    firstColor: Color = Color.White,
-    secondColor: Color = Color.Black,
-) {
+fun GetPreviewElement(i: Int, firstColor: Color = Color.White, secondColor: Color = Color.Black) {
     val textColor = if (i % 2 > 0) secondColor else firstColor
     val backgroundColor = if (i % 2 > 0) firstColor else secondColor
     PreviewElement(index = i, textColor = textColor, backgroundColor = backgroundColor)
 }
 
 @Composable
-private fun PreviewElement(index: Int, textColor: Color, backgroundColor: Color) {
+private fun PreviewElement(
+    index: Int,
+    textColor: Color,
+    backgroundColor: Color,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
             .background(color = backgroundColor),
         contentAlignment = Alignment.Center,
-
-        ) {
+    ) {
         Text(
             text = "${index * 50}",
-            color = textColor
+            color = textColor,
         )
     }
 }

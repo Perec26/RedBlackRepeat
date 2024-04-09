@@ -23,13 +23,13 @@ fun DefaultDialog(
         Card(
             modifier = Modifier.padding(24.dp),
             shape = RoundedCornerShape(28.dp),
-            //несоответствие цветов Card в адроиде и Dialog в материале 3
+            // несоответствие цветов Card в адроиде и Dialog в материале 3
             colors = CardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                 contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                disabledContentColor = MaterialTheme.colorScheme.surfaceContainerHigh
-            )
+                disabledContentColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            ),
         ) {
             content()
         }
@@ -41,11 +41,11 @@ fun DefaultDialog(
 private fun DefaultDialogPreview() {
     RedBlackRepeatTheme {
         DefaultDialog(
-            onDismissRequest = {}
+            onDismissRequest = {},
         ) {
             Text(
                 modifier = Modifier.padding(16.dp),
-                text = "Dialog Example"
+                text = "Dialog Example",
             )
         }
     }

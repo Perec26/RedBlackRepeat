@@ -48,8 +48,8 @@ fun PlayerLabel(
         label = "differenceOffset",
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioNoBouncy,
-            stiffness = Spring.StiffnessMedium
-        )
+            stiffness = Spring.StiffnessMedium,
+        ),
     )
 
     val backgroundColor = if (isActive) {
@@ -71,7 +71,6 @@ fun PlayerLabel(
         bottomEnd = if (isFirst) 50.dp else 0.dp,
     )
 
-
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -81,18 +80,17 @@ fun PlayerLabel(
 
         val align = if (isFirst) Alignment.CenterEnd else Alignment.CenterStart
 
-
         Box(
             modifier = Modifier
                 .align(align)
                 .offset(
-                    x = if (isFirst) -differenceOffset else differenceOffset
+                    x = if (isFirst) -differenceOffset else differenceOffset,
                 )
                 .border(
                     width = 2.dp,
                     color = MaterialTheme.colorScheme.primary,
-                    shape = backgroundShape
-                )
+                    shape = backgroundShape,
+                ),
         ) {
             Row {
                 PlayerText(
@@ -103,12 +101,6 @@ fun PlayerLabel(
             }
         }
 
-
-        Surface(
-            color = backgroundColor
-        ) {
-
-        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -126,11 +118,8 @@ fun PlayerLabel(
                 LeftRow(name = name, points = points, textColor = textColor)
             }
         }
-
-
     }
 }
-
 
 @Composable
 private fun RightRow(
@@ -147,7 +136,6 @@ private fun RightRow(
         text = points.toString(),
         color = textColor,
     )
-
 }
 
 @Composable
@@ -168,7 +156,11 @@ private fun LeftRow(
 }
 
 @Composable
-private fun PlayerText(modifier: Modifier = Modifier, text: String, color: Color) {
+private fun PlayerText(
+    modifier: Modifier = Modifier,
+    text: String,
+    color: Color,
+) {
     Text(
         modifier = modifier.padding(16.dp),
         text = text,

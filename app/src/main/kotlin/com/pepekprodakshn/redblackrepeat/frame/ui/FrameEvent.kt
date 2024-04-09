@@ -6,8 +6,7 @@ sealed class FrameEvent {
     data class OnBallClick(val ballUI: BallUI) : FrameEvent()
     data class OnSelectPlayer(val isFirstPlayerSelected: Boolean) : FrameEvent()
 
-
-    //Foul Events
+    // Foul Events
 
     data class OnFoulPointClick(val points: Int) : FrameEvent()
     data object OnFoulIsFreeBallClick : FrameEvent()
@@ -17,7 +16,7 @@ sealed class FrameEvent {
     data object OnFoulAddRedsClick : FrameEvent()
     data object OnFoulBottomSheetClosed : FrameEvent()
 
-    //AddRemove Events
+    // AddRemove Events
 
     data object OnAddRemoveRedsDialogClose : FrameEvent()
     data object OnAddRedsDialogClick : FrameEvent()
@@ -25,7 +24,7 @@ sealed class FrameEvent {
     data object OnAddRemoveRedsMinusClick : FrameEvent()
     data object OnAddRemoveRedsPlusClick : FrameEvent()
 
-    //FrameOptions Events
+    // FrameOptions Events
 
     data class OnOptionsElementsCounted(val count: Int) : FrameEvent()
     data object OnFoulClick : FrameEvent()
@@ -35,5 +34,4 @@ sealed class FrameEvent {
     data object OnRestartClick : FrameEvent()
     data object OnMoreClick : FrameEvent()
     data object OnFrameOptionsBottomSheetClose : FrameEvent()
-
 }

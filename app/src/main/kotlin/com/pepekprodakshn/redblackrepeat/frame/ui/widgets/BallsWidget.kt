@@ -34,28 +34,28 @@ fun BallsWidget(
             .width(IntrinsicSize.Max)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerLow,
-                shape = RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
+                shape = RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp),
             ),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = stringResource(R.string.frame_balls),
-            style = RBRTypography.titleMedium
+            style = RBRTypography.titleMedium,
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Ball(
                 ball = BallUI.RED,
                 onClick = onClick,
                 count = ballsState.redsCount,
                 showCount = ballsState.showRedsCount,
-                isEnabled = ballsState.redsEnabled
+                isEnabled = ballsState.redsEnabled,
             )
             Ball(ball = BallUI.YELLOW, onClick = onClick, isEnabled = ballsState.yellowEnabled)
             Ball(ball = BallUI.GREEN, onClick = onClick, isEnabled = ballsState.greenEnabled)
@@ -65,14 +65,13 @@ fun BallsWidget(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp, start = 16.dp, end = 16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Ball(ball = BallUI.BLUE, onClick = onClick, isEnabled = ballsState.blueEnabled)
             Ball(ball = BallUI.PINK, onClick = onClick, isEnabled = ballsState.pinkEnabled)
             Ball(ball = BallUI.BLACK, onClick = onClick, isEnabled = ballsState.blackEnabled)
         }
     }
-
 }
 
 @Preview

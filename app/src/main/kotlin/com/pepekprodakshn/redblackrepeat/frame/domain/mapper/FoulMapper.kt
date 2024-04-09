@@ -7,5 +7,5 @@ fun FoulUI.toDTO() = FoulDTO(
     points = points,
     isMiss = isMiss,
     isFreeBall = isFreeBall,
-    removeReds = removeReds
+    removeReds = removeReds,
 )

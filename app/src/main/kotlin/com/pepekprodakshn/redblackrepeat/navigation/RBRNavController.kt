@@ -12,7 +12,6 @@ class RBRNavController(context: Context) : NavHostController(context) {
         navigatorProvider.addNavigator(DialogNavigator())
     }
 
-
     fun navigateTo(destination: Destination) {
         navigate(destination.name)
     }
@@ -28,5 +27,4 @@ class RBRNavController(context: Context) : NavHostController(context) {
     fun getIntArg(name: String): Int? {
         return currentBackStackEntry?.arguments?.getInt(name)
     }
-
 }

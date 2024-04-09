@@ -24,7 +24,7 @@ fun DefaultCounter(
 ) {
     Row(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         IconButton(
             enabled = value > 0,
@@ -32,13 +32,13 @@ fun DefaultCounter(
         ) {
             Icon(
                 imageVector = Icons.Filled.Remove,
-                contentDescription = ""
+                contentDescription = "",
             )
         }
 
         Text(
             text = value.toString(),
-            style = RBRTypography.bodyLarge
+            style = RBRTypography.bodyLarge,
         )
 
         IconButton(
@@ -47,10 +47,9 @@ fun DefaultCounter(
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
-                contentDescription = ""
+                contentDescription = "",
             )
         }
-
     }
 }
 

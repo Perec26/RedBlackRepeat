@@ -8,5 +8,5 @@ class GetTableState @Inject constructor(
     private val repository: FrameRepository,
 ) {
 
-     fun execute() = repository.getState().toUI()
+    fun execute() = repository.getState().toUI()
 }

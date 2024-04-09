@@ -33,25 +33,25 @@ fun CustomTopAppBar(
         title = { Title(title = title) },
         actions = actions,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = MaterialTheme.colorScheme.surfaceContainer,
         ),
         navigationIcon = {
             onNavigationClick?.let {
                 IconButton(onClick = it) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = ""
+                        contentDescription = "",
                     )
                 }
             }
-        }
+        },
     )
 }
 
 @Composable
 private fun Title(title: String) = Text(
     text = title,
-    style = RBRTypography.titleLarge
+    style = RBRTypography.titleLarge,
 )
 
 @Preview(showBackground = true)
@@ -80,10 +80,10 @@ private fun CustomTopAppBarPreviewContent() {
                     IconButton(onClick = {}) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            contentDescription = ""
+                            contentDescription = "",
                         )
                     }
-                }
+                },
             )
         }
     }

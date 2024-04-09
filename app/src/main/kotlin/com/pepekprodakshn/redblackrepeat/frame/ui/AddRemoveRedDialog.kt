@@ -56,7 +56,7 @@ fun AddRemoveRedDialog(
                     value = state.redsCount,
                     isPlusEnabled = state.isPlusEnabled,
                     onPlusClick = { onEvent(FrameEvent.OnAddRemoveRedsPlusClick) },
-                    onMinusClick = { onEvent(FrameEvent.OnAddRemoveRedsMinusClick) }
+                    onMinusClick = { onEvent(FrameEvent.OnAddRemoveRedsMinusClick) },
                 )
             }
 
@@ -75,15 +75,14 @@ fun AddRemoveRedDialog(
 
                 DefaultTextButton(
                     text = stringResource(id = R.string.frame_cancel),
-                    onClick = { onEvent(event) }
+                    onClick = { onEvent(event) },
                 )
 
                 DefaultTextButton(
                     text = stringResource(id = buttonName),
                     isEnable = state.redsCount > 0,
-                    onClick = { onEvent(event) }
+                    onClick = { onEvent(event) },
                 )
-
             }
         }
     }

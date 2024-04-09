@@ -41,7 +41,7 @@ data class TableStateDTO(
             breakDTO = newBreak,
             lowestPriceBall = lowestPriceBall,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
-            secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
+            secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
     }
 
@@ -51,13 +51,13 @@ data class TableStateDTO(
 
         val newBreak = breakDTO?.copy(
             isFreeBall = false,
-            freeBallScore = lowestPriceBall.value
+            freeBallScore = lowestPriceBall.value,
         )
         return copy(
             breakDTO = newBreak,
             nextIsColor = redsCount != 0,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
-            secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
+            secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
     }
 
@@ -73,10 +73,9 @@ data class TableStateDTO(
             nextIsColor = false,
             lowestPriceBall = lowestPriceBall,
             breakDTO = null,
-            isFirstPlayerSelected = !isFirstPlayerSelected
+            isFirstPlayerSelected = !isFirstPlayerSelected,
         )
     }
-
 
     fun onFoul(foul: FoulDTO): TableStateDTO {
 
@@ -99,12 +98,11 @@ data class TableStateDTO(
             isFirstPlayerSelected = foul.isMiss == isFirstPlayerSelected,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
-            redsCount = redsCount - foul.removeReds
+            redsCount = redsCount - foul.removeReds,
         )
     }
 
     fun onAddReds(count: Int) = copy(redsCount = redsCount + count)
 
     fun onRemoveReds(count: Int) = copy(redsCount = redsCount - count)
-
 }

@@ -28,7 +28,6 @@ import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallUI
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
-
 @Composable
 fun Ball(
     ball: BallUI,
@@ -47,7 +46,7 @@ fun Ball(
         count = count,
         showCount = showCount,
         isEnabled = isEnabled,
-        onClick = { onClick(ball) }
+        onClick = { onClick(ball) },
     )
 }
 
@@ -82,7 +81,7 @@ private fun Ball(
 
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Spacer(
             modifier = Modifier
@@ -90,7 +89,7 @@ private fun Ball(
                 .background(
                     color = Color.White,
                     shape = CircleShape,
-                )
+                ),
         )
         Icon(
             modifier = modifier
@@ -99,7 +98,7 @@ private fun Ball(
                 .clickable(onClick = onClick, enabled = isEnabled),
             painter = painterResource(id = R.drawable.ic_ball),
             tint = ballColor.copy(alpha = alpha),
-            contentDescription = ""
+            contentDescription = "",
         )
 
         val textSize = 24.sp / (64.dp / size)
@@ -107,7 +106,7 @@ private fun Ball(
             Text(
                 text = count.toString(),
                 color = ballTextColor,
-                style = RBRTypography.titleMedium.copy(fontSize = textSize)
+                style = RBRTypography.titleMedium.copy(fontSize = textSize),
             )
         }
     }
@@ -119,7 +118,7 @@ private fun BallPreview() {
     RedBlackRepeatTheme {
         Column(
             modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             BallRowPreview(true)
             BallRowPreview(false)
@@ -130,7 +129,7 @@ private fun BallPreview() {
 @Composable
 private fun BallRowPreview(isEnabled: Boolean) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         BallUI.entries.forEach {
             Ball(
@@ -143,4 +142,3 @@ private fun BallRowPreview(isEnabled: Boolean) {
         }
     }
 }
-

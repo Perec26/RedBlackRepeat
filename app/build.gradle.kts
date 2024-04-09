@@ -1,9 +1,12 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
 android {
@@ -23,8 +26,6 @@ android {
         }
     }
 
-
-
     buildTypes {
         debug {
             isDebuggable = true
@@ -34,7 +35,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -58,36 +59,44 @@ android {
         }
     }
 
-  testOptions.unitTests.all {
-      it.useJUnitPlatform()
-  }
-
+    testOptions.unitTests.all {
+        it.useJUnitPlatform()
+    }
 }
+
+ktlint {
+    android = true
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.SARIF)
+    }
+}
+
+
 
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
-    //Compose & design
+    // Compose & design
     implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.03.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.2.1")
 
-    //hilt
+    // hilt
     implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     kapt("com.google.dagger:hilt-android-compiler:2.51")
 
-
-    implementation("androidx.compose.material:material-icons-extended:1.6.4")
+    implementation("androidx.compose.material:material-icons-extended:1.6.5")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 
     val roomVersion = "2.6.1"
-
 
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
@@ -99,17 +108,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.7")
 
-    //kotest
+    // kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.8.1")
-
-//    testImplementation("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-//    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-//    androidTestImplementation(platform("androidx.compose:compose-bom:2024.03.00"))
-//    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.5")
 }
 
 kapt {

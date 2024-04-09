@@ -9,14 +9,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class NavigationModule {
 
     @Singleton
     @Provides
-    fun provideNavController(@ApplicationContext context: Context): RBRNavController =
-        RBRNavController(context)
-
+    fun provideNavController(
+        @ApplicationContext context: Context,
+    ): RBRNavController = RBRNavController(context)
 }

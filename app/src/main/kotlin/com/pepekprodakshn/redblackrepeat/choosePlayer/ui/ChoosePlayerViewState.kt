@@ -30,13 +30,13 @@ data class ChoosePlayerViewState(
 
     fun updateNewPlayerName(newName: String) = copy(
         newPlayerName = newName,
-        isNewPlayerError = false
+        isNewPlayerError = false,
     )
 
     fun showNewNameValidationError() = copy(isNewPlayerError = true)
 
     fun setEmptyNewPlayerState() = copy(
         newPlayerName = "",
-        showNewPlayerBottomSheet = false
+        showNewPlayerBottomSheet = false,
     )
 }

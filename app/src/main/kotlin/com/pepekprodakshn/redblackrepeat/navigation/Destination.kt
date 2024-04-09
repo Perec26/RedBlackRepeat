@@ -7,7 +7,6 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
-
 class Destination(
     val name: String,
     val arguments: List<NamedNavArgument> = emptyList(),
@@ -18,7 +17,7 @@ fun NavGraphBuilder.getRoute(destination: Destination) {
     composable(
         route = destination.name + destination.argsToString(),
         arguments = destination.arguments,
-        content = destination.content
+        content = destination.content,
     )
 }
 
@@ -27,6 +26,6 @@ private fun Destination.argsToString(): String {
     return arguments.joinToString(
         prefix = "/",
         separator = "/",
-        transform = { "{${it.name}}" }
+        transform = { "{${it.name}}" },
     )
 }

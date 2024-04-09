@@ -69,15 +69,15 @@ private fun NewPlayerBottomSheetContent(
                 .size(80.dp)
                 .background(
                     color = MaterialTheme.colorScheme.primaryContainer,
-                    shape = CircleShape
+                    shape = CircleShape,
                 ),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = name.firstOrNull()?.uppercase() ?: "",
                 style = RBRTypography.headlineLarge,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
 
@@ -94,7 +94,7 @@ private fun NewPlayerBottomSheetContent(
                 isError = isError,
                 supportingText = getErrorSupportingText(
                     isError = isError,
-                    errorText = stringResource(R.string.new_player_validation_error)
+                    errorText = stringResource(R.string.new_player_validation_error),
                 ),
                 label = { Text(text = "Enter name") },
                 onValueChange = { onEvent(ChoosePlayerEvent.OnNameChanged(it)) },
@@ -103,28 +103,33 @@ private fun NewPlayerBottomSheetContent(
                     onDone = {
                         keyboardController?.hide()
                         onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick)
-                    }
+                    },
                 ),
                 singleLine = true,
             )
 
             IconButton(
                 modifier = Modifier.padding(vertical = 8.dp),
-                onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) }
+                onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) },
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
-                    contentDescription = ""
+                    contentDescription = "",
                 )
             }
         }
     }
 }
 
-private fun getErrorSupportingText(isError: Boolean, errorText: String): @Composable (() -> Unit)? {
+private fun getErrorSupportingText(
+    isError: Boolean,
+    errorText: String,
+): @Composable (() -> Unit)? {
     return if (isError) {
         { ErrorSupportingText(errorText) }
-    } else null
+    } else {
+        null
+    }
 }
 
 @Composable
@@ -132,7 +137,7 @@ private fun ErrorSupportingText(text: String) {
     Text(
         text = text,
         style = RBRTypography.bodySmall,
-        color = MaterialTheme.colorScheme.error
+        color = MaterialTheme.colorScheme.error,
     )
 }
 

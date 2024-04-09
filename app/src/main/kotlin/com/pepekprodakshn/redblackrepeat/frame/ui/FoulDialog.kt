@@ -36,39 +36,39 @@ fun FoulDialog(
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(R.string.frame_fouls),
-                style = RBRTypography.titleMedium
+                style = RBRTypography.titleMedium,
             )
             Row(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
                 (foulUI.lowestBallValue..7).forEach {
                     Foul(
                         modifier = Modifier.padding(8.dp).weight(1f),
                         foulValue = it,
                         isSelected = foulUI.points == it,
-                        onClick = { points -> onEvent(FrameEvent.OnFoulPointClick(points)) }
+                        onClick = { points -> onEvent(FrameEvent.OnFoulPointClick(points)) },
                     )
                 }
             }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
+                horizontalArrangement = Arrangement.SpaceAround,
             ) {
 
                 CheckBoxWithText(
                     isChecked = foulUI.isMiss,
                     text = stringResource(R.string.frame_miss),
-                    onClick = { onEvent(FrameEvent.OnFoulIsMissClick) }
+                    onClick = { onEvent(FrameEvent.OnFoulIsMissClick) },
                 )
 
                 CheckBoxWithText(
                     isChecked = foulUI.isFreeBall,
                     text = stringResource(R.string.frame_free_ball),
-                    onClick = { onEvent(FrameEvent.OnFoulIsFreeBallClick) }
+                    onClick = { onEvent(FrameEvent.OnFoulIsFreeBallClick) },
                 )
             }
 
@@ -80,7 +80,7 @@ fun FoulDialog(
                 ) {
                     Text(
                         text = "Remove reds",
-                        style = RBRTypography.bodyMedium
+                        style = RBRTypography.bodyMedium,
                     )
                     DefaultCounter(
                         value = foulUI.removeReds,
@@ -94,7 +94,7 @@ fun FoulDialog(
             DefaultTextButton(
                 modifier = Modifier.padding(16.dp).align(Alignment.End),
                 text = "Confirm",
-                onClick = { onEvent(FrameEvent.OnFoulConfirmClick) }
+                onClick = { onEvent(FrameEvent.OnFoulConfirmClick) },
             )
         }
     }

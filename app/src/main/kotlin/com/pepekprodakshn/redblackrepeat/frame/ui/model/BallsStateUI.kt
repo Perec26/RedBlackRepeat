@@ -16,7 +16,7 @@ data class BallsStateUI(
     val pinkEnabled = isColorBallEnabled(BallUI.PINK)
     val blackEnabled = isColorBallEnabled(BallUI.BLACK)
 
-    private fun isColorBallEnabled(ballUI: BallUI) = nextIsColor
-            || lowestPriceBall == ballUI
-            || (isFreeBall && ballUI.value >= lowestPriceBall.value)
+    private fun isColorBallEnabled(ballUI: BallUI) = nextIsColor ||
+        lowestPriceBall == ballUI ||
+        (isFreeBall && ballUI.value >= lowestPriceBall.value)
 }

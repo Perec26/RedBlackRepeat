@@ -29,15 +29,14 @@ fun CheckBoxWithText(
         Checkbox(
             checked = isChecked,
             enabled = isEnable,
-            onCheckedChange = { onClick() }
+            onCheckedChange = { onClick() },
         )
         Text(
             modifier = Modifier.clickable(onClick = onClick),
             text = text,
-            style = RBRTypography.bodyMedium
+            style = RBRTypography.bodyMedium,
         )
     }
-
 }
 
 @PreviewLightDark
@@ -47,8 +46,16 @@ private fun CheckBoxWithTextPreview() {
         Column {
             CheckBoxWithText(isChecked = true, text = "CheckBox checked") {}
             CheckBoxWithText(isChecked = false, text = "CheckBox unchecked") {}
-            CheckBoxWithText(isChecked = true, isEnable = false, text = "CheckBox checked unable") {}
-            CheckBoxWithText(isChecked = false, isEnable = false, text = "CheckBox unchecked unable") {}
+            CheckBoxWithText(
+                isChecked = true,
+                isEnable = false,
+                text = "CheckBox checked unable",
+            ) {}
+            CheckBoxWithText(
+                isChecked = false,
+                isEnable = false,
+                text = "CheckBox unchecked unable",
+            ) {}
         }
     }
 }

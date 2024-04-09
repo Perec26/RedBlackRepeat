@@ -30,7 +30,7 @@ class FrameViewModel @Inject constructor(
     private val removeRedsUseCase: RemoveRedsUseCase,
     private val restartUseCase: RestartUseCase,
 ) : BaseViewModel<FrameUiState, FrameEvent>(
-    initialState = FrameUiState()
+    initialState = FrameUiState(),
 ) {
 
     init {
@@ -41,7 +41,10 @@ class FrameViewModel @Inject constructor(
         getPlayers(firstPlayerId, secondPlayerId)
     }
 
-    private fun getPlayers(firstPlayerId: Int, secondPlayerId: Int) {
+    private fun getPlayers(
+        firstPlayerId: Int,
+        secondPlayerId: Int,
+    ) {
         launch {
             val firstPlayer = getPlayerUseCase.execute(firstPlayerId)
             val secondPlayer = getPlayerUseCase.execute(secondPlayerId)

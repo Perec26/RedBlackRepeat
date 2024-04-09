@@ -58,13 +58,13 @@ private fun ChoosePlayerContent(
 
             CustomTopAppBar(
                 title = stringResource(R.string.choose_players_title),
-                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) }
+                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
             ) {
 
                 IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
                     Icon(
                         imageVector = Icons.Filled.Add,
-                        contentDescription = ""
+                        contentDescription = "",
                     )
                 }
             }
@@ -73,14 +73,14 @@ private fun ChoosePlayerContent(
                 columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             ) {
                 items(state.players) {
                     PlayerItem(
                         player = it,
                         enabled = state.isEnabled || state.selectedPlayers.contains(it),
                         isSelected = state.selectedPlayers.contains(it),
-                        onClick = { onEvent(ChoosePlayerEvent.OnPlayerClick(it)) }
+                        onClick = { onEvent(ChoosePlayerEvent.OnPlayerClick(it)) },
                     )
                 }
                 item { SpacerHeight(height = 60.dp) }
@@ -98,12 +98,12 @@ private fun ChoosePlayerContent(
                 modifier = Modifier.padding(16.dp),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = { onEvent(ChoosePlayerEvent.OnStartMatchClick) }
+                onClick = { onEvent(ChoosePlayerEvent.OnStartMatchClick) },
             ) {
 
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = ""
+                    contentDescription = "",
                 )
             }
         }
@@ -113,14 +113,14 @@ private fun ChoosePlayerContent(
         NewPlayerBottomSheet(
             name = state.newPlayerName,
             isError = state.isNewPlayerError,
-            onEvent = onEvent
+            onEvent = onEvent,
         )
     }
 }
 
 @Preview(
     showBackground = true,
-    device = LANDSCAPE_DEVICE
+    device = LANDSCAPE_DEVICE,
 )
 @Composable
 private fun ChoosePlayerScreenPreview() {
@@ -130,7 +130,7 @@ private fun ChoosePlayerScreenPreview() {
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = LANDSCAPE_DEVICE
+    device = LANDSCAPE_DEVICE,
 )
 @Composable
 private fun ChoosePlayerScreenPreviewDark() {

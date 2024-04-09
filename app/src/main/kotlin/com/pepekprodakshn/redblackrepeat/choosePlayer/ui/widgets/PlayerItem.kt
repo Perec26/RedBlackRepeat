@@ -34,10 +34,10 @@ fun PlayerItem(
             .fillMaxWidth()
             .clickable(
                 enabled = enabled || isSelected,
-                onClick = onClick
+                onClick = onClick,
             )
             .background(color = MaterialTheme.colorScheme.surfaceContainer),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
 
         Box(
@@ -46,15 +46,15 @@ fun PlayerItem(
                 .size(40.dp)
                 .background(
                     color = MaterialTheme.colorScheme.primaryContainer,
-                    shape = CircleShape
+                    shape = CircleShape,
                 ),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = player.name.firstOrNull()?.uppercase() ?: "R",
                 style = RBRTypography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
 
@@ -62,14 +62,14 @@ fun PlayerItem(
             modifier = Modifier.weight(1f),
             text = player.name,
             style = RBRTypography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
         )
 
         Checkbox(
             modifier = Modifier.padding(8.dp),
             checked = isSelected,
             enabled = enabled,
-            onCheckedChange = null
+            onCheckedChange = null,
         )
     }
 }

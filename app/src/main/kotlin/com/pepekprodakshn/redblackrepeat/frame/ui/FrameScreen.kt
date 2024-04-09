@@ -30,7 +30,7 @@ fun FrameScreen(
 
     FrameScreenContent(
         state = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
     )
 }
 
@@ -53,7 +53,7 @@ fun FrameScreenContent(
                 BallsWidget(
                     modifier = Modifier.padding(top = 16.dp),
                     ballsState = state.tableState.ballState,
-                    onClick = { onEvent(FrameEvent.OnBallClick(it)) }
+                    onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                 )
 
                 FrameOptions(
@@ -61,7 +61,6 @@ fun FrameScreenContent(
                     onEvent = onEvent,
                 )
             }
-
 
             PlayersCounters(
                 modifier = Modifier
@@ -74,7 +73,7 @@ fun FrameScreenContent(
                 isFirstPlayerSelected = state.tableState.isFirstPlayerSelected,
                 breakUI = state.tableState.breakUI,
                 previousBreakUI = state.previousBreakUI,
-                onCLick = { onEvent(FrameEvent.OnSelectPlayer(it)) }
+                onCLick = { onEvent(FrameEvent.OnSelectPlayer(it)) },
             )
         }
     }
@@ -82,21 +81,21 @@ fun FrameScreenContent(
     if (state.showFoulBottomSheet) {
         FoulDialog(
             foulUI = state.foulUI,
-            onEvent = onEvent
+            onEvent = onEvent,
         )
     }
 
     if (state.showAddRemoveDialog) {
         AddRemoveRedDialog(
             state = state.addRemoveDialogState,
-            onEvent = onEvent
+            onEvent = onEvent,
         )
     }
 
     if (state.showOptionsBottomSheet) {
         FrameOptionsBottomSheet(
             options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
-            onEvent = onEvent
+            onEvent = onEvent,
         )
     }
 }

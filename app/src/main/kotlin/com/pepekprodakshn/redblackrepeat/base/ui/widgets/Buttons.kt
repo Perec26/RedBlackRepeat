@@ -25,7 +25,7 @@ fun DefaultFilledButton(
     ) {
         Text(
             text = text,
-            style = RBRTypography.labelLarge
+            style = RBRTypography.labelLarge,
         )
     }
 }
@@ -44,7 +44,7 @@ fun DefaultTextButton(
     ) {
         Text(
             text = text,
-            style = RBRTypography.labelLarge
+            style = RBRTypography.labelLarge,
         )
     }
 }
