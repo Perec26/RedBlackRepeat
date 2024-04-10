@@ -34,4 +34,13 @@ sealed class FrameEvent {
     data object OnRestartClick : FrameEvent()
     data object OnMoreClick : FrameEvent()
     data object OnFrameOptionsBottomSheetClose : FrameEvent()
+    data object OnFinishClick : FrameEvent()
+
+    // FinishFrameConfirmation Events
+    data object OnFinishFrameConfirmationClosed : FrameEvent()
+    data object OnFinishFrameConfirm : FrameEvent()
+
+    // RestartFrameConfirmation Events
+    data object OnRestartFrameConfirmationClosed : FrameEvent()
+    data object OnRestartConfirm : FrameEvent()
 }

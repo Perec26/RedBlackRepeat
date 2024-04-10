@@ -25,12 +25,16 @@ data class TableStateDTO(
         val addFirstPlayerPoints = if (isFirstPlayerSelected) ball.value else 0
         val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else ball.value
 
+        val newFirstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints
+        val newSecondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
+        val isDraw = newFirstPlayerPoints == newSecondPlayerPoints
+
         val newBreak = breakDTO?.add(ball) ?: BreakDTO(listOf(ball))
 
         val isNextInFinal = (redsCount == 0 && !isRed)
 
         val lowestPriceBall = if (isNextInFinal) {
-            lowestPriceBall.getNextValueBall()
+            lowestPriceBall.getNextValueBall() ?: if (isDraw) BallDTO.BLACK else BallDTO.RED
         } else {
             lowestPriceBall
         }
@@ -64,7 +68,7 @@ data class TableStateDTO(
     fun onBreakEnded(): TableStateDTO {
 
         val lowestPriceBall = if (redsCount == 0 && lowestPriceBall == BallDTO.RED) {
-            lowestPriceBall.getNextValueBall()
+            lowestPriceBall.getNextValueBall() ?: BallDTO.RED
         } else {
             lowestPriceBall
         }
@@ -86,7 +90,7 @@ data class TableStateDTO(
 
         val lowestPriceBall =
             if (redsCount == 0 && lowestPriceBall == BallDTO.RED && !newNextIsColor) {
-                lowestPriceBall.getNextValueBall()
+                lowestPriceBall.getNextValueBall() ?: BallDTO.RED
             } else {
                 lowestPriceBall
             }

@@ -1,12 +1,10 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui.widgets
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -16,17 +14,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.pepekprodakshn.redblackrepeat.R
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallUI
 import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
+import kotlin.math.sqrt
 
 @Composable
 fun Ball(
@@ -40,7 +40,7 @@ fun Ball(
 ) {
     Ball(
         modifier = modifier,
-        ballColor = ball.color,
+        ballIcon = painterResource(id = ball.icon),
         ballTextColor = ball.textColor,
         size = size,
         count = count,
@@ -57,7 +57,7 @@ fun FreeBall(
 ) {
     Ball(
         modifier = modifier,
-        ballColor = Color.White,
+        ballIcon = painterResource(id = R.drawable.ic_ball_full_white),
         ballTextColor = MaterialTheme.colorScheme.scrim,
         size = 28.dp,
         count = count,
@@ -69,7 +69,7 @@ fun FreeBall(
 @Composable
 private fun Ball(
     modifier: Modifier = Modifier,
-    ballColor: Color,
+    ballIcon: Painter,
     ballTextColor: Color,
     size: Dp = 64.dp,
     count: Int = 0,
@@ -77,36 +77,28 @@ private fun Ball(
     isEnabled: Boolean = true,
     onClick: () -> Unit = {},
 ) {
-    val alpha = if (isEnabled) 1f else 0.6f
-
+    val alpha = if (isEnabled) 1f else 0.5f
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        Spacer(
-            modifier = Modifier
-                .size(size - 1.dp)
-                .background(
-                    color = Color.White,
-                    shape = CircleShape,
-                ),
-        )
         Icon(
-            modifier = modifier
+            modifier = Modifier
                 .size(size)
                 .clip(CircleShape)
+                .alpha(alpha)
                 .clickable(onClick = onClick, enabled = isEnabled),
-            painter = painterResource(id = R.drawable.ic_ball),
-            tint = ballColor.copy(alpha = alpha),
+            painter = ballIcon,
+            tint = Color.Unspecified,
             contentDescription = "",
         )
 
-        val textSize = 24.sp / (64.dp / size)
+        val textSize = RBRTypography.titleLarge.fontSize / sqrt((64.0 / size.value))
         if (showCount) {
             Text(
                 text = count.toString(),
-                color = ballTextColor,
-                style = RBRTypography.titleMedium.copy(fontSize = textSize),
+                color = ballTextColor.copy(alpha),
+                style = RBRTypography.titleLarge.copy(fontSize = textSize),
             )
         }
     }
@@ -122,12 +114,14 @@ private fun BallPreview() {
         ) {
             BallRowPreview(true)
             BallRowPreview(false)
+            BallRowPreview(true, 24.dp)
+            BallRowPreview(false, 24.dp)
         }
     }
 }
 
 @Composable
-private fun BallRowPreview(isEnabled: Boolean) {
+private fun BallRowPreview(isEnabled: Boolean, size: Dp = 64.dp) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -135,7 +129,7 @@ private fun BallRowPreview(isEnabled: Boolean) {
             Ball(
                 ball = it,
                 count = it.value * 2,
-                size = 24.dp,
+                size = size,
                 showCount = true,
                 isEnabled = isEnabled,
             )

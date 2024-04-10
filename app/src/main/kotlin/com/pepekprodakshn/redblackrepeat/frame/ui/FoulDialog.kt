@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,12 +42,13 @@ fun FoulDialog(
             Row(
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .height(60.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
                 (foulUI.lowestBallValue..7).forEach {
                     Foul(
-                        modifier = Modifier.padding(8.dp).weight(1f),
+                        modifier = Modifier.padding(8.dp),
                         foulValue = it,
                         isSelected = foulUI.points == it,
                         onClick = { points -> onEvent(FrameEvent.OnFoulPointClick(points)) },
@@ -92,8 +94,11 @@ fun FoulDialog(
             }
 
             DefaultTextButton(
-                modifier = Modifier.padding(16.dp).align(Alignment.End),
-                text = "Confirm",
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.End),
+                text = stringResource(R.string.common_confirm),
+                isEnable = foulUI.points > 0,
                 onClick = { onEvent(FrameEvent.OnFoulConfirmClick) },
             )
         }
@@ -104,6 +109,6 @@ fun FoulDialog(
 @Composable
 private fun FoulBottomSheetPreview() {
     RedBlackRepeatTheme {
-        FoulDialog(FoulUI(points = 4)) {}
+        FoulDialog(FoulUI(points = 4, lowestBallValue = 6)) {}
     }
 }

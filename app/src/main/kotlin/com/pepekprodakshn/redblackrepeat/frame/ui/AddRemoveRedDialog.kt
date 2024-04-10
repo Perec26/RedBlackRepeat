@@ -26,7 +26,7 @@ fun AddRemoveRedDialog(
     onEvent: (FrameEvent) -> Unit,
 ) {
 
-    DefaultDialog(onDismissRequest = { onEvent(FrameEvent.OnFoulBottomSheetClosed) }) {
+    DefaultDialog(onDismissRequest = { onEvent(FrameEvent.OnAddRemoveRedsDialogClose) }) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,7 +43,6 @@ fun AddRemoveRedDialog(
             )
 
             Row(
-                modifier = Modifier.padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
 

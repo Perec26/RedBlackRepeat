@@ -26,4 +26,6 @@ abstract class BaseViewModel<STATE : Any, EVENT : Any>(
     fun launch(block: suspend CoroutineScope.() -> Unit): Job {
         return viewModelScope.launch { block.invoke(this) }
     }
+
+    open fun onBackPressed() {}
 }

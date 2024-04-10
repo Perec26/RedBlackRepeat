@@ -14,7 +14,7 @@ class FrameDataSource @Inject constructor() {
 
     fun endBreak() = actions.add(FrameActionsDTO.BreakEnded)
 
-    fun undoAction() = actions.removeLast()
+    fun undoAction() = actions.removeLastOrNull()
 
     fun addReds(count: Int) = actions.add(FrameActionsDTO.AddReds(count))
 

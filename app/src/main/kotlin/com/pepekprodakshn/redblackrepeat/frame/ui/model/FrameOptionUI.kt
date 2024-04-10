@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.RemoveCircle
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material.icons.rounded.HighlightOff
@@ -44,5 +45,11 @@ enum class FrameOptionUI(
         text = R.string.frame_restart,
         icon = Icons.Filled.RestartAlt,
         event = FrameEvent.OnRestartClick,
+    ),
+
+    FINISH(
+        text = R.string.frame_finish,
+        icon = Icons.Filled.Close,
+        event = FrameEvent.OnFinishClick,
     ),
 }

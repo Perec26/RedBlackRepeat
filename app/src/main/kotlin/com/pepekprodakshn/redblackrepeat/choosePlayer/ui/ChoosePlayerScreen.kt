@@ -20,19 +20,23 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.redblackrepeat.R
 import com.pepekprodakshn.redblackrepeat.base.ui.LANDSCAPE_DEVICE
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.CustomTopAppBar
+import com.pepekprodakshn.redblackrepeat.base.ui.widgets.DefaultFilledButton
 import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.widgets.PlayerItem
+import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
@@ -65,6 +69,32 @@ private fun ChoosePlayerContent(
                     Icon(
                         imageVector = Icons.Filled.Add,
                         contentDescription = "",
+                    )
+                }
+            }
+
+            if (state.players.isEmpty()) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Text(
+                        text = stringResource(R.string.choose_players_empty_players_title),
+                        style = RBRTypography.titleLarge,
+                    )
+
+                    Text(
+                        modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
+                        text = stringResource(R.string.choose_players_empty_players_description),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        style = RBRTypography.bodySmall,
+                    )
+
+                    DefaultFilledButton(
+                        text = stringResource(R.string.choose_players_empty_players_button),
+                        onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) },
                     )
                 }
             }
@@ -137,9 +167,32 @@ private fun ChoosePlayerScreenPreviewDark() {
     ChoosePlayerScreenPreviewContent()
 }
 
+@Preview(
+    showBackground = true,
+    device = LANDSCAPE_DEVICE,
+)
 @Composable
-private fun ChoosePlayerScreenPreviewContent() {
+private fun ChoosePlayerScreenEmptyPreview() {
+    ChoosePlayerScreenPreviewContent(true)
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    device = LANDSCAPE_DEVICE,
+)
+@Composable
+private fun ChoosePlayerScreenEmptyPreviewDark() {
+    ChoosePlayerScreenPreviewContent(true)
+}
+
+@Composable
+private fun ChoosePlayerScreenPreviewContent(isEmpty: Boolean = false) {
     RedBlackRepeatTheme {
-        ChoosePlayerContent(state = choosePlayerViewStateMock) {}
+        ChoosePlayerContent(
+            state = choosePlayerViewStateMock.copy(
+                players = if (isEmpty) emptyList() else listOfPlayers,
+            ),
+        ) {}
     }
 }

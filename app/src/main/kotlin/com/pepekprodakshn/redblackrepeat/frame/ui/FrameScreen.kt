@@ -1,6 +1,7 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui
 
 import android.content.res.Configuration
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,10 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.redblackrepeat.R
 import com.pepekprodakshn.redblackrepeat.base.ui.LANDSCAPE_DEVICE
+import com.pepekprodakshn.redblackrepeat.base.ui.widgets.ButtonDescription
+import com.pepekprodakshn.redblackrepeat.base.ui.widgets.ThreeButtonsDialog
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.FrameOptionUI
 import com.pepekprodakshn.redblackrepeat.frame.ui.widgets.BallsWidget
 import com.pepekprodakshn.redblackrepeat.frame.ui.widgets.FrameOptions
@@ -27,6 +32,10 @@ fun FrameScreen(
     viewModel: FrameViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value
+
+    if (state.isBackHandlerEnabled) {
+        BackHandler { viewModel.onBackPressed() }
+    }
 
     FrameScreenContent(
         state = state,
@@ -96,6 +105,38 @@ fun FrameScreenContent(
         FrameOptionsBottomSheet(
             options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
             onEvent = onEvent,
+        )
+    }
+
+    if (state.showFinishFrameConfirmationDialog) {
+        ThreeButtonsDialog(
+            title = stringResource(id = R.string.frame_finish_frame_dialog_title),
+            description = stringResource(id = R.string.frame_finish_frame_dialog_description),
+            okButtonDescription = ButtonDescription(
+                text = stringResource(id = R.string.frame_finish_frame_dialog_yes),
+                onClick = { onEvent(FrameEvent.OnFinishFrameConfirm) },
+            ),
+            noButtonDescription = ButtonDescription(
+                text = stringResource(id = R.string.frame_finish_frame_dialog_no),
+                onClick = { onEvent(FrameEvent.OnFinishFrameConfirmationClosed) },
+            ),
+            onDismissRequest = { onEvent(FrameEvent.OnFinishFrameConfirmationClosed) },
+        )
+    }
+
+    if (state.showRestartFrameConfirmationDialog) {
+        ThreeButtonsDialog(
+            title = stringResource(id = R.string.frame_restart_frame_dialog_title),
+            description = stringResource(id = R.string.frame_restart_frame_dialog_description),
+            okButtonDescription = ButtonDescription(
+                text = stringResource(id = R.string.frame_finish_frame_dialog_yes),
+                onClick = { onEvent(FrameEvent.OnRestartConfirm) },
+            ),
+            noButtonDescription = ButtonDescription(
+                text = stringResource(id = R.string.frame_finish_frame_dialog_no),
+                onClick = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
+            ),
+            onDismissRequest = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
         )
     }
 }

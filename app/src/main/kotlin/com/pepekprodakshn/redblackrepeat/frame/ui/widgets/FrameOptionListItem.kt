@@ -23,7 +23,7 @@ import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
-fun FrameOption(
+fun FrameOptionListItem(
     modifier: Modifier = Modifier,
     @StringRes name: Int,
     iconImageVector: ImageVector,
@@ -54,9 +54,9 @@ fun FrameOption(
 
 @PreviewLightDark
 @Composable
-private fun FrameOptionPreview() {
+private fun FrameOptionListItemPreview() {
     RedBlackRepeatTheme {
-        FrameOption(
+        FrameOptionListItem(
             name = R.string.frame_foul,
             iconImageVector = Icons.Filled.AddCircle,
         ) {}

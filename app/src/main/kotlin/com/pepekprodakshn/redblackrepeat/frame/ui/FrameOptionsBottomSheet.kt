@@ -1,17 +1,21 @@
 package com.pepekprodakshn.redblackrepeat.frame.ui
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.FrameOptionUI
-import com.pepekprodakshn.redblackrepeat.frame.ui.widgets.FrameOption
+import com.pepekprodakshn.redblackrepeat.frame.ui.widgets.FrameOptionGridItem
 import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,12 +39,15 @@ private fun FrameOptionsBottomSheetContent(
     onEvent: (FrameEvent) -> Unit,
 ) {
 
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
     ) {
         items(options) {
-            FrameOption(
+            FrameOptionGridItem(
                 name = it.text,
                 iconImageVector = it.icon,
                 onClick = { onEvent(it.event) },

@@ -84,12 +84,11 @@ private fun NewPlayerBottomSheetContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 32.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             OutlinedTextField(
-                modifier = Modifier
-                    .weight(1f),
+                modifier = Modifier.weight(1f),
                 value = name,
                 isError = isError,
                 supportingText = getErrorSupportingText(
@@ -109,7 +108,6 @@ private fun NewPlayerBottomSheetContent(
             )
 
             IconButton(
-                modifier = Modifier.padding(vertical = 8.dp),
                 onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) },
             ) {
                 Icon(

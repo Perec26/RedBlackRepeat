@@ -2,6 +2,9 @@
     <string name="app_name">RedBlackRepeat</string>
     <string name="start_start">Start</string>
     <string name="choose_players_title">Choose players</string>
+    <string name="choose_players_empty_players_title">No players, yet</string>
+    <string name="choose_players_empty_players_description">Your players list is empty.\nCreate two players to start the game</string>
+    <string name="choose_players_empty_players_button">Create new player</string>
     <string name="new_player_validation_error">Invalid name</string>
     <string name="frame_fouls">Fouls</string>
     <string name="frame_foul">Foul</string>
@@ -9,6 +12,7 @@
     <string name="frame_add_reds">Add reds</string>
     <string name="frame_remove_reds">Remove reds</string>
     <string name="frame_restart">Restart</string>
+    <string name="frame_finish">Finish frame</string>
     <string name="frame_more">More</string>
     <string name="frame_add">Add</string>
     <string name="frame_remove">Remove</string>
@@ -19,4 +23,13 @@
     <string name="frame_miss">Miss</string>
     <string name="frame_free_ball">Free ball</string>
     <string name="frame_reds">Reds:</string>
+    <string name="frame_finish_frame_dialog_title">Finish frame</string>
+    <string name="frame_finish_frame_dialog_description">Do you want to finish this frame?</string>
+    <string name="frame_finish_frame_dialog_yes">Yes</string>
+    <string name="frame_finish_frame_dialog_no">No</string>
+    <string name="frame_restart_frame_dialog_title">Restart frame</string>
+    <string name="frame_restart_frame_dialog_description">Do you want to restart this frame?</string>
+    <string name="common_confirm">Confirm</string>
+
+
 </resources>

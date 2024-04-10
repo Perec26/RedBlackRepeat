@@ -20,8 +20,18 @@ data class FrameUiState(
     val showFoulBottomSheet: Boolean = false,
     val showAddRemoveDialog: Boolean = false,
     val showOptionsBottomSheet: Boolean = false,
+    val showFinishFrameConfirmationDialog: Boolean = false,
+    val showRestartFrameConfirmationDialog: Boolean = false,
     val optionElementsOnScreen: Int = 0,
 ) {
+
+    val isBackHandlerEnabled = !(
+        showFoulBottomSheet &&
+            showAddRemoveDialog &&
+            showOptionsBottomSheet &&
+            showFinishFrameConfirmationDialog
+        )
+
     fun initPlayers(
         firstPlayerUI: PlayerUI,
         secondPlayerUI: PlayerUI,
@@ -114,6 +124,14 @@ data class FrameUiState(
     fun showOptionsBottomSheet() = copy(showOptionsBottomSheet = true)
 
     fun hideOptionsBottomSheet() = copy(showOptionsBottomSheet = false)
+
+    fun showFinishFrameConfirmationDialog() = copy(showFinishFrameConfirmationDialog = true)
+
+    fun hideFinishFrameConfirmationDialog() = copy(showFinishFrameConfirmationDialog = false)
+
+    fun showRestartFrameConfirmationDialog() = copy(showRestartFrameConfirmationDialog = true)
+
+    fun hideRestartFrameConfirmationDialog() = copy(showRestartFrameConfirmationDialog = false)
 }
 
 data class PlayerUI(

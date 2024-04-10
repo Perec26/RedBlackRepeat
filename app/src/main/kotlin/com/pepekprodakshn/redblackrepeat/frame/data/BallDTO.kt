@@ -17,5 +17,5 @@ fun BallDTO.getNextValueBall() = when (this) {
     BallDTO.BROWN -> BallDTO.BLUE
     BallDTO.BLUE -> BallDTO.PINK
     BallDTO.PINK -> BallDTO.BLACK
-    BallDTO.BLACK -> BallDTO.BLACK
+    BallDTO.BLACK -> null
 }

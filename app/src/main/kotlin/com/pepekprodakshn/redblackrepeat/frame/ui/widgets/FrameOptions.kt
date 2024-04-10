@@ -13,7 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -49,12 +48,10 @@ fun FrameOptions(
         )
 
         ColumnWithMoreElement(
-            modifier = Modifier
-                .width(IntrinsicSize.Max)
-                .clip(RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)),
+            modifier = Modifier.width(IntrinsicSize.Max),
             onElementsCounted = { onEvent(FrameEvent.OnOptionsElementsCounted(it)) },
             moreElement = {
-                FrameOption(
+                FrameOptionListItem(
                     modifier = Modifier.padding(bottom = 8.dp),
                     name = R.string.frame_more,
                     iconImageVector = Icons.Filled.MoreHoriz,
@@ -64,7 +61,7 @@ fun FrameOptions(
         ) {
 
             FrameOptionUI.entries.forEach {
-                FrameOption(
+                FrameOptionListItem(
                     name = it.text,
                     iconImageVector = it.icon,
                     onClick = { onEvent(it.event) },

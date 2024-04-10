@@ -76,15 +76,45 @@ class FrameViewModel @Inject constructor(
             is FrameEvent.OnMoreClick -> updateState { showOptionsBottomSheet() }
             is FrameEvent.OnOptionsElementsCounted -> updateState { setOptionElements(event.count) }
             FrameEvent.OnFrameOptionsBottomSheetClose -> updateState { hideOptionsBottomSheet() }
+            FrameEvent.OnFinishFrameConfirm -> onFinishFrameConfirm()
+            FrameEvent.OnFinishFrameConfirmationClosed -> {
+                updateState { hideFinishFrameConfirmationDialog() }
+            }
+
+            FrameEvent.OnFinishClick -> onFinishClick()
+
+            FrameEvent.OnRestartConfirm -> onRestartConfirm()
+            FrameEvent.OnRestartFrameConfirmationClosed -> {
+                updateState { hideRestartFrameConfirmationDialog() }
+            }
         }
     }
 
     private fun onRestartClick() {
+        updateState { hideOptionsBottomSheet() }
+        updateState { showRestartFrameConfirmationDialog() }
+    }
+
+    private fun onFinishFrameConfirm() {
+        updateState { hideFinishFrameConfirmationDialog() }
+        navController.navigateUp()
+    }
+
+    override fun onBackPressed() {
+        updateState { showFinishFrameConfirmationDialog() }
+    }
+
+    private fun onRestartConfirm() {
         launch {
-            updateState { hideOptionsBottomSheet() }
+            updateState { hideRestartFrameConfirmationDialog() }
             restartUseCase.execute()
             updateTableState()
         }
+    }
+
+    private fun onFinishClick() {
+        updateState { hideOptionsBottomSheet() }
+        updateState { showFinishFrameConfirmationDialog() }
     }
 
     private fun onAddRedsDialogClick() {
