@@ -1,9 +1,9 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.data
+package com.pepekprodakshn.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.pepekprodakshn.redblackrepeat.choosePlayer.data.models.PlayerEntity
+import com.pepekprodakshn.database.model.PlayerEntity
 
 @Dao
 interface PlayersDao {

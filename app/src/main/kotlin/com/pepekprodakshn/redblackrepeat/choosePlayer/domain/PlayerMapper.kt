@@ -1,6 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.domain
 
-import com.pepekprodakshn.redblackrepeat.choosePlayer.data.models.PlayerEntity
+import com.pepekprodakshn.database.model.PlayerEntity
 import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
 
 fun List<PlayerUI>.toEntity() = map(PlayerUI::toEntity)

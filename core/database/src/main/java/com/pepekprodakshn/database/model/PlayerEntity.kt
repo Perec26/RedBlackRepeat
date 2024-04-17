@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.data.models
+package com.pepekprodakshn.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

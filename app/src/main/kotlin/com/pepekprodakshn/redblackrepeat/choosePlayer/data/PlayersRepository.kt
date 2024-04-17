@@ -1,6 +1,7 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.data
 
-import com.pepekprodakshn.redblackrepeat.choosePlayer.data.models.PlayerEntity
+import com.pepekprodakshn.database.dao.PlayersDao
+import com.pepekprodakshn.database.model.PlayerEntity
 import javax.inject.Inject
 
 class PlayersRepository @Inject constructor(

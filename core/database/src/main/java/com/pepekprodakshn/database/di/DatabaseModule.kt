@@ -1,8 +1,8 @@
-package com.pepekprodakshn.redblackrepeat.di
+package com.pepekprodakshn.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.pepekprodakshn.redblackrepeat.main.RBRDatabase
+import com.pepekprodakshn.database.RBRDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +25,4 @@ class DatabaseModule {
         klass = RBRDatabase::class.java,
         name = DATABASE_NAME,
     ).build()
-
-    @Singleton
-    @Provides
-    fun providePlayerDao(database: RBRDatabase) = database.playersDao()
 }

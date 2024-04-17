@@ -107,4 +107,7 @@ dependencies {
     // kotest
     testImplementation(libs.kotest.runner.junit5)
     testImplementation(libs.junit.jupiter)
+
+    // Project
+    implementation(project(":core:database"))
 }
