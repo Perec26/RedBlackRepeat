@@ -1,6 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.frame.domain
 
-import com.pepekprodakshn.redblackrepeat.choosePlayer.data.PlayersRepository
+import com.pepekprodakshn.player.dataSource.PlayersRepository
 import com.pepekprodakshn.redblackrepeat.choosePlayer.domain.toUI
 import javax.inject.Inject
 
