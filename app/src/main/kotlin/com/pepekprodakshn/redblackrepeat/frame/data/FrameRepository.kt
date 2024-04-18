@@ -1,24 +1,30 @@
 package com.pepekprodakshn.redblackrepeat.frame.data
 
+import com.pepekprodakshn.table.model.Ball
+import com.pepekprodakshn.table.model.Foul
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
+@ViewModelScoped
 class FrameRepository @Inject constructor(
-    private val dataSource: FrameDataSource,
+    private val calculator: TableStateCalculator,
 ) {
 
-    fun potBall(ballDTO: BallDTO) = dataSource.potBall(ballDTO)
+    private val actions = mutableListOf<FrameActionsDTO>()
 
-    fun foul(foulDTO: FoulDTO) = dataSource.foul(foulDTO)
+    fun potBall(ball: Ball) = actions.add(FrameActionsDTO.BallPotted(ball))
 
-    fun undo() = dataSource.undoAction()
+    fun foul(foul: Foul) = actions.add(FrameActionsDTO.Fouled(foul))
 
-    fun addReds(count: Int) = dataSource.addReds(count)
+    fun undo() = actions.removeLastOrNull()
 
-    fun removeReds(count: Int) = dataSource.removeReds(count)
+    fun addReds(count: Int) = actions.add(FrameActionsDTO.AddReds(count))
 
-    fun endBreak() = dataSource.endBreak()
+    fun removeReds(count: Int) = actions.add(FrameActionsDTO.RemoveReds(count))
 
-    fun getState() = dataSource.calculateState()
+    fun endBreak() = actions.add(FrameActionsDTO.BreakEnded)
 
-    fun restart() = dataSource.restart()
+    fun getState() = calculator.calculateState(actions)
+
+    fun restart() = actions.clear()
 }

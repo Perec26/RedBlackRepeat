@@ -17,3 +17,4 @@ rootProject.name = "RedBlackRepeat"
 include(":app")
 include(":core:database")
 include(":data:player")
+include(":data:table")
