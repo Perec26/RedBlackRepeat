@@ -110,4 +110,5 @@ dependencies {
 
     // Project
     implementation(project(":core:database"))
+    implementation(project(":data:player"))
 }

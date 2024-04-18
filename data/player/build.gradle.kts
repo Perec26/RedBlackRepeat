@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pepekprodakshn.database"
+    namespace = "com.pepekprodakshn.player"
     compileSdk = 34
 
     defaultConfig {
@@ -39,6 +39,7 @@ dependencies {
     // DI
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(project(":core:database"))
     ksp(libs.hilt.android.compiler)
 
     // Database
