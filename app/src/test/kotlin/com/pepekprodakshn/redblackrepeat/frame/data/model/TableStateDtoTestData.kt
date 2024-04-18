@@ -1,29 +1,29 @@
 package com.pepekprodakshn.redblackrepeat.frame.data.model
 
-import com.pepekprodakshn.redblackrepeat.frame.data.BallDTO
-import com.pepekprodakshn.redblackrepeat.frame.data.BreakDTO
-import com.pepekprodakshn.redblackrepeat.frame.data.FoulDTO
-import com.pepekprodakshn.redblackrepeat.frame.data.TableStateDTO
+import com.pepekprodakshn.table.model.Ball
+import com.pepekprodakshn.table.model.Foul
+import com.pepekprodakshn.table.model.FrameBreak
+import com.pepekprodakshn.table.model.TableState
 
-val finalTableState = TableStateDTO(
+val finalTableState = TableState(
     redsCount = 0,
-    lowestPriceBall = BallDTO.YELLOW,
+    lowestPriceBall = Ball.YELLOW,
 )
 
-val preFinalTableState = TableStateDTO(
+val preFinalTableState = TableState(
     redsCount = 0,
-    lowestPriceBall = BallDTO.RED,
+    lowestPriceBall = Ball.RED,
 )
 
-val startTableStateWithFreeBall = TableStateDTO(
-    breakDTO = BreakDTO(isFreeBall = true),
+val startTableStateWithFreeBall = TableState(
+    frameBreak = FrameBreak(isFreeBall = true),
 )
 
 val finalTableStateWithFreeBall = finalTableState.copy(
-    breakDTO = BreakDTO(isFreeBall = true),
+    frameBreak = FrameBreak(isFreeBall = true),
 )
 
-val foul = FoulDTO(
+val foul = Foul(
     points = 4,
     isMiss = false,
     isFreeBall = false,

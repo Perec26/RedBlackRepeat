@@ -1,26 +1,35 @@
 package com.pepekprodakshn.redblackrepeat.frame.data
 
-data class TableStateDTO(
-    val firstPlayerPoints: Int = 0,
-    val secondPlayerPoints: Int = 0,
-    val redsCount: Int = 15,
-    val lowestPriceBall: BallDTO = BallDTO.RED,
-    val nextIsColor: Boolean = false,
-    val breakDTO: BreakDTO? = null,
-    val isFirstPlayerSelected: Boolean = true,
-) {
+import com.pepekprodakshn.table.model.Ball
+import com.pepekprodakshn.table.model.Foul
+import com.pepekprodakshn.table.model.FrameBreak
+import com.pepekprodakshn.table.model.TableState
+import com.pepekprodakshn.table.model.getNextValueBall
+import javax.inject.Inject
 
-    val pointOnTable: Int
-        get() {
-            return redsCount * 8 + BallDTO.entries.sumOf {
-                if (it.value > lowestPriceBall.value) it.value else 0
-            }
-        }
+class TableStateCalculator @Inject constructor() {
 
-    fun onBallPotted(ball: BallDTO): TableStateDTO {
-        if (breakDTO?.isFreeBall == true) return onFreeBallPotted()
+    fun calculateState(actions: List<FrameActionsDTO>): TableState {
+        var resultState = TableState()
+        actions.forEach { resultState = updateFrameState(it, resultState) }
+        return resultState
+    }
 
-        val isRed = ball == BallDTO.RED
+    private fun updateFrameState(
+        action: FrameActionsDTO,
+        resultState: TableState,
+    ) = when (action) {
+        is FrameActionsDTO.BallPotted -> resultState.onBallPotted(action.ball)
+        is FrameActionsDTO.Fouled -> resultState.onFoul(action.foul)
+        is FrameActionsDTO.AddReds -> resultState.onAddReds(action.count)
+        is FrameActionsDTO.RemoveReds -> resultState.onRemoveReds(action.count)
+        FrameActionsDTO.BreakEnded -> resultState.onBreakEnded()
+    }
+
+    private fun TableState.onBallPotted(ball: Ball): TableState {
+        if (frameBreak?.isFreeBall == true) return onFreeBallPotted()
+
+        val isRed = ball == Ball.RED
 
         val addFirstPlayerPoints = if (isFirstPlayerSelected) ball.value else 0
         val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else ball.value
@@ -29,12 +38,12 @@ data class TableStateDTO(
         val newSecondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
         val isDraw = newFirstPlayerPoints == newSecondPlayerPoints
 
-        val newBreak = breakDTO?.add(ball) ?: BreakDTO(listOf(ball))
+        val newBreak = frameBreak?.add(ball) ?: FrameBreak(listOf(ball))
 
         val isNextInFinal = (redsCount == 0 && !isRed)
 
         val lowestPriceBall = if (isNextInFinal) {
-            lowestPriceBall.getNextValueBall() ?: if (isDraw) BallDTO.BLACK else BallDTO.RED
+            lowestPriceBall.getNextValueBall() ?: if (isDraw) Ball.BLACK else Ball.RED
         } else {
             lowestPriceBall
         }
@@ -42,33 +51,33 @@ data class TableStateDTO(
         return copy(
             redsCount = redsCount - if (isRed) 1 else 0,
             nextIsColor = isRed,
-            breakDTO = newBreak,
+            frameBreak = newBreak,
             lowestPriceBall = lowestPriceBall,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
     }
 
-    private fun onFreeBallPotted(): TableStateDTO {
+    private fun TableState.onFreeBallPotted(): TableState {
         val addFirstPlayerPoints = if (isFirstPlayerSelected) lowestPriceBall.value else 0
         val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else lowestPriceBall.value
 
-        val newBreak = breakDTO?.copy(
+        val newBreak = frameBreak?.copy(
             isFreeBall = false,
             freeBallScore = lowestPriceBall.value,
         )
         return copy(
-            breakDTO = newBreak,
+            frameBreak = newBreak,
             nextIsColor = redsCount != 0,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
     }
 
-    fun onBreakEnded(): TableStateDTO {
+    private fun TableState.onBreakEnded(): TableState {
 
-        val lowestPriceBall = if (redsCount == 0 && lowestPriceBall == BallDTO.RED) {
-            lowestPriceBall.getNextValueBall() ?: BallDTO.RED
+        val lowestPriceBall = if (redsCount == 0 && lowestPriceBall == Ball.RED) {
+            lowestPriceBall.getNextValueBall() ?: Ball.RED
         } else {
             lowestPriceBall
         }
@@ -76,12 +85,12 @@ data class TableStateDTO(
         return copy(
             nextIsColor = false,
             lowestPriceBall = lowestPriceBall,
-            breakDTO = null,
+            frameBreak = null,
             isFirstPlayerSelected = !isFirstPlayerSelected,
         )
     }
 
-    fun onFoul(foul: FoulDTO): TableStateDTO {
+    private fun TableState.onFoul(foul: Foul): TableState {
 
         val addFirstPlayerPoints = if (isFirstPlayerSelected) 0 else foul.points
         val addSecondPlayerPoints = if (isFirstPlayerSelected) foul.points else 0
@@ -89,14 +98,14 @@ data class TableStateDTO(
         val newNextIsColor = if (foul.isMiss) nextIsColor else false
 
         val lowestPriceBall =
-            if (redsCount == 0 && lowestPriceBall == BallDTO.RED && !newNextIsColor) {
-                lowestPriceBall.getNextValueBall() ?: BallDTO.RED
+            if (redsCount == 0 && lowestPriceBall == Ball.RED && !newNextIsColor) {
+                lowestPriceBall.getNextValueBall() ?: Ball.RED
             } else {
                 lowestPriceBall
             }
 
         return copy(
-            breakDTO = BreakDTO(isFreeBall = true).takeIf { foul.isFreeBall },
+            frameBreak = FrameBreak(isFreeBall = true).takeIf { foul.isFreeBall },
             nextIsColor = newNextIsColor,
             lowestPriceBall = lowestPriceBall,
             isFirstPlayerSelected = foul.isMiss == isFirstPlayerSelected,
@@ -106,7 +115,7 @@ data class TableStateDTO(
         )
     }
 
-    fun onAddReds(count: Int) = copy(redsCount = redsCount + count)
+    private fun TableState.onAddReds(count: Int) = copy(redsCount = redsCount + count)
 
-    fun onRemoveReds(count: Int) = copy(redsCount = redsCount - count)
+    private fun TableState.onRemoveReds(count: Int) = copy(redsCount = redsCount - count)
 }

@@ -1,18 +1,18 @@
 package com.pepekprodakshn.redblackrepeat.frame.domain.mapper
 
-import com.pepekprodakshn.redblackrepeat.frame.data.TableStateDTO
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallsStateUI
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.TableStateUI
+import com.pepekprodakshn.table.model.TableState
 
-fun TableStateDTO.toUI() = TableStateUI(
+fun TableState.toUI() = TableStateUI(
     firstPlayerPoints = firstPlayerPoints,
     secondPlayerPoints = secondPlayerPoints,
     ballState = BallsStateUI(
         redsCount = redsCount,
         lowestPriceBall = lowestPriceBall.toUI(),
         nextIsColor = nextIsColor,
-        isFreeBall = breakDTO?.isFreeBall ?: false,
+        isFreeBall = frameBreak?.isFreeBall ?: false,
     ),
-    breakUI = breakDTO?.toUI(),
+    breakUI = frameBreak?.toUI(),
     isFirstPlayerSelected = isFirstPlayerSelected,
 )

@@ -1,6 +1,6 @@
-package com.pepekprodakshn.redblackrepeat.frame.data
+package com.pepekprodakshn.table.model
 
-data class FoulDTO(
+data class Foul(
     val points: Int,
     val isMiss: Boolean,
     val isFreeBall: Boolean,

@@ -1,26 +1,26 @@
 package com.pepekprodakshn.redblackrepeat.frame.domain.mapper
 
-import com.pepekprodakshn.redblackrepeat.frame.data.BallDTO
 import com.pepekprodakshn.redblackrepeat.frame.ui.model.BallUI
+import com.pepekprodakshn.table.model.Ball
 
 fun BallUI.toDTO() = when (this) {
-    BallUI.RED -> BallDTO.RED
-    BallUI.YELLOW -> BallDTO.YELLOW
-    BallUI.GREEN -> BallDTO.GREEN
-    BallUI.BROWN -> BallDTO.BROWN
-    BallUI.BLUE -> BallDTO.BLUE
-    BallUI.PINK -> BallDTO.PINK
-    BallUI.BLACK -> BallDTO.BLACK
+    BallUI.RED -> Ball.RED
+    BallUI.YELLOW -> Ball.YELLOW
+    BallUI.GREEN -> Ball.GREEN
+    BallUI.BROWN -> Ball.BROWN
+    BallUI.BLUE -> Ball.BLUE
+    BallUI.PINK -> Ball.PINK
+    BallUI.BLACK -> Ball.BLACK
 }
 
-fun BallDTO.toUI() = when (this) {
-    BallDTO.RED -> BallUI.RED
-    BallDTO.YELLOW -> BallUI.YELLOW
-    BallDTO.GREEN -> BallUI.GREEN
-    BallDTO.BROWN -> BallUI.BROWN
-    BallDTO.BLUE -> BallUI.BLUE
-    BallDTO.PINK -> BallUI.PINK
-    BallDTO.BLACK -> BallUI.BLACK
+fun Ball.toUI() = when (this) {
+    Ball.RED -> BallUI.RED
+    Ball.YELLOW -> BallUI.YELLOW
+    Ball.GREEN -> BallUI.GREEN
+    Ball.BROWN -> BallUI.BROWN
+    Ball.BLUE -> BallUI.BLUE
+    Ball.PINK -> BallUI.PINK
+    Ball.BLACK -> BallUI.BLACK
 }
 
-fun List<BallDTO>.toUI() = map(BallDTO::toUI)
+fun List<Ball>.toUI() = map(Ball::toUI)
