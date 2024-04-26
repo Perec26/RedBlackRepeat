@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.pepekprodakshn.redblackrepeat.navigation.RBRNavController
+import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.navigation.RBRNavController
 import com.pepekprodakshn.redblackrepeat.navigation.RedBlackRepeatApp
-import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

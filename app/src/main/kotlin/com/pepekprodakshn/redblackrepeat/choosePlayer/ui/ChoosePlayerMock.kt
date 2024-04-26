@@ -1,6 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
 
-import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
+import com.pepekprodakshn.frame.ui.PlayerUI
 
 val listOfPlayers = listOf(
     PlayerUI(id = 1, name = "Ronnie O'Sullivan"),

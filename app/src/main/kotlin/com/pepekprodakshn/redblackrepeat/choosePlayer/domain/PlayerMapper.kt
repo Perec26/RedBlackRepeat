@@ -1,7 +1,7 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.domain
 
+import com.pepekprodakshn.frame.ui.PlayerUI
 import com.pepekprodakshn.player.model.Player
-import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
 
 fun List<PlayerUI>.toDomain() = map(PlayerUI::toDomain)
 

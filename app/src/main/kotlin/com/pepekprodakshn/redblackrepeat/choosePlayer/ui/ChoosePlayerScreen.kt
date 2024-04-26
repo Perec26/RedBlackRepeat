@@ -30,14 +30,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
+import com.pepekprodakshn.designsystem.theme.RBRTypography
+import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
+import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
+import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.R
-import com.pepekprodakshn.redblackrepeat.base.ui.LANDSCAPE_DEVICE
-import com.pepekprodakshn.redblackrepeat.base.ui.widgets.CustomTopAppBar
-import com.pepekprodakshn.redblackrepeat.base.ui.widgets.DefaultFilledButton
-import com.pepekprodakshn.redblackrepeat.base.ui.widgets.SpacerHeight
 import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.widgets.PlayerItem
-import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
-import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun ChoosePlayerScreen(

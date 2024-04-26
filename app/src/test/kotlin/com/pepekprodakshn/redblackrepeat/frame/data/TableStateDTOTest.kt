@@ -1,14 +1,6 @@
 package com.pepekprodakshn.redblackrepeat.frame.data
 
-import com.pepekprodakshn.redblackrepeat.frame.data.model.finalTableStateWithFreeBall
-import com.pepekprodakshn.redblackrepeat.frame.data.model.foul
-import com.pepekprodakshn.redblackrepeat.frame.data.model.foulWithFreeBall
-import com.pepekprodakshn.redblackrepeat.frame.data.model.foulWithMiss
-import com.pepekprodakshn.redblackrepeat.frame.data.model.foulWithRemoveReds
-import com.pepekprodakshn.redblackrepeat.frame.data.model.preFinalTableState
-import com.pepekprodakshn.redblackrepeat.frame.data.model.startTableStateWithFreeBall
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.shouldBe
 
 class TableStateDTOTest : FreeSpec({
 

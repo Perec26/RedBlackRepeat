@@ -86,7 +86,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
-    implementation(project(":data:table"))
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
@@ -112,4 +111,9 @@ dependencies {
     // Project
     implementation(project(":core:database"))
     implementation(project(":data:player"))
+    implementation(project(":data:table"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:ui"))
+    implementation(project(":feature:frame"))
 }

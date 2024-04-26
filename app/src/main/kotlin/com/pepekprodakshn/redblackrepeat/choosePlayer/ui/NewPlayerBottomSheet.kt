@@ -30,9 +30,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.theme.RBRTypography
+import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.redblackrepeat.R
-import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
-import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
