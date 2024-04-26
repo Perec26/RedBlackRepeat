@@ -17,9 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
+import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.redblackrepeat.R
-import com.pepekprodakshn.redblackrepeat.base.ui.LANDSCAPE_DEVICE
-import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
 
 @Composable
 fun StartScreen(

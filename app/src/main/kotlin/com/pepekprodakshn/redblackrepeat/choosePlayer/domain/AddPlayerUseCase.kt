@@ -1,7 +1,7 @@
 package com.pepekprodakshn.redblackrepeat.choosePlayer.domain
 
+import com.pepekprodakshn.frame.ui.PlayerUI
 import com.pepekprodakshn.player.dataSource.PlayersRepository
-import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
 import javax.inject.Inject
 
 class AddPlayerUseCase @Inject constructor(

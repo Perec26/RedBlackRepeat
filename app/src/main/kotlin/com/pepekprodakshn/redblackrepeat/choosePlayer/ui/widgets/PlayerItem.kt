@@ -17,10 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.redblackrepeat.frame.ui.PlayerUI
-import com.pepekprodakshn.redblackrepeat.frame.ui.firstPlayerUIMock
-import com.pepekprodakshn.redblackrepeat.ui.theme.RBRTypography
-import com.pepekprodakshn.redblackrepeat.ui.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.designsystem.theme.RBRTypography
+import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.frame.ui.PlayerUI
+import com.pepekprodakshn.frame.ui.firstPlayerUIMock
 
 @Composable
 fun PlayerItem(

@@ -1,7 +1,7 @@
 package com.pepekprodakshn.redblackrepeat.di
 
 import android.content.Context
-import com.pepekprodakshn.redblackrepeat.navigation.RBRNavController
+import com.pepekprodakshn.navigation.RBRNavController
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
