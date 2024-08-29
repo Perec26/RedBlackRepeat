@@ -1,6 +1,6 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.frame.ui.PlayerUI
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 private const val MAX_PLAYERS = 2
 

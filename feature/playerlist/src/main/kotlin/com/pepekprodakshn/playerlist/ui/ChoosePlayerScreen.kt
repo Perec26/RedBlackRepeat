@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
@@ -36,8 +36,9 @@ import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
 import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
 import com.pepekprodakshn.designsystem.widgets.SpacerHeight
-import com.pepekprodakshn.redblackrepeat.R
-import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.widgets.PlayerItem
+import com.pepekprodakshn.playerlist.R
+import com.pepekprodakshn.playerlist.ui.widgets.PlayerItem
+import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.NewPlayerBottomSheet
 
 @Composable
 fun ChoosePlayerScreen(

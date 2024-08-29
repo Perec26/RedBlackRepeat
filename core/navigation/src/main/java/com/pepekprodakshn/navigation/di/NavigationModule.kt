@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.di
+package com.pepekprodakshn.navigation.di
 
 import android.content.Context
 import com.pepekprodakshn.navigation.RBRNavController

@@ -1,9 +1,4 @@
 <resources>
     <string name="app_name">RedBlackRepeat</string>
     <string name="start_start">Start</string>
-    <string name="choose_players_title">Choose players</string>
-    <string name="choose_players_empty_players_title">No players, yet</string>
-    <string name="choose_players_empty_players_description">Your players list is empty.\nCreate two players to start the game</string>
-    <string name="choose_players_empty_players_button">Create new player</string>
-    <string name="new_player_validation_error">Invalid name</string>
 </resources>

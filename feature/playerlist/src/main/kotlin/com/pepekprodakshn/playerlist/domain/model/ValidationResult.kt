@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.domain.model
+package com.pepekprodakshn.playerlist.domain.model
 
 sealed class ValidationResult {
     data object Success : ValidationResult()

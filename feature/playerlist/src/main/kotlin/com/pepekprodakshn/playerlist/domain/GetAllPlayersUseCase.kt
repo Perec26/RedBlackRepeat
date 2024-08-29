@@ -1,6 +1,7 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.domain
+package com.pepekprodakshn.playerlist.domain
 
 import com.pepekprodakshn.player.dataSource.PlayersRepository
+import com.pepekprodakshn.playerlist.domain.mapper.toUI
 import javax.inject.Inject
 
 class GetAllPlayersUseCase @Inject constructor(

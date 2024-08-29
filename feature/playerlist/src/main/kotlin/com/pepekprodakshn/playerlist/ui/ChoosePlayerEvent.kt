@@ -1,6 +1,6 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.frame.ui.PlayerUI
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 sealed class ChoosePlayerEvent {
     data class OnPlayerClick(val player: PlayerUI) : ChoosePlayerEvent()
