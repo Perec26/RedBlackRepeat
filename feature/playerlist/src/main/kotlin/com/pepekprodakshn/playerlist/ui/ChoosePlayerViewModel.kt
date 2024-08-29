@@ -1,11 +1,12 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.frame.ui.PlayerUI
-import com.pepekprodakshn.frame.ui.navigation.FrameDestinations
-import com.pepekprodakshn.redblackrepeat.choosePlayer.domain.AddPlayerUseCase
-import com.pepekprodakshn.redblackrepeat.choosePlayer.domain.GetAllPlayersUseCase
-import com.pepekprodakshn.redblackrepeat.choosePlayer.domain.ValidateNameUseCase
-import com.pepekprodakshn.redblackrepeat.choosePlayer.domain.model.ValidationResult
+import com.pepekprodakshn.navigation.RBRNavController
+import com.pepekprodakshn.navigation.SharedRouter
+import com.pepekprodakshn.playerlist.domain.AddPlayerUseCase
+import com.pepekprodakshn.playerlist.domain.GetAllPlayersUseCase
+import com.pepekprodakshn.playerlist.domain.ValidateNameUseCase
+import com.pepekprodakshn.playerlist.domain.model.ValidationResult
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 import com.pepekprodakshn.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +16,8 @@ class ChoosePlayerViewModel @Inject constructor(
     private val getAllPlayersUseCase: GetAllPlayersUseCase,
     private val addPlayerUseCase: AddPlayerUseCase,
     private val validateNameUseCase: ValidateNameUseCase,
-    private val navController: com.pepekprodakshn.navigation.RBRNavController,
+    private val sharedRouter: SharedRouter,
+    private val navController: RBRNavController,
 ) : BaseViewModel<ChoosePlayerViewState, ChoosePlayerEvent>(
     initialState = ChoosePlayerViewState(),
 ) {
@@ -42,8 +44,7 @@ class ChoosePlayerViewModel @Inject constructor(
     }
 
     private fun onStartMatchClick() {
-        navController.navigateTo(
-            destination = FrameDestinations.Frame,
+        sharedRouter.navigateToFrame(
             viewState.selectedPlayers.first().id,
             viewState.selectedPlayers.last().id,
         )

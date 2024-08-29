@@ -116,4 +116,5 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
     implementation(project(":feature:frame"))
+    implementation(project(":feature:playerlist"))
 }

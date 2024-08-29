@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui.widgets
+package com.pepekprodakshn.playerlist.ui.widgets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
-import com.pepekprodakshn.frame.ui.PlayerUI
-import com.pepekprodakshn.frame.ui.firstPlayerUIMock
+import com.pepekprodakshn.playerlist.ui.firstPlayerUIMock
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 @Composable
 fun PlayerItem(

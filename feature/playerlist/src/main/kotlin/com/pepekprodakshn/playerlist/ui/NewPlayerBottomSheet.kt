@@ -32,7 +32,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
-import com.pepekprodakshn.redblackrepeat.R
+import com.pepekprodakshn.playerlist.R
+import com.pepekprodakshn.playerlist.ui.ChoosePlayerEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

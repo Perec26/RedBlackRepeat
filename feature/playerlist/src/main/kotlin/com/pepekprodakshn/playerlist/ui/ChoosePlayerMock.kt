@@ -1,6 +1,6 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.frame.ui.PlayerUI
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 val listOfPlayers = listOf(
     PlayerUI(id = 1, name = "Ronnie O'Sullivan"),
@@ -16,4 +16,14 @@ val listOfPlayers = listOf(
 
 val choosePlayerViewStateMock = ChoosePlayerViewState(
     players = listOfPlayers,
+)
+
+val firstPlayerUIMock = PlayerUI(
+    id = 1,
+    name = "Ronnie O'Sullivan",
+)
+
+val secondPlayerUIMock = PlayerUI(
+    id = 2,
+    name = "Mark Selby",
 )
