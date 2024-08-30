@@ -117,4 +117,5 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":feature:frame"))
     implementation(project(":feature:playerlist"))
+    implementation(project(":feature:start"))
 }
