@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.start.ui
+package com.pepekprodakshn.start.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
-import com.pepekprodakshn.redblackrepeat.R
+import com.pepekprodakshn.start.R
 
 @Composable
 fun StartScreen(

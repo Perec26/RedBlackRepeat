@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.start.ui
+package com.pepekprodakshn.start.ui
 
 import com.pepekprodakshn.navigation.SharedRouter
 import com.pepekprodakshn.ui.BaseViewModel

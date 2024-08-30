@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.start.ui
+package com.pepekprodakshn.start.ui
 
 sealed class StartEvent {
     data object ButtonClick : StartEvent()
