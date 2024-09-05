@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.redblackrepeat.hilt)
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
@@ -47,26 +47,11 @@ dependencies {
 
     // Design
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
 
     // DI
-    implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    ksp(libs.hilt.android.compiler)
-
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:ui"))
+    implementation(projects.core.designsystem)
+    implementation(projects.core.navigation)
+    implementation(projects.core.ui)
 }

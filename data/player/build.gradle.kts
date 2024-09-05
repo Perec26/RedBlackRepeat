@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.redblackrepeat.hilt)
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
@@ -35,23 +35,5 @@ android {
 }
 
 dependencies {
-
-    // DI
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(project(":core:database"))
-    ksp(libs.hilt.android.compiler)
-
-    // Database
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
-    ksp(libs.androidx.room.room.compiler)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(projects.core.database)
 }
