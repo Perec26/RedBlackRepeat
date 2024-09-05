@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
@@ -32,20 +31,4 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-
-    // DI
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.hilt.android.compiler)
-
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
