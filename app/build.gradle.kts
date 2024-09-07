@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     alias(libs.plugins.redblackrepeat.hilt)
+    alias(libs.plugins.compose.compiler)
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
@@ -61,6 +62,11 @@ android {
     testOptions.unitTests.all {
         it.useJUnitPlatform()
     }
+}
+
+composeCompiler {
+    enableStrongSkippingMode = true
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
 ktlint {

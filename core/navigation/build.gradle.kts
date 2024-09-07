@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.redblackrepeat.hilt)
+    alias(libs.plugins.compose.compiler)
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
