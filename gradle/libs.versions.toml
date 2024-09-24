@@ -2,10 +2,9 @@
 minSdk = "26"
 targetSdk = "34"
 compileSdk = "34"
-composeBom = "2024.09.00"
+composeBom = "2024.09.01"
 activityCompose = "1.9.2"
 coreKtx = "1.13.1"
-hiltAndroidCompiler = "2.51.1"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 junitJupiter = "5.10.2"
@@ -14,11 +13,12 @@ androidxLifecycle = "2.8.5"
 navigationCompose = "2.8.0"
 roomVersion = "2.6.1"
 
-androidGradlePlugin = "8.5.2"
-kotlinPlugin = "2.0.0"
+androidGradlePlugin = "8.6.0"
+kotlinPlugin = "2.0.20"
 hiltPlugin = "2.51.1"
-kspPlugin = "2.0.0-1.0.21"
-jetbrainsKotlinJvm = "2.0.0"
+kspPlugin = "2.0.20-1.0.24"
+ktlintPlugin = "12.1.1"
+ktlintGradlePlugin = "12.1.1"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" } #Access composable APIs built on top of Activity.
@@ -35,7 +35,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotestRunnerJunit5" }
@@ -43,20 +43,30 @@ kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", ver
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlinPlugin" }
+compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlinPlugin" }
+ktlint-gradlePlugin = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 
 
 [plugins]
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinPlugin" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinPlugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinPlugin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltPlugin" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
-jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintPlugin" }
 
 #Project plugins
 redblackrepeat-hilt = { id = "redblackrepeat.hilt", version = "unspecified" }
+redblackrepeat-android-aplication = { id = "redblackrepeat.android.application", version = "unspecified" }
+redblackrepeat-android-aplication-compose = { id = "redblackrepeat.android.application.compose", version = "unspecified" }
+redblackrepeat-ktlint = { id = "redblackrepeat.ktlint", version = "unspecified" }
+redblackrepeat-android-library = { id = "redblackrepeat.android.library", version = "unspecified" }
+redblackrepeat-android-feature = { id = "redblackrepeat.android.feature", version = "unspecified" }
+redblackrepeat-android-library-compose = { id = "redblackrepeat.android.library.compose", version = "unspecified" }
+
 
 
 

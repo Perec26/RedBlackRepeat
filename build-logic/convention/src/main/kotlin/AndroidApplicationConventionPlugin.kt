@@ -1,23 +1,32 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.pepekprodakshn.convention.configureKotlinAndroid
+import com.pepekprodakshn.convention.findLibraryString
 import com.pepekprodakshn.convention.findVersionInt
 import com.pepekprodakshn.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("com.android.application")
-                apply("org.jetbrains.kotlin.android")
-            }
+            apply(plugin = "com.android.application")
+            apply(plugin = "org.jetbrains.kotlin.android")
+            apply(plugin = "redblackrepeat.ktlint")
+            apply(plugin = "redblackrepeat.hilt")
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = libs.findVersionInt("targetSdk")
+            }
+
+            dependencies {
+                add("implementation", libs.findLibraryString("androidx.core.ktx"))
+                add("implementation", libs.findLibraryString("androidx.hilt.navigation.compose"))
+                add("implementation", libs.findLibraryString("androidx.navigation.compose"))
             }
         }
     }
