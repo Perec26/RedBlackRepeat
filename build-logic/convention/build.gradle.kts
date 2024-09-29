@@ -45,5 +45,9 @@ gradlePlugin {
             id = "redblackrepeat.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("unitTest") {
+            id = "redblackrepeat.unittest"
+            implementationClass = "UnitTestConventionPlugin"
+        }
     }
 }

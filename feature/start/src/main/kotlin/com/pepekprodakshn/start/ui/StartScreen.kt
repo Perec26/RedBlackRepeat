@@ -22,7 +22,7 @@ import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.start.R
 
 @Composable
-fun StartScreen(
+internal fun StartScreen(
     viewModel: StartViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value

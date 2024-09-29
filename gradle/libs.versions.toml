@@ -2,23 +2,25 @@
 minSdk = "26"
 targetSdk = "34"
 compileSdk = "34"
-composeBom = "2024.09.01"
+composeBom = "2024.09.02"
 activityCompose = "1.9.2"
 coreKtx = "1.13.1"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 junitJupiter = "5.10.2"
-kotestRunnerJunit5 = "5.8.1"
-androidxLifecycle = "2.8.5"
-navigationCompose = "2.8.0"
+kotest = "5.8.1"
+mock = "1.13.12"
+androidxLifecycle = "2.8.6"
+navigationCompose = "2.8.1"
 roomVersion = "2.6.1"
 
-androidGradlePlugin = "8.6.0"
+androidGradlePlugin = "8.6.1"
 kotlinPlugin = "2.0.20"
 hiltPlugin = "2.51.1"
 kspPlugin = "2.0.20-1.0.24"
 ktlintPlugin = "12.1.1"
 ktlintGradlePlugin = "12.1.1"
+
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" } #Access composable APIs built on top of Activity.
@@ -38,7 +40,8 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
-kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotestRunnerJunit5" }
+kotest = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mock" }
 
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -66,6 +69,7 @@ redblackrepeat-ktlint = { id = "redblackrepeat.ktlint", version = "unspecified" 
 redblackrepeat-android-library = { id = "redblackrepeat.android.library", version = "unspecified" }
 redblackrepeat-android-feature = { id = "redblackrepeat.android.feature", version = "unspecified" }
 redblackrepeat-android-library-compose = { id = "redblackrepeat.android.library.compose", version = "unspecified" }
+redblackrepeat-unittest = { id = "redblackrepeat.unittest", version = "unspecified" }
 
 
 

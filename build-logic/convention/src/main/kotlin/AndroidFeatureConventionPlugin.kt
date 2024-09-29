@@ -10,6 +10,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "redblackrepeat.android.library.compose")
             apply(plugin = "redblackrepeat.hilt")
+            apply(plugin = "redblackrepeat.unittest")
 
             dependencies {
                 add("implementation", libs.findLibraryString("androidx.hilt.navigation.compose"))

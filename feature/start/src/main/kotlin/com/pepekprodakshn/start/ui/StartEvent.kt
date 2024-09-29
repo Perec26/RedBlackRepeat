@@ -1,5 +1,5 @@
 package com.pepekprodakshn.start.ui
 
-sealed class StartEvent {
+internal sealed class StartEvent {
     data object ButtonClick : StartEvent()
 }

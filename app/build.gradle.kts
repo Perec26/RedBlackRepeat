@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest)
     testImplementation(libs.junit.jupiter)
     // Project
     implementation(projects.core.database)
