@@ -13,6 +13,7 @@ mock = "1.13.12"
 androidxLifecycle = "2.8.6"
 navigationCompose = "2.8.1"
 roomVersion = "2.6.1"
+coroutinesTest = "1.8.0"
 
 androidGradlePlugin = "8.6.1"
 kotlinPlugin = "2.0.20"
@@ -42,6 +43,7 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 kotest = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mock" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

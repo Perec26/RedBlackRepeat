@@ -18,6 +18,7 @@ class UnitTestConventionPlugin : Plugin<Project> {
             dependencies {
                 add("testImplementation", libs.findLibraryString("kotest"))
                 add("testImplementation", libs.findLibraryString("mockk"))
+                add("testImplementation", libs.findLibraryString("coroutines.test"))
             }
         }
     }
