@@ -20,7 +20,7 @@ import com.pepekprodakshn.frame.ui.widgets.FrameOptionGridItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FrameOptionsBottomSheet(
+internal fun FrameOptionsBottomSheet(
     options: List<FrameOptionUI>,
     onEvent: (FrameEvent) -> Unit,
 ) {

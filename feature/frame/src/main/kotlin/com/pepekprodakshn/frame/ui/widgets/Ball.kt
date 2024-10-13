@@ -29,7 +29,7 @@ import com.pepekprodakshn.frame.ui.model.BallUI
 import kotlin.math.sqrt
 
 @Composable
-fun Ball(
+internal fun Ball(
     ball: BallUI,
     modifier: Modifier = Modifier,
     size: Dp = 64.dp,
@@ -51,7 +51,7 @@ fun Ball(
 }
 
 @Composable
-fun FreeBall(
+internal fun FreeBall(
     modifier: Modifier = Modifier,
     count: Int = 0,
 ) {

@@ -25,7 +25,7 @@ import com.pepekprodakshn.frame.ui.FrameEvent
 import com.pepekprodakshn.frame.ui.model.FrameOptionUI
 
 @Composable
-fun FrameOptions(
+internal fun FrameOptions(
     modifier: Modifier = Modifier,
     onEvent: (FrameEvent) -> Unit,
 ) {

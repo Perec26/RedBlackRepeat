@@ -1,6 +1,6 @@
 package com.pepekprodakshn.playerlist.ui.model
 
-data class PlayerUI(
+internal data class PlayerUI(
     val id: Int,
     val name: String,
 )

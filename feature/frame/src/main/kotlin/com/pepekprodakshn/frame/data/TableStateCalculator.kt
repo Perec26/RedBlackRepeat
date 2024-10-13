@@ -7,7 +7,7 @@ import com.pepekprodakshn.table.model.TableState
 import com.pepekprodakshn.table.model.getNextValueBall
 import javax.inject.Inject
 
-class TableStateCalculator @Inject constructor() {
+internal class TableStateCalculator @Inject constructor() {
 
     fun calculateState(actions: List<FrameActionsDTO>): TableState {
         var resultState = TableState()
@@ -117,5 +117,12 @@ class TableStateCalculator @Inject constructor() {
 
     private fun TableState.onAddReds(count: Int) = copy(redsCount = redsCount + count)
 
-    private fun TableState.onRemoveReds(count: Int) = copy(redsCount = redsCount - count)
+    private fun TableState.onRemoveReds(count: Int): TableState {
+        val newRedsCount = redsCount - count
+        val lowestPriceBall = if (newRedsCount > 0) lowestPriceBall else Ball.YELLOW
+        return copy(
+            redsCount = newRedsCount,
+            lowestPriceBall = lowestPriceBall
+        )
+    }
 }

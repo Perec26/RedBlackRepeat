@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.mockk.mockk
 import io.mockk.verify
 
-class StartViewModelTest : FreeSpec(
+internal class StartViewModelTest : FreeSpec(
     {
         "Feature: StartViewModel" - {
 

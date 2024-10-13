@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @Composable
-fun Foul(
+internal fun Foul(
     modifier: Modifier = Modifier,
     foulValue: Int,
     isSelected: Boolean = false,

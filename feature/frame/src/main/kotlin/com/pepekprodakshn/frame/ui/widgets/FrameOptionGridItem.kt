@@ -28,7 +28,7 @@ import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 
 @Composable
-fun FrameOptionGridItem(
+internal fun FrameOptionGridItem(
     modifier: Modifier = Modifier,
     @StringRes name: Int,
     iconImageVector: ImageVector,
@@ -70,7 +70,7 @@ fun FrameOptionGridItem(
 
 @PreviewLightDark
 @Composable
-fun FrameOptionGridItemPreview() {
+private fun FrameOptionGridItemPreview() {
     RedBlackRepeatTheme {
         FrameOptionGridItem(
             name = R.string.frame_foul,

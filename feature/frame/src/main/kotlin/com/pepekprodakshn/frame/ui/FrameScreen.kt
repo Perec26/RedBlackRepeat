@@ -28,7 +28,7 @@ import com.pepekprodakshn.frame.ui.widgets.FrameOptions
 import com.pepekprodakshn.frame.ui.widgets.PlayersCounters
 
 @Composable
-fun FrameScreen(
+internal fun FrameScreen(
     viewModel: FrameViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value
@@ -44,7 +44,7 @@ fun FrameScreen(
 }
 
 @Composable
-fun FrameScreenContent(
+private fun FrameScreenContent(
     state: FrameUiState,
     onEvent: (FrameEvent) -> Unit,
 ) {

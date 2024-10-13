@@ -1,8 +1,8 @@
 package com.pepekprodakshn.frame.ui.model
 
-const val LOWEST_FOUL_VALUE = 4
+internal const val LOWEST_FOUL_VALUE = 4
 
-data class FoulUI(
+internal data class FoulUI(
     val points: Int = 0,
     val isMiss: Boolean = false,
     val isFreeBall: Boolean = false,

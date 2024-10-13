@@ -4,7 +4,7 @@ import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 private const val MAX_PLAYERS = 2
 
-data class ChoosePlayerViewState(
+internal data class ChoosePlayerViewState(
     val players: List<PlayerUI> = emptyList(),
     val showNewPlayerBottomSheet: Boolean = false,
     val newPlayerName: String = "",

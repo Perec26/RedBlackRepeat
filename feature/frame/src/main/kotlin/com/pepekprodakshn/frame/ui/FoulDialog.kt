@@ -24,7 +24,7 @@ import com.pepekprodakshn.frame.ui.model.FoulUI
 import com.pepekprodakshn.frame.ui.widgets.Foul
 
 @Composable
-fun FoulDialog(
+internal fun FoulDialog(
     foulUI: FoulUI,
     onEvent: (FrameEvent) -> Unit,
 ) {

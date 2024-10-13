@@ -3,7 +3,7 @@ package com.pepekprodakshn.frame.domain.mapper
 import com.pepekprodakshn.frame.ui.model.BallUI
 import com.pepekprodakshn.table.model.Ball
 
-fun BallUI.toDTO() = when (this) {
+internal fun BallUI.toDTO() = when (this) {
     BallUI.RED -> Ball.RED
     BallUI.YELLOW -> Ball.YELLOW
     BallUI.GREEN -> Ball.GREEN
@@ -13,7 +13,7 @@ fun BallUI.toDTO() = when (this) {
     BallUI.BLACK -> Ball.BLACK
 }
 
-fun Ball.toUI() = when (this) {
+internal fun Ball.toUI() = when (this) {
     Ball.RED -> BallUI.RED
     Ball.YELLOW -> BallUI.YELLOW
     Ball.GREEN -> BallUI.GREEN
@@ -23,4 +23,4 @@ fun Ball.toUI() = when (this) {
     Ball.BLACK -> BallUI.BLACK
 }
 
-fun List<Ball>.toUI() = map(Ball::toUI)
+internal fun List<Ball>.toUI() = map(Ball::toUI)

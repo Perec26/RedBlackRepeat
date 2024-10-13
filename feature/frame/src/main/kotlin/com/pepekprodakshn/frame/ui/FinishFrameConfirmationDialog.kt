@@ -19,7 +19,7 @@ import com.pepekprodakshn.designsystem.widgets.DefaultTextButton
 import com.pepekprodakshn.frame.R
 
 @Composable
-fun FinishFrameConfirmationDialog(
+internal fun FinishFrameConfirmationDialog(
     onEvent: (FrameEvent) -> Unit,
 ) {
     DefaultDialog(onDismissRequest = { onEvent(FrameEvent.OnFinishFrameConfirmationClosed) }) {
@@ -65,7 +65,7 @@ fun FinishFrameConfirmationDialog(
 
 @PreviewLightDark
 @Composable
-fun FinishFrameConfirmationDialogPreview() {
+private fun FinishFrameConfirmationDialogPreview() {
     RedBlackRepeatTheme {
         FinishFrameConfirmationDialog {}
     }

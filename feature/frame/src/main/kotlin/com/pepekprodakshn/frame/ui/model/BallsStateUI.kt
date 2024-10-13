@@ -1,6 +1,6 @@
 package com.pepekprodakshn.frame.ui.model
 
-data class BallsStateUI(
+internal data class BallsStateUI(
     val redsCount: Int = 15,
     val lowestPriceBall: BallUI = BallUI.RED,
     val nextIsColor: Boolean = false,

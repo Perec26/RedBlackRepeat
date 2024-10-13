@@ -12,7 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ChoosePlayerViewModel @Inject constructor(
+internal class ChoosePlayerViewModel @Inject constructor(
     private val getAllPlayersUseCase: GetAllPlayersUseCase,
     private val addPlayerUseCase: AddPlayerUseCase,
     private val validateNameUseCase: ValidateNameUseCase,

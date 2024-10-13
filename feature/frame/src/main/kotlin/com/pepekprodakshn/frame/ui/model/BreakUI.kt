@@ -1,6 +1,6 @@
 package com.pepekprodakshn.frame.ui.model
 
-data class BreakUI(
+internal data class BreakUI(
     val balls: List<BallUI> = emptyList(),
     val isFreeBall: Boolean = false,
     val freeBallScore: Int = 0,

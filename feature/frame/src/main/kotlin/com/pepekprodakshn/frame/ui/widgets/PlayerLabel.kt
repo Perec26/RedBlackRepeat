@@ -32,7 +32,7 @@ import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 private const val DIFFERENCE_PADDING = 50
 
 @Composable
-fun PlayerLabel(
+internal fun PlayerLabel(
     modifier: Modifier = Modifier,
     isActive: Boolean = false,
     name: String = "Ronnie O'Sullivan",

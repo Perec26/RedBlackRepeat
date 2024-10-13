@@ -2,7 +2,7 @@ package com.pepekprodakshn.playerlist.ui
 
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
-val listOfPlayers = listOf(
+internal val listOfPlayers = listOf(
     PlayerUI(id = 1, name = "Ronnie O'Sullivan"),
     PlayerUI(id = 2, name = "Luca Brecel"),
     PlayerUI(id = 3, name = "Judd Trump"),
@@ -14,16 +14,16 @@ val listOfPlayers = listOf(
     PlayerUI(id = 9, name = "Mark J Williams"),
 )
 
-val choosePlayerViewStateMock = ChoosePlayerViewState(
+internal val choosePlayerViewStateMock = ChoosePlayerViewState(
     players = listOfPlayers,
 )
 
-val firstPlayerUIMock = PlayerUI(
+internal val firstPlayerUIMock = PlayerUI(
     id = 1,
     name = "Ronnie O'Sullivan",
 )
 
-val secondPlayerUIMock = PlayerUI(
+internal val secondPlayerUIMock = PlayerUI(
     id = 2,
     name = "Mark Selby",
 )

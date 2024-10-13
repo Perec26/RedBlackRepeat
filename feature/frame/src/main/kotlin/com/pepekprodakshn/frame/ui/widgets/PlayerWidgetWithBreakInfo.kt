@@ -17,7 +17,7 @@ import com.pepekprodakshn.frame.ui.breakMock
 import com.pepekprodakshn.frame.ui.model.BreakUI
 
 @Composable
-fun PlayerWidgetWithBreakInfo(
+internal fun PlayerWidgetWithBreakInfo(
     modifier: Modifier = Modifier,
     isActive: Boolean = false,
     name: String = "Ronnie O'Sullivan",

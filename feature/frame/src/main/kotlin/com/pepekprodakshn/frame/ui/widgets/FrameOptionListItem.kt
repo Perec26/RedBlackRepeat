@@ -23,7 +23,7 @@ import com.pepekprodakshn.designsystem.widgets.SpacerWidth
 import com.pepekprodakshn.frame.R
 
 @Composable
-fun FrameOptionListItem(
+internal fun FrameOptionListItem(
     modifier: Modifier = Modifier,
     @StringRes name: Int,
     iconImageVector: ImageVector,

@@ -5,9 +5,11 @@ import com.pepekprodakshn.frame.domain.mapper.toDTO
 import com.pepekprodakshn.frame.ui.model.FoulUI
 import javax.inject.Inject
 
-class FoulUseCase @Inject constructor(
+internal class FoulUseCase @Inject constructor(
     private val repository: FrameRepository,
 ) {
 
-    fun execute(foulUI: FoulUI) = repository.foul(foulUI.toDTO())
+    fun execute(foulUI: FoulUI) {
+        repository.foul(foulUI.toDTO())
+    }
 }

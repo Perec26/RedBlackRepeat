@@ -4,7 +4,7 @@ import com.pepekprodakshn.frame.data.FrameRepository
 import com.pepekprodakshn.frame.domain.mapper.toUI
 import javax.inject.Inject
 
-class GetTableState @Inject constructor(
+internal class GetTableState @Inject constructor(
     private val repository: FrameRepository,
 ) {
 

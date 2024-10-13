@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
 import com.pepekprodakshn.frame.R
 
-enum class BallUI(
+internal enum class BallUI(
     val value: Int,
     @DrawableRes val icon: Int,
     val textColor: Color,

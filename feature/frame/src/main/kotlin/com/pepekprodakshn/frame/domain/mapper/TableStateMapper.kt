@@ -4,7 +4,7 @@ import com.pepekprodakshn.frame.ui.model.BallsStateUI
 import com.pepekprodakshn.frame.ui.model.TableStateUI
 import com.pepekprodakshn.table.model.TableState
 
-fun TableState.toUI() = TableStateUI(
+internal fun TableState.toUI() = TableStateUI(
     firstPlayerPoints = firstPlayerPoints,
     secondPlayerPoints = secondPlayerPoints,
     ballState = BallsStateUI(

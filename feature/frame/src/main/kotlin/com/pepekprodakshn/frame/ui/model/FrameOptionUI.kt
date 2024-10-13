@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.FrameEvent
 
-enum class FrameOptionUI(
+internal enum class FrameOptionUI(
     @StringRes val text: Int,
     val icon: ImageVector,
     val event: FrameEvent,

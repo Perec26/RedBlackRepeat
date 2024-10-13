@@ -18,7 +18,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FrameViewModel @Inject constructor(
+internal class FrameViewModel @Inject constructor(
     private val navController: RBRNavController,
     private val getPlayerUseCase: GetPlayerUseCase,
     private val potBallUseCase: PotBallUseCase,
@@ -70,8 +70,8 @@ class FrameViewModel @Inject constructor(
             FrameEvent.OnAddRemoveRedsDialogClose -> updateState { closeAddRemoveRedsDialog() }
             FrameEvent.OnAddRemoveRedsPlusClick -> updateState { plusAddRemoveRedsDialog() }
             FrameEvent.OnAddRemoveRedsMinusClick -> updateState { minusAddRemoveRedsDialog() }
-            is FrameEvent.OnAddRedsDialogClick -> onAddRedsDialogClick()
-            is FrameEvent.OnRemoveRedsDialogClick -> onRemoveRedsDialogClick()
+            FrameEvent.OnAddRedsDialogClick -> onAddRedsDialogClick()
+            FrameEvent.OnRemoveRedsDialogClick -> onRemoveRedsDialogClick()
             FrameEvent.OnRestartClick -> onRestartClick()
             is FrameEvent.OnMoreClick -> updateState { showOptionsBottomSheet() }
             is FrameEvent.OnOptionsElementsCounted -> updateState { setOptionElements(event.count) }

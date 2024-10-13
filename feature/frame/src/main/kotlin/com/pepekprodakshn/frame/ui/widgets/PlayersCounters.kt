@@ -20,7 +20,7 @@ import com.pepekprodakshn.frame.ui.model.BreakUI
 import com.pepekprodakshn.frame.ui.secondPlayerUIMock
 
 @Composable
-fun PlayersCounters(
+internal fun PlayersCounters(
     modifier: Modifier = Modifier,
     firstPlayerUI: PlayerUI,
     firstPlayerPoints: Int,

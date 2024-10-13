@@ -21,7 +21,7 @@ import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.AddRemoveDialogState
 
 @Composable
-fun AddRemoveRedDialog(
+internal fun AddRemoveRedDialog(
     state: AddRemoveDialogState,
     onEvent: (FrameEvent) -> Unit,
 ) {

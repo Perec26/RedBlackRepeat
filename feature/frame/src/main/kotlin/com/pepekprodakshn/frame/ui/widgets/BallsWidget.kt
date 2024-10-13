@@ -24,7 +24,7 @@ import com.pepekprodakshn.frame.ui.model.BallUI
 import com.pepekprodakshn.frame.ui.model.BallsStateUI
 
 @Composable
-fun BallsWidget(
+internal fun BallsWidget(
     modifier: Modifier = Modifier,
     ballsState: BallsStateUI,
     onClick: (BallUI) -> Unit,

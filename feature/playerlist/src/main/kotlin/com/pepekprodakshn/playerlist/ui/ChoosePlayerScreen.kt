@@ -38,10 +38,9 @@ import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
 import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 import com.pepekprodakshn.playerlist.R
 import com.pepekprodakshn.playerlist.ui.widgets.PlayerItem
-import com.pepekprodakshn.redblackrepeat.choosePlayer.ui.NewPlayerBottomSheet
 
 @Composable
-fun ChoosePlayerScreen(
+internal fun ChoosePlayerScreen(
     viewModel: ChoosePlayerViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState().value

@@ -23,7 +23,7 @@ import com.pepekprodakshn.playerlist.ui.firstPlayerUIMock
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
 @Composable
-fun PlayerItem(
+internal fun PlayerItem(
     player: PlayerUI,
     enabled: Boolean = true,
     isSelected: Boolean = true,

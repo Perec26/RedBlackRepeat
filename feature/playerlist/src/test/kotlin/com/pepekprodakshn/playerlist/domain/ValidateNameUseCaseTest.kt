@@ -4,7 +4,7 @@ import com.pepekprodakshn.playerlist.domain.model.ValidationResult
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class ValidateNameUseCaseTest : FreeSpec(
+internal class ValidateNameUseCaseTest : FreeSpec(
     {
         "Feature: ValidateNameUseCase" - {
 

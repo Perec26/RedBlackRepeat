@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ChoosePlayerViewModelTest : FreeSpec(
+internal class ChoosePlayerViewModelTest : FreeSpec(
     {
         Dispatchers.setMain(Dispatchers.Unconfined)
 

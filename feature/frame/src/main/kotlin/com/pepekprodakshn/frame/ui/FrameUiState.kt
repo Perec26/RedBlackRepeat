@@ -8,7 +8,7 @@ import com.pepekprodakshn.frame.ui.model.LOWEST_FOUL_VALUE
 import com.pepekprodakshn.frame.ui.model.TableStateUI
 
 @Stable
-data class FrameUiState(
+internal data class FrameUiState(
     val firstPlayerUI: PlayerUI = PlayerUI(0, ""),
     val secondPlayerUI: PlayerUI = PlayerUI(0, ""),
     val tableState: TableStateUI = TableStateUI(),
@@ -82,7 +82,7 @@ data class FrameUiState(
     fun removeFoulRedBall() = copy(
         foulUI = foulUI.copy(
             removeReds = foulUI.removeReds - 1,
-            canAddReds = foulUI.removeReds - 1 < tableState.ballState.redsCount,
+            canAddReds = true,
         ),
     )
 

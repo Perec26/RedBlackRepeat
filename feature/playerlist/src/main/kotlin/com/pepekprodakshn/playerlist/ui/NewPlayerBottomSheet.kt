@@ -1,4 +1,4 @@
-package com.pepekprodakshn.redblackrepeat.choosePlayer.ui
+package com.pepekprodakshn.playerlist.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,11 +33,10 @@ import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.playerlist.R
-import com.pepekprodakshn.playerlist.ui.ChoosePlayerEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewPlayerBottomSheet(
+internal fun NewPlayerBottomSheet(
     name: String = "",
     isError: Boolean = false,
     onEvent: (ChoosePlayerEvent) -> Unit,

@@ -30,7 +30,7 @@ import com.pepekprodakshn.frame.ui.model.BreakUI
 private const val DIFFERENCE_PADDING = 80
 
 @Composable
-fun BreakWidget(
+internal fun BreakWidget(
     modifier: Modifier = Modifier,
     breakUI: BreakUI?,
     isRight: Boolean,

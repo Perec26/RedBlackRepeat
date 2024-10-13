@@ -2,7 +2,7 @@ package com.pepekprodakshn.playerlist.ui
 
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 
-sealed class ChoosePlayerEvent {
+internal sealed class ChoosePlayerEvent {
     data class OnPlayerClick(val player: PlayerUI) : ChoosePlayerEvent()
     data object OnBackPressed : ChoosePlayerEvent()
     data object OnAddPlayerClick : ChoosePlayerEvent()

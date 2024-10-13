@@ -6,7 +6,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @ViewModelScoped
-class FrameRepository @Inject constructor(
+internal class FrameRepository @Inject constructor(
     private val calculator: TableStateCalculator,
 ) {
 

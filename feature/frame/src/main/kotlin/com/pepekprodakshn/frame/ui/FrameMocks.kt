@@ -5,19 +5,19 @@ import com.pepekprodakshn.frame.ui.model.BallsStateUI
 import com.pepekprodakshn.frame.ui.model.BreakUI
 import com.pepekprodakshn.frame.ui.model.TableStateUI
 
-val firstPlayerUIMock = PlayerUI(
+internal val firstPlayerUIMock = PlayerUI(
     id = 1,
     name = "Ronnie O'Sullivan",
 )
 
-val secondPlayerUIMock = PlayerUI(
+internal val secondPlayerUIMock = PlayerUI(
     id = 2,
     name = "Mark Selby",
 )
 
-val ballsState = BallsStateUI()
+internal val ballsState = BallsStateUI()
 
-val breakMock = BreakUI(
+internal val breakMock = BreakUI(
     balls = listOf(
         BallUI.RED,
         BallUI.RED,
@@ -31,7 +31,7 @@ val breakMock = BreakUI(
     ),
 )
 
-val frameUiStateMock = FrameUiState(
+internal val frameUiStateMock = FrameUiState(
     firstPlayerUI = firstPlayerUIMock,
     secondPlayerUI = secondPlayerUIMock,
     tableState = TableStateUI(breakUI = breakMock),

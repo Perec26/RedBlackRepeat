@@ -5,7 +5,7 @@ import com.pepekprodakshn.frame.domain.mapper.toDTO
 import com.pepekprodakshn.frame.ui.model.BallUI
 import javax.inject.Inject
 
-class PotBallUseCase @Inject constructor(
+internal class PotBallUseCase @Inject constructor(
     private val repository: FrameRepository,
 ) {
 
