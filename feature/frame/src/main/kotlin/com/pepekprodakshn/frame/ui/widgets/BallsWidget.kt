@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.BallUI
@@ -42,7 +41,7 @@ internal fun BallsWidget(
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = stringResource(R.string.frame_balls),
-            style = RBRTypography.titleMedium,
+            style = MaterialTheme.typography.titleMedium,
         )
         Row(
             modifier = Modifier

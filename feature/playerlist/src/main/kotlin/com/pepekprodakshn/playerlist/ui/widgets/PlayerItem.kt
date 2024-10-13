@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.playerlist.ui.firstPlayerUIMock
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
@@ -53,7 +52,7 @@ internal fun PlayerItem(
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = player.name.firstOrNull()?.uppercase() ?: "R",
-                style = RBRTypography.titleMedium,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
@@ -61,7 +60,7 @@ internal fun PlayerItem(
         Text(
             modifier = Modifier.weight(1f),
             text = player.name,
-            style = RBRTypography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
 

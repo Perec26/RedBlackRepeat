@@ -22,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.BallUI
@@ -93,12 +92,12 @@ private fun Ball(
             contentDescription = "",
         )
 
-        val textSize = RBRTypography.titleLarge.fontSize / sqrt((64.0 / size.value))
+        val textSize = MaterialTheme.typography.titleLarge.fontSize / sqrt((64.0 / size.value))
         if (showCount) {
             Text(
                 text = count.toString(),
                 color = ballTextColor.copy(alpha),
-                style = RBRTypography.titleLarge.copy(fontSize = textSize),
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = textSize),
             )
         }
     }

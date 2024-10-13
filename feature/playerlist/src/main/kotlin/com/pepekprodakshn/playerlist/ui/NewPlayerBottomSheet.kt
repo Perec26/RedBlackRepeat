@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.playerlist.R
 
@@ -76,7 +75,7 @@ private fun NewPlayerBottomSheetContent(
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = name.firstOrNull()?.uppercase() ?: "",
-                style = RBRTypography.headlineLarge,
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
         }
@@ -134,7 +133,7 @@ private fun getErrorSupportingText(
 private fun ErrorSupportingText(text: String) {
     Text(
         text = text,
-        style = RBRTypography.bodySmall,
+        style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.error,
     )
 }

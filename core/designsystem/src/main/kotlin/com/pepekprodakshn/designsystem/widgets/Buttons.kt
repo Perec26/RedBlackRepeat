@@ -2,13 +2,13 @@ package com.pepekprodakshn.designsystem.widgets
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @Composable
@@ -25,7 +25,7 @@ fun DefaultFilledButton(
     ) {
         Text(
             text = text,
-            style = RBRTypography.labelLarge,
+            style = MaterialTheme.typography.labelLarge,
         )
     }
 }
@@ -44,7 +44,7 @@ fun DefaultTextButton(
     ) {
         Text(
             text = text,
-            style = RBRTypography.labelLarge,
+            style = MaterialTheme.typography.labelLarge,
         )
     }
 }

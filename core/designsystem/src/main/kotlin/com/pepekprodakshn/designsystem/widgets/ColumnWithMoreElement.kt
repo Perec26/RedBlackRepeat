@@ -83,7 +83,7 @@ fun ColumnWithMoreElement(
 
 @PreviewLightDark
 @Composable
-fun ColumnWithMoreElementPreview() {
+private fun ColumnWithMoreElementPreview() {
     RedBlackRepeatTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             ColumnWithMoreElement(
@@ -95,7 +95,7 @@ fun ColumnWithMoreElementPreview() {
 }
 
 @Composable
-fun GetPreviewElement(i: Int, firstColor: Color = Color.White, secondColor: Color = Color.Black) {
+private fun GetPreviewElement(i: Int, firstColor: Color = Color.White, secondColor: Color = Color.Black) {
     val textColor = if (i % 2 > 0) secondColor else firstColor
     val backgroundColor = if (i % 2 > 0) firstColor else secondColor
     PreviewElement(index = i, textColor = textColor, backgroundColor = backgroundColor)

@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DaoModule {
+internal class DaoModule {
 
     @Singleton
     @Provides

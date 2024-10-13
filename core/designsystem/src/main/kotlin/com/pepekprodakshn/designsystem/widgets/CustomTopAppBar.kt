@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +50,7 @@ fun CustomTopAppBar(
 @Composable
 private fun Title(title: String) = Text(
     text = title,
-    style = RBRTypography.titleLarge,
+    style = MaterialTheme.typography.titleLarge,
 )
 
 @Preview(showBackground = true)

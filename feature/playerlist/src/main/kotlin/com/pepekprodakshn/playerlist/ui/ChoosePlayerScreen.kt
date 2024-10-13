@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
 import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
@@ -81,7 +80,7 @@ private fun ChoosePlayerContent(
                 ) {
                     Text(
                         text = stringResource(R.string.choose_players_empty_players_title),
-                        style = RBRTypography.titleLarge,
+                        style = MaterialTheme.typography.titleLarge,
                     )
 
                     Text(
@@ -89,7 +88,7 @@ private fun ChoosePlayerContent(
                         text = stringResource(R.string.choose_players_empty_players_description),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
-                        style = RBRTypography.bodySmall,
+                        style = MaterialTheme.typography.bodySmall,
                     )
 
                     DefaultFilledButton(

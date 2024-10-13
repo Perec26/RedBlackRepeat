@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ColumnWithMoreElement
 import com.pepekprodakshn.frame.R
@@ -44,7 +43,7 @@ internal fun FrameOptions(
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             text = stringResource(R.string.frame_options),
-            style = RBRTypography.titleMedium,
+            style = MaterialTheme.typography.titleMedium,
         )
 
         ColumnWithMoreElement(

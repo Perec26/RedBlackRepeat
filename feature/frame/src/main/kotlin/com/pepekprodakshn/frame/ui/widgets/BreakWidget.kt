@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.breakMock
@@ -57,7 +56,7 @@ internal fun BreakWidget(
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp),
             text = stringResource(R.string.frame_break, breakUI?.sum ?: 0),
-            style = RBRTypography.labelLarge,
+            style = MaterialTheme.typography.labelLarge,
         )
 
         Row(
@@ -107,7 +106,7 @@ private fun FreeBallLabel() {
             text = stringResource(id = R.string.frame_free_ball),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.scrim,
-            style = RBRTypography.titleMedium,
+            style = MaterialTheme.typography.titleMedium,
         )
     }
 }

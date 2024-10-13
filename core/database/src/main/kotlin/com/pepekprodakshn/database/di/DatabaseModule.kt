@@ -14,7 +14,7 @@ private const val DATABASE_NAME = "RBR_DATABASE"
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+internal class DatabaseModule {
 
     @Singleton
     @Provides

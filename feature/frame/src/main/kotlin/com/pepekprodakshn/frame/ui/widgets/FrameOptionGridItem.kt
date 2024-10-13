@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.pepekprodakshn.designsystem.theme.RBRTypography
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 
@@ -62,7 +61,7 @@ internal fun FrameOptionGridItem(
             Text(
                 modifier = Modifier.padding(start = 16.dp),
                 text = stringResource(id = name),
-                style = RBRTypography.titleMedium,
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }
