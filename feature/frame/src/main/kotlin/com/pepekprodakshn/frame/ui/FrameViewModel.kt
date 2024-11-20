@@ -1,5 +1,7 @@
 package com.pepekprodakshn.frame.ui
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.toRoute
 import com.pepekprodakshn.frame.domain.AddRedsUseCase
 import com.pepekprodakshn.frame.domain.EndBreakUseCase
 import com.pepekprodakshn.frame.domain.FoulUseCase
@@ -10,8 +12,7 @@ import com.pepekprodakshn.frame.domain.RemoveRedsUseCase
 import com.pepekprodakshn.frame.domain.RestartUseCase
 import com.pepekprodakshn.frame.domain.UndoUseCase
 import com.pepekprodakshn.frame.ui.model.BallUI
-import com.pepekprodakshn.frame.ui.navigation.FIRST_PLAYER_ID
-import com.pepekprodakshn.frame.ui.navigation.SECOND_PLAYER_ID
+import com.pepekprodakshn.frame.ui.navigation.Frame
 import com.pepekprodakshn.navigation.RBRNavController
 import com.pepekprodakshn.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class FrameViewModel @Inject constructor(
-    private val navController: RBRNavController,
+    private val savedStateHandle: SavedStateHandle,
     private val getPlayerUseCase: GetPlayerUseCase,
     private val potBallUseCase: PotBallUseCase,
     private val endBreakUseCase: EndBreakUseCase,
@@ -34,10 +35,9 @@ internal class FrameViewModel @Inject constructor(
 ) {
 
     init {
-        val firstPlayerId =
-            navController.getIntArg(FIRST_PLAYER_ID) ?: error("Can't find argument")
-        val secondPlayerId =
-            navController.getIntArg(SECOND_PLAYER_ID) ?: error("Can't find argument")
+        val route = savedStateHandle.toRoute<Frame>()
+        val firstPlayerId = route.firstPlayerId
+        val secondPlayerId = route.secondPlayerId
         getPlayers(firstPlayerId, secondPlayerId)
     }
 
@@ -97,7 +97,7 @@ internal class FrameViewModel @Inject constructor(
 
     private fun onFinishFrameConfirm() {
         updateState { hideFinishFrameConfirmationDialog() }
-        navController.navigateUp()
+        //TODO: fix back navigation
     }
 
     override fun onBackPressed() {

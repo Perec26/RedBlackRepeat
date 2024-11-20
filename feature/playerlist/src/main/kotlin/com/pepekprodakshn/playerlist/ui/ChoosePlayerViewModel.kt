@@ -1,7 +1,5 @@
 package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.navigation.RBRNavController
-import com.pepekprodakshn.navigation.SharedRouter
 import com.pepekprodakshn.playerlist.domain.AddPlayerUseCase
 import com.pepekprodakshn.playerlist.domain.GetAllPlayersUseCase
 import com.pepekprodakshn.playerlist.domain.ValidateNameUseCase
@@ -16,8 +14,6 @@ internal class ChoosePlayerViewModel @Inject constructor(
     private val getAllPlayersUseCase: GetAllPlayersUseCase,
     private val addPlayerUseCase: AddPlayerUseCase,
     private val validateNameUseCase: ValidateNameUseCase,
-    private val sharedRouter: SharedRouter,
-    private val navController: RBRNavController,
 ) : BaseViewModel<ChoosePlayerViewState, ChoosePlayerEvent>(
     initialState = ChoosePlayerViewState(),
 ) {
@@ -32,22 +28,13 @@ internal class ChoosePlayerViewModel @Inject constructor(
             }
 
             is ChoosePlayerEvent.OnNameChanged -> updateState { updateNewPlayerName(event.name) }
-            ChoosePlayerEvent.OnBackPressed -> navController.navigateUp()
             ChoosePlayerEvent.OnAddPlayerClick -> updateState { openNewPlayerBottomSheet() }
             ChoosePlayerEvent.OnNewPlayerBottomSheetClosed -> {
                 updateState { closeNewPlayerBottomSheet() }
             }
 
             ChoosePlayerEvent.OnNewPlayerDoneClick -> onAddPlayerClick()
-            ChoosePlayerEvent.OnStartMatchClick -> onStartMatchClick()
         }
-    }
-
-    private fun onStartMatchClick() {
-        sharedRouter.navigateToFrame(
-            viewState.selectedPlayers.first().id,
-            viewState.selectedPlayers.last().id,
-        )
     }
 
     private fun onAddPlayerClick() {

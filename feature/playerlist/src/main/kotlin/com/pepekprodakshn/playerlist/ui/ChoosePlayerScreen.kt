@@ -41,11 +41,15 @@ import com.pepekprodakshn.playerlist.ui.widgets.PlayerItem
 @Composable
 internal fun ChoosePlayerScreen(
     viewModel: ChoosePlayerViewModel = hiltViewModel(),
+    onStartFrameClick: (Int, Int) -> Unit = { _, _ -> },
+    onBackPress: () -> Unit = {},
 ) {
     val state = viewModel.state.collectAsState().value
 
     ChoosePlayerContent(
         state = state,
+        onStartFrameClick = onStartFrameClick,
+        onBackPress = onBackPress,
         onEvent = viewModel::onEvent,
     )
 }
@@ -53,6 +57,8 @@ internal fun ChoosePlayerScreen(
 @Composable
 private fun ChoosePlayerContent(
     state: ChoosePlayerViewState,
+    onStartFrameClick: (Int, Int) -> Unit = { _, _ -> },
+    onBackPress: () -> Unit = {},
     onEvent: (ChoosePlayerEvent) -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -61,7 +67,7 @@ private fun ChoosePlayerContent(
 
             CustomTopAppBar(
                 title = stringResource(R.string.choose_players_title),
-                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
+                onNavigationClick = onBackPress,
             ) {
 
                 IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
@@ -127,7 +133,12 @@ private fun ChoosePlayerContent(
                 modifier = Modifier.padding(16.dp),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = { onEvent(ChoosePlayerEvent.OnStartMatchClick) },
+                onClick = {
+                    onStartFrameClick(
+                        state.selectedPlayers.first().id,
+                        state.selectedPlayers.last().id,
+                    )
+                },
             ) {
 
                 Icon(

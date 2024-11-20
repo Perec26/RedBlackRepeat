@@ -24,19 +24,20 @@ import com.pepekprodakshn.start.R
 @Composable
 internal fun StartScreen(
     viewModel: StartViewModel = hiltViewModel(),
+    onStartClick: () -> Unit = {},
 ) {
     val state = viewModel.state.collectAsState().value
 
     StartScreenContent(
         state = state,
-        onEvent = viewModel::onEvent,
+        onStartClick = onStartClick,
     )
 }
 
 @Composable
 private fun StartScreenContent(
     state: StartUiState,
-    onEvent: (StartEvent) -> Unit,
+    onStartClick: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +48,7 @@ private fun StartScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(onClick = { onEvent(StartEvent.ButtonClick) }) {
+            Button(onClick = onStartClick) {
                 Text(
                     modifier = Modifier.padding(32.dp),
                     text = stringResource(R.string.start_start),
