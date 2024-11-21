@@ -13,7 +13,6 @@ import com.pepekprodakshn.frame.domain.RestartUseCase
 import com.pepekprodakshn.frame.domain.UndoUseCase
 import com.pepekprodakshn.frame.ui.model.BallUI
 import com.pepekprodakshn.frame.ui.navigation.Frame
-import com.pepekprodakshn.navigation.RBRNavController
 import com.pepekprodakshn.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -97,7 +96,7 @@ internal class FrameViewModel @Inject constructor(
 
     private fun onFinishFrameConfirm() {
         updateState { hideFinishFrameConfirmationDialog() }
-        //TODO: fix back navigation
+        // TODO: fix back navigation
     }
 
     override fun onBackPressed() {

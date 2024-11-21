@@ -2,7 +2,6 @@ package com.pepekprodakshn.start.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.pepekprodakshn.navigation.Destination
 import com.pepekprodakshn.start.ui.StartScreen
 import kotlinx.serialization.Serializable
 

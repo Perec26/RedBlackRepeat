@@ -1,6 +1,5 @@
 package com.pepekprodakshn.frame.ui
 
-import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,12 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ButtonDescription
+import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
 import com.pepekprodakshn.designsystem.widgets.ThreeButtonsDialog
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.FrameOptionUI
@@ -141,24 +139,9 @@ private fun FrameScreenContent(
     }
 }
 
-@Preview(
-    showBackground = true,
-    device = LANDSCAPE_DEVICE,
-    showSystemUi = true,
-)
+@ScreenPreviews
 @Composable
 private fun FrameScreenPreview() {
-    FrameScreenPreviewContent()
-}
-
-@Preview(
-    showBackground = true,
-    device = LANDSCAPE_DEVICE,
-    showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Composable
-private fun FrameScreenPreviewDark() {
     FrameScreenPreviewContent()
 }
 

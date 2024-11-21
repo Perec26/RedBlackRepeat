@@ -13,7 +13,7 @@ fun NavGraphBuilder.playerListNavigation(
     navController: NavController,
     onStartFrameClick: (Int, Int) -> Unit,
 ) {
-    composable<PlayerList>() {
+    composable<PlayerList> {
         ChoosePlayerScreen(
             onStartFrameClick = onStartFrameClick,
             onBackPress = { navController.navigateUp() },

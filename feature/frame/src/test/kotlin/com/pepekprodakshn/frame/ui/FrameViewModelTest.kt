@@ -1,24 +1,11 @@
 package com.pepekprodakshn.frame.ui
 
-import com.pepekprodakshn.frame.domain.GetPlayerUseCase
-import com.pepekprodakshn.frame.ui.model.BallUI
-import com.pepekprodakshn.navigation.RBRNavController
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.shouldBe
-import io.mockk.Runs
-import io.mockk.coEvery
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.verify
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class FrameViewModelTest : FreeSpec(
-    //TODO:fix test
+    // TODO:fix test
 //    {
 //        Dispatchers.setMain(Dispatchers.Unconfined)
 //

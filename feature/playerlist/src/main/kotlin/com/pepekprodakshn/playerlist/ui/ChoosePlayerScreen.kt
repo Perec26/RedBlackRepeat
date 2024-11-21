@@ -25,15 +25,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.pepekprodakshn.designsystem.LANDSCAPE_DEVICE
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
 import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
+import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
 import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 import com.pepekprodakshn.playerlist.R
 import com.pepekprodakshn.playerlist.ui.widgets.PlayerItem
@@ -103,9 +103,18 @@ private fun ChoosePlayerContent(
                     )
                 }
             }
+            val columnsNumber = when (LocalConfiguration.current.orientation) {
+                Configuration.ORIENTATION_LANDSCAPE -> {
+                    2
+                }
+
+                else -> {
+                    1
+                }
+            }
 
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
+                columns = GridCells.Fixed(columnsNumber),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
@@ -158,41 +167,15 @@ private fun ChoosePlayerContent(
     }
 }
 
-@Preview(
-    showBackground = true,
-    device = LANDSCAPE_DEVICE,
-)
+@ScreenPreviews
 @Composable
 private fun ChoosePlayerScreenPreview() {
     ChoosePlayerScreenPreviewContent()
 }
 
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = LANDSCAPE_DEVICE,
-)
-@Composable
-private fun ChoosePlayerScreenPreviewDark() {
-    ChoosePlayerScreenPreviewContent()
-}
-
-@Preview(
-    showBackground = true,
-    device = LANDSCAPE_DEVICE,
-)
+@ScreenPreviews
 @Composable
 private fun ChoosePlayerScreenEmptyPreview() {
-    ChoosePlayerScreenPreviewContent(true)
-}
-
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = LANDSCAPE_DEVICE,
-)
-@Composable
-private fun ChoosePlayerScreenEmptyPreviewDark() {
     ChoosePlayerScreenPreviewContent(true)
 }
 
