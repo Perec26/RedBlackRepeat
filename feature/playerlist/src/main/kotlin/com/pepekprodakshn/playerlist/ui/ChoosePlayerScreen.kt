@@ -1,6 +1,5 @@
 package com.pepekprodakshn.playerlist.ui
 
-import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
@@ -25,11 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
 import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
@@ -103,15 +102,8 @@ private fun ChoosePlayerContent(
                     )
                 }
             }
-            val columnsNumber = when (LocalConfiguration.current.orientation) {
-                Configuration.ORIENTATION_LANDSCAPE -> {
-                    2
-                }
 
-                else -> {
-                    1
-                }
-            }
+            val columnsNumber = if (isPortrait()) 1 else 2
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(columnsNumber),

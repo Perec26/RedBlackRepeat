@@ -1,5 +1,6 @@
 package com.pepekprodakshn.frame.ui.widgets
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,10 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.BallUI
 import com.pepekprodakshn.frame.ui.model.BallsStateUI
@@ -28,12 +30,20 @@ internal fun BallsWidget(
     ballsState: BallsStateUI,
     onClick: (BallUI) -> Unit,
 ) {
+
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val shape = if (isLandscape) {
+        RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
+    } else {
+        RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
+    }
+
     Column(
         modifier = modifier
             .width(IntrinsicSize.Max)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerLow,
-                shape = RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp),
+                shape = shape,
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -73,7 +83,7 @@ internal fun BallsWidget(
     }
 }
 
-@Preview
+@WidgetPreviews
 @Composable
 private fun BallsWidgetPreview() {
     RedBlackRepeatTheme {

@@ -1,20 +1,24 @@
 package com.pepekprodakshn.frame.ui
 
+import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ButtonDescription
 import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
@@ -49,30 +53,50 @@ private fun FrameScreenContent(
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
 
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
+            if (isPortrait()) {
                 BallsWidget(
-                    modifier = Modifier.padding(top = 16.dp),
                     ballsState = state.tableState.ballState,
                     onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                 )
 
                 FrameOptions(
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .align(Alignment.End),
                     onEvent = onEvent,
                 )
+
+                Spacer(
+                    modifier = Modifier
+                        .height(16.dp)
+                        .weight(1f),
+                )
+            } else {
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    BallsWidget(
+                        modifier = Modifier.padding(top = 16.dp),
+                        ballsState = state.tableState.ballState,
+                        onClick = { onEvent(FrameEvent.OnBallClick(it)) },
+                    )
+
+                    FrameOptions(
+                        modifier = Modifier.padding(top = 16.dp),
+                        onEvent = onEvent,
+                    )
+                }
             }
 
             PlayersCounters(
-                modifier = Modifier
-                    .height(IntrinsicSize.Max)
-                    .padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = 16.dp),
                 firstPlayerUI = state.firstPlayerUI,
                 firstPlayerPoints = state.tableState.firstPlayerPoints,
                 secondPlayerUI = state.secondPlayerUI,
@@ -80,7 +104,7 @@ private fun FrameScreenContent(
                 isFirstPlayerSelected = state.tableState.isFirstPlayerSelected,
                 breakUI = state.tableState.breakUI,
                 previousBreakUI = state.previousBreakUI,
-                onCLick = { onEvent(FrameEvent.OnSelectPlayer(it)) },
+                onClick = { onEvent(FrameEvent.OnSelectPlayer(it)) },
             )
         }
     }

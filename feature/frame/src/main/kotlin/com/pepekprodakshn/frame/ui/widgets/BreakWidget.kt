@@ -1,14 +1,19 @@
 package com.pepekprodakshn.frame.ui.widgets
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,15 +23,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.breakMock
 import com.pepekprodakshn.frame.ui.model.BallUI
 import com.pepekprodakshn.frame.ui.model.BreakUI
 
-private const val DIFFERENCE_PADDING = 80
+@Composable
+internal fun AnimatedBreakWidget(
+    modifier: Modifier = Modifier,
+    breakUI: BreakUI?,
+    isFirst: Boolean,
+    isVisible: Boolean,
+) {
+
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = slideInHorizontally(initialOffsetX = { if (isFirst) -it else it }),
+        exit = slideOutHorizontally(targetOffsetX = { if (isFirst) -it else it }),
+    ) {
+        Box(
+            modifier = modifier
+                .width(IntrinsicSize.Max),
+        ) {
+            BreakWidget(
+                breakUI = breakUI,
+                isRight = isFirst,
+            )
+        }
+    }
+}
 
 @Composable
 internal fun BreakWidget(
@@ -35,18 +64,15 @@ internal fun BreakWidget(
     isRight: Boolean,
 ) {
 
-    val shape = if (isRight) {
-        RoundedCornerShape(topEnd = 28.dp)
-    } else {
-        RoundedCornerShape(topStart = 28.dp)
+    val shape = when {
+        isRight && isPortrait() -> RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
+        isRight -> RoundedCornerShape(topEnd = 28.dp)
+        !isRight && isPortrait() -> RoundedCornerShape(topStart = 28.dp, bottomStart = 28.dp)
+        else -> RoundedCornerShape(topStart = 28.dp)
     }
-
-    val startPadding = if (isRight) 0.dp else DIFFERENCE_PADDING.dp
-    val endPadding = if (isRight) DIFFERENCE_PADDING.dp else 0.dp
 
     Column(
         modifier = modifier
-            .padding(start = startPadding, end = endPadding)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 shape = shape,
@@ -111,7 +137,7 @@ private fun FreeBallLabel() {
     }
 }
 
-@PreviewLightDark
+@WidgetPreviews
 @Composable
 private fun BreakWidgetPreview() {
     RedBlackRepeatTheme {

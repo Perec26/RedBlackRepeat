@@ -2,10 +2,11 @@ package com.pepekprodakshn.designsystem.widgets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @Composable
-fun ColumnWithMoreElement(
+fun RowWithMoreElement(
     modifier: Modifier = Modifier,
     moreElement: @Composable () -> Unit,
-    divider: @Composable () -> Unit = { DefaultHorizontalDivider() },
+    divider: @Composable () -> Unit = { VerticalDivider(modifier = Modifier.width(1.dp)) },
     onElementsCounted: (Int) -> Unit = {},
     elements: @Composable () -> Unit,
 ) {
@@ -42,40 +43,40 @@ fun ColumnWithMoreElement(
             .take(elementsPlaceables.size)
             .map { it.measure(constraints) }
 
-        var sum = morePlaceables.height
-        val dividerHeight = dividerPlaceable.first().height
+        var sum = morePlaceables.width
+        val dividerWidth = dividerPlaceable.first().width
         var showMore = false
 
         var count = 0
 
         for (element in elementsPlaceables) {
-            if (sum + element.height + dividerHeight > constraints.maxHeight) {
+            if (sum + element.width + dividerWidth > constraints.maxWidth) {
                 showMore = true
                 onElementsCounted(count)
                 break
             }
-            sum += element.height + dividerHeight
+            sum += element.width + dividerWidth
             count += 1
         }
-        if (!showMore) sum -= morePlaceables.height
+        if (!showMore) sum -= morePlaceables.width
 
         var offset = 0
         layout(
-            height = sum,
-            width = elementsPlaceables.maxOf(Placeable::width),
+            height = elementsPlaceables.maxOf(Placeable::height),
+            width = sum,
         ) {
             for (i in 0 until count) {
-                elementsPlaceables[i].place(0, offset)
-                offset += elementsPlaceables[i].height
+                elementsPlaceables[i].place(offset, 0)
+                offset += elementsPlaceables[i].width
                 if (i != count - 1) {
-                    dividerPlaceable[i].place(0, offset)
-                    offset += dividerHeight
+                    dividerPlaceable[i].place(offset, 0)
+                    offset += dividerWidth
                 }
             }
             if (showMore) {
-                dividerPlaceable[count - 1].place(0, offset)
-                offset += dividerHeight
-                morePlaceables.place(0, offset)
+                dividerPlaceable[count - 1].place(offset, 0)
+                offset += dividerWidth
+                morePlaceables.place(offset, 0)
             }
         }
     }
@@ -83,12 +84,12 @@ fun ColumnWithMoreElement(
 
 @PreviewLightDark
 @Composable
-private fun ColumnWithMoreElementPreview() {
+private fun RowWithMoreElementPreview() {
     RedBlackRepeatTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            ColumnWithMoreElement(
+            RowWithMoreElement(
                 elements = { (1..8).forEach { GetPreviewElement(it) } },
-                moreElement = { Text(text = "more") },
+                moreElement = { Text(text = "More") },
             )
         }
     }
@@ -113,8 +114,8 @@ private fun PreviewElement(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
+            .fillMaxHeight()
+            .width(50.dp)
             .background(color = backgroundColor),
         contentAlignment = Alignment.Center,
     ) {

@@ -1,7 +1,5 @@
 package com.pepekprodakshn.frame.ui.widgets
 
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
+import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 import com.pepekprodakshn.frame.ui.breakMock
 import com.pepekprodakshn.frame.ui.model.BreakUI
 
@@ -28,28 +26,26 @@ internal fun PlayerWidgetWithBreakInfo(
     previousBreakUI: BreakUI? = null,
     onClick: () -> Unit,
 ) {
+
+    val alignment = if (isFirst) Alignment.Start else Alignment.End
+
     Column(
         modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = alignment,
     ) {
-        val alignment = if (isFirst) Alignment.Start else Alignment.End
-        val animationOffset = if (isFirst) -1 else 1
 
-        Box(modifier = Modifier.align(alignment)) {
-            androidx.compose.animation.AnimatedVisibility(
-                enter = slideInHorizontally(initialOffsetX = { animationOffset * it }),
-                exit = slideOutHorizontally(targetOffsetX = { animationOffset * it }),
-                visible = isActive && breakUI != null,
-            ) {
-                BreakWidget(
-                    breakUI = breakUI ?: previousBreakUI,
-                    isRight = isFirst,
-                )
-            }
+        Box {
 
             BreakWidget(
                 modifier = Modifier.alpha(0f),
                 breakUI = breakUI ?: previousBreakUI,
                 isRight = isFirst,
+            )
+
+            AnimatedBreakWidget(
+                breakUI = breakUI ?: previousBreakUI,
+                isFirst = isFirst,
+                isVisible = isActive && breakUI != null,
             )
         }
 
@@ -64,9 +60,46 @@ internal fun PlayerWidgetWithBreakInfo(
     }
 }
 
-@PreviewLightDark
+@WidgetPreviews
 @Composable
-private fun PlayerWidgetWithBreakInfoPreview() {
+private fun PlayerWidgetWithEmptyBreakPreview() {
+    RedBlackRepeatTheme {
+        PlayerWidgetWithBreakInfo(breakUI = breakMock) {}
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun SecondPlayerWidgetWithEmptyBreakPreview() {
+    RedBlackRepeatTheme {
+        PlayerWidgetWithBreakInfo(breakUI = breakMock, isFirst = false) {}
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun PlayerWidgetWithBreakPreview() {
+    RedBlackRepeatTheme {
+        PlayerWidgetWithBreakInfo(breakUI = breakMock, isActive = true, difference = 29) {}
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun SecondPlayerWidgetWithBreakPreview() {
+    RedBlackRepeatTheme {
+        PlayerWidgetWithBreakInfo(
+            breakUI = breakMock,
+            isFirst = false,
+            isActive = true,
+            difference = 29,
+        ) {}
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun PlayerWidgetWithBreakInfosPreview() {
     RedBlackRepeatTheme {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
