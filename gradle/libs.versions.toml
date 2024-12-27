@@ -16,7 +16,7 @@ roomVersion = "2.6.1"
 coroutinesTest = "1.9.0"
 serialization = "1.7.3"
 
-androidGradlePlugin = "8.7.2"
+androidGradlePlugin = "8.7.3"
 kotlinPlugin = "2.0.20"
 hiltPlugin = "2.52"
 kspPlugin = "2.0.20-1.0.25"

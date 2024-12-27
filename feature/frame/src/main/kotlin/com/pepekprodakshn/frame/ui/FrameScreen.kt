@@ -1,6 +1,5 @@
 package com.pepekprodakshn.frame.ui
 
-import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,10 +10,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,12 +31,13 @@ import com.pepekprodakshn.frame.ui.widgets.PlayersCounters
 @Composable
 internal fun FrameScreen(
     viewModel: FrameViewModel = hiltViewModel(),
+    navigationHandler: (FrameNavigationEvent) -> Unit,
 ) {
     val state = viewModel.state.collectAsState().value
 
-    if (state.isBackHandlerEnabled) {
-        BackHandler { viewModel.onBackPressed() }
-    }
+    LaunchedEffect(Unit) { viewModel.navigationEvent.collect(navigationHandler) }
+
+    BackHandler(state.isBackHandlerEnabled) { viewModel.onEvent(FrameEvent.OnBackPressed) }
 
     FrameScreenContent(
         state = state,
@@ -127,22 +127,6 @@ private fun FrameScreenContent(
         FrameOptionsBottomSheet(
             options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
             onEvent = onEvent,
-        )
-    }
-
-    if (state.showFinishFrameConfirmationDialog) {
-        ThreeButtonsDialog(
-            title = stringResource(id = R.string.frame_finish_frame_dialog_title),
-            description = stringResource(id = R.string.frame_finish_frame_dialog_description),
-            okButtonDescription = ButtonDescription(
-                text = stringResource(id = R.string.frame_finish_frame_dialog_yes),
-                onClick = { onEvent(FrameEvent.OnFinishFrameConfirm) },
-            ),
-            noButtonDescription = ButtonDescription(
-                text = stringResource(id = R.string.frame_finish_frame_dialog_no),
-                onClick = { onEvent(FrameEvent.OnFinishFrameConfirmationClosed) },
-            ),
-            onDismissRequest = { onEvent(FrameEvent.OnFinishFrameConfirmationClosed) },
         )
     }
 

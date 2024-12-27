@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,21 +23,16 @@ import com.pepekprodakshn.start.R
 @Composable
 internal fun StartScreen(
     viewModel: StartViewModel = hiltViewModel(),
-    onStartClick: () -> Unit = {},
+    navigationHandler: (StartNavigationEvent) -> Unit = {},
 ) {
     val state = viewModel.state.collectAsState().value
+    LaunchedEffect(Unit) { viewModel.navigationEvent.collect(navigationHandler) }
 
-    StartScreenContent(
-        state = state,
-        onStartClick = onStartClick,
-    )
+    StartScreenContent(state = state, onEvent = viewModel::onEvent)
 }
 
 @Composable
-private fun StartScreenContent(
-    state: StartUiState,
-    onStartClick: () -> Unit = {},
-) {
+private fun StartScreenContent(state: StartUiState, onEvent: (StartEvent) -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -46,7 +42,7 @@ private fun StartScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(onClick = onStartClick) {
+            Button(onClick = { onEvent(StartEvent.ButtonClick) }) {
                 Text(
                     modifier = Modifier.padding(32.dp),
                     text = stringResource(R.string.start_start),

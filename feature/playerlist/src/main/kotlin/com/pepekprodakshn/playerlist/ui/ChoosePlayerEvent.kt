@@ -5,6 +5,8 @@ import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 internal sealed class ChoosePlayerEvent {
     data class OnPlayerClick(val player: PlayerUI) : ChoosePlayerEvent()
     data object OnAddPlayerClick : ChoosePlayerEvent()
+    data object OnStartFrameClick : ChoosePlayerEvent()
+    data object OnBackPress : ChoosePlayerEvent()
 
     // NewPlayerBottomSheet
 

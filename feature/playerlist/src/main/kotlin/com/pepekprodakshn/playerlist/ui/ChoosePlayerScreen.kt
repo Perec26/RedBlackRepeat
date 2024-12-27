@@ -6,6 +6,7 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,12 +16,14 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,20 +38,20 @@ import com.pepekprodakshn.designsystem.widgets.DefaultFilledButton
 import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
 import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 import com.pepekprodakshn.playerlist.R
+import com.pepekprodakshn.playerlist.ui.newPlayer.NewPlayerBottomSheet
 import com.pepekprodakshn.playerlist.ui.widgets.PlayerItem
+import com.pepekprodakshn.ui.ListState
 
 @Composable
 internal fun ChoosePlayerScreen(
     viewModel: ChoosePlayerViewModel = hiltViewModel(),
-    onStartFrameClick: (Int, Int) -> Unit = { _, _ -> },
-    onBackPress: () -> Unit = {},
+    navigationHandler: (ChoosePlayerNavigationEvent) -> Unit = {},
 ) {
     val state = viewModel.state.collectAsState().value
+    LaunchedEffect(true) { viewModel.navigationEvent.collect(navigationHandler) }
 
     ChoosePlayerContent(
         state = state,
-        onStartFrameClick = onStartFrameClick,
-        onBackPress = onBackPress,
         onEvent = viewModel::onEvent,
     )
 }
@@ -56,8 +59,6 @@ internal fun ChoosePlayerScreen(
 @Composable
 private fun ChoosePlayerContent(
     state: ChoosePlayerViewState,
-    onStartFrameClick: (Int, Int) -> Unit = { _, _ -> },
-    onBackPress: () -> Unit = {},
     onEvent: (ChoosePlayerEvent) -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -66,7 +67,7 @@ private fun ChoosePlayerContent(
 
             CustomTopAppBar(
                 title = stringResource(R.string.choose_players_title),
-                onNavigationClick = onBackPress,
+                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPress) },
             ) {
 
                 IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
@@ -77,50 +78,10 @@ private fun ChoosePlayerContent(
                 }
             }
 
-            if (state.players.isEmpty()) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Text(
-                        text = stringResource(R.string.choose_players_empty_players_title),
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-
-                    Text(
-                        modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
-                        text = stringResource(R.string.choose_players_empty_players_description),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-
-                    DefaultFilledButton(
-                        text = stringResource(R.string.choose_players_empty_players_button),
-                        onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) },
-                    )
-                }
-            }
-
-            val columnsNumber = if (isPortrait()) 1 else 2
-
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(columnsNumber),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            ) {
-                items(state.players) {
-                    PlayerItem(
-                        player = it,
-                        enabled = state.isEnabled || state.selectedPlayers.contains(it),
-                        isSelected = state.selectedPlayers.contains(it),
-                        onClick = { onEvent(ChoosePlayerEvent.OnPlayerClick(it)) },
-                    )
-                }
-                item { SpacerHeight(height = 60.dp) }
-                item { SpacerHeight(height = 60.dp) }
+            when (state.listState) {
+                ListState.LOADING -> LoadingPlayerList()
+                ListState.EMPTY -> EmptyPlayerList(onEvent)
+                ListState.READY -> PlayerList(state, onEvent)
             }
         }
         AnimatedVisibility(
@@ -134,12 +95,7 @@ private fun ChoosePlayerContent(
                 modifier = Modifier.padding(16.dp),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = {
-                    onStartFrameClick(
-                        state.selectedPlayers.first().id,
-                        state.selectedPlayers.last().id,
-                    )
-                },
+                onClick = { onEvent(ChoosePlayerEvent.OnStartFrameClick) },
             ) {
 
                 Icon(
@@ -159,6 +115,69 @@ private fun ChoosePlayerContent(
     }
 }
 
+@Composable
+private fun EmptyPlayerList(onEvent: (ChoosePlayerEvent) -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            text = stringResource(R.string.choose_players_empty_players_title),
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Text(
+            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
+            text = stringResource(R.string.choose_players_empty_players_description),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodySmall,
+        )
+
+        DefaultFilledButton(
+            text = stringResource(R.string.choose_players_empty_players_button),
+            onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) },
+        )
+    }
+}
+
+@Composable
+private fun ColumnScope.PlayerList(
+    state: ChoosePlayerViewState,
+    onEvent: (ChoosePlayerEvent) -> Unit,
+) {
+    val columnsNumber = if (isPortrait()) 1 else 2
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(columnsNumber),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+    ) {
+        items(state.players) {
+            PlayerItem(
+                player = it,
+                enabled = state.isEnabled || state.selectedPlayers.contains(it),
+                isSelected = state.selectedPlayers.contains(it),
+                onClick = { onEvent(ChoosePlayerEvent.OnPlayerClick(it)) },
+            )
+        }
+        item { SpacerHeight(height = 60.dp) }
+        item { SpacerHeight(height = 60.dp) }
+    }
+}
+
+@Composable
+private fun LoadingPlayerList() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator()
+    }
+}
+
 @ScreenPreviews
 @Composable
 private fun ChoosePlayerScreenPreview() {
@@ -168,15 +187,23 @@ private fun ChoosePlayerScreenPreview() {
 @ScreenPreviews
 @Composable
 private fun ChoosePlayerScreenEmptyPreview() {
-    ChoosePlayerScreenPreviewContent(true)
+    ChoosePlayerScreenPreviewContent(ListState.EMPTY)
+}
+
+@ScreenPreviews
+@Composable
+private fun ChoosePlayerScreenLoadingPreview() {
+    ChoosePlayerScreenPreviewContent(ListState.LOADING)
 }
 
 @Composable
-private fun ChoosePlayerScreenPreviewContent(isEmpty: Boolean = false) {
+private fun ChoosePlayerScreenPreviewContent(
+    listState: ListState = ListState.READY,
+) {
     RedBlackRepeatTheme {
         ChoosePlayerContent(
             state = choosePlayerViewStateMock.copy(
-                players = if (isEmpty) emptyList() else listOfPlayers,
+                listState = listState,
             ),
         ) {}
     }

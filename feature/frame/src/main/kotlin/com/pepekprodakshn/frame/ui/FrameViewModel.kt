@@ -29,7 +29,7 @@ internal class FrameViewModel @Inject constructor(
     private val addRedsUseCase: AddRedsUseCase,
     private val removeRedsUseCase: RemoveRedsUseCase,
     private val restartUseCase: RestartUseCase,
-) : BaseViewModel<FrameUiState, FrameEvent>(
+) : BaseViewModel<FrameUiState, FrameEvent, FrameNavigationEvent>(
     initialState = FrameUiState(),
 ) {
 
@@ -75,32 +75,19 @@ internal class FrameViewModel @Inject constructor(
             is FrameEvent.OnMoreClick -> updateState { showOptionsBottomSheet() }
             is FrameEvent.OnOptionsElementsCounted -> updateState { setOptionElements(event.count) }
             FrameEvent.OnFrameOptionsBottomSheetClose -> updateState { hideOptionsBottomSheet() }
-            FrameEvent.OnFinishFrameConfirm -> onFinishFrameConfirm()
-            FrameEvent.OnFinishFrameConfirmationClosed -> {
-                updateState { hideFinishFrameConfirmationDialog() }
-            }
-
             FrameEvent.OnFinishClick -> onFinishClick()
-
             FrameEvent.OnRestartConfirm -> onRestartConfirm()
             FrameEvent.OnRestartFrameConfirmationClosed -> {
                 updateState { hideRestartFrameConfirmationDialog() }
             }
+
+            FrameEvent.OnBackPressed -> onNavigationEvent(FrameNavigationEvent.OnBackPressed)
         }
     }
 
     private fun onRestartClick() {
         updateState { hideOptionsBottomSheet() }
         updateState { showRestartFrameConfirmationDialog() }
-    }
-
-    private fun onFinishFrameConfirm() {
-        updateState { hideFinishFrameConfirmationDialog() }
-        // TODO: fix back navigation
-    }
-
-    override fun onBackPressed() {
-        updateState { showFinishFrameConfirmationDialog() }
     }
 
     private fun onRestartConfirm() {
@@ -113,7 +100,7 @@ internal class FrameViewModel @Inject constructor(
 
     private fun onFinishClick() {
         updateState { hideOptionsBottomSheet() }
-        updateState { showFinishFrameConfirmationDialog() }
+        onNavigationEvent(FrameNavigationEvent.OnBackPressed)
     }
 
     private fun onAddRedsDialogClick() {

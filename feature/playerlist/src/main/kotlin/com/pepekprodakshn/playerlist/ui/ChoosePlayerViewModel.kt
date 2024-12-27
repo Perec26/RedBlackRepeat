@@ -14,7 +14,7 @@ internal class ChoosePlayerViewModel @Inject constructor(
     private val getAllPlayersUseCase: GetAllPlayersUseCase,
     private val addPlayerUseCase: AddPlayerUseCase,
     private val validateNameUseCase: ValidateNameUseCase,
-) : BaseViewModel<ChoosePlayerViewState, ChoosePlayerEvent>(
+) : BaseViewModel<ChoosePlayerViewState, ChoosePlayerEvent, ChoosePlayerNavigationEvent>(
     initialState = ChoosePlayerViewState(),
 ) {
     init {
@@ -34,6 +34,18 @@ internal class ChoosePlayerViewModel @Inject constructor(
             }
 
             ChoosePlayerEvent.OnNewPlayerDoneClick -> onAddPlayerClick()
+            ChoosePlayerEvent.OnStartFrameClick -> {
+                onNavigationEvent(
+                    ChoosePlayerNavigationEvent.OnStartFrameClick(
+                        firstPlayerId = viewState.selectedPlayers.first().id,
+                        secondPlayerId = viewState.selectedPlayers.last().id,
+                    ),
+                )
+            }
+
+            ChoosePlayerEvent.OnBackPress -> {
+                onNavigationEvent(ChoosePlayerNavigationEvent.OnBackPress)
+            }
         }
     }
 

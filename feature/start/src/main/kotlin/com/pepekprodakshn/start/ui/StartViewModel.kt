@@ -6,7 +6,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class StartViewModel @Inject constructor() :
-    BaseViewModel<StartUiState, StartEvent>(initialState = StartUiState()) {
+    BaseViewModel<StartUiState, StartEvent, StartNavigationEvent>(initialState = StartUiState()) {
 
-    override fun onEvent(event: StartEvent) {}
+    override fun onEvent(event: StartEvent) {
+        when (event) {
+            StartEvent.ButtonClick -> onNavigationEvent(StartNavigationEvent.OnStartClick)
+        }
+    }
 }
