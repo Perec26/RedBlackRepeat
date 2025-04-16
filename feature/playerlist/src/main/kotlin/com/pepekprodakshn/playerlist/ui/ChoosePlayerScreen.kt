@@ -67,7 +67,7 @@ private fun ChoosePlayerContent(
 
             CustomTopAppBar(
                 title = stringResource(R.string.choose_players_title),
-                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPress) },
+                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
             ) {
 
                 IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {

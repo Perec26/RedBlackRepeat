@@ -43,7 +43,7 @@ internal class ChoosePlayerViewModel @Inject constructor(
                 )
             }
 
-            ChoosePlayerEvent.OnBackPress -> {
+            ChoosePlayerEvent.OnBackPressed -> {
                 onNavigationEvent(ChoosePlayerNavigationEvent.OnBackPress)
             }
         }
