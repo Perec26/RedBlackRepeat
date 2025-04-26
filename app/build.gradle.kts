@@ -41,6 +41,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
     testImplementation(libs.kotest)
     testImplementation(libs.junit.jupiter)
     // Project

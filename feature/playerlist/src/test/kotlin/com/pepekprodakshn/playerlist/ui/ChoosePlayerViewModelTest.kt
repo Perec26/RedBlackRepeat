@@ -1,14 +1,15 @@
 package com.pepekprodakshn.playerlist.ui
 
+import app.cash.turbine.test
 import com.pepekprodakshn.playerlist.domain.model.ValidationResult
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.coVerify
 import io.mockk.every
-import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -21,14 +22,18 @@ internal class ChoosePlayerViewModelTest : FreeSpec(
             "Scenario: OnBackPressed" - {
 
                 "Given: ChoosePlayerViewModel" - {
-                    val navController = testNavController
-                    val viewModel = testViewModel(navController = navController)
+                    val viewModel = testViewModel()
 
                     "When: OnBackPressed" - {
-                        viewModel.onEvent(ChoosePlayerEvent.OnBackPressed)
 
-                        "Then: navController.navigateUp() should be called" {
-                            verify { navController.navigateUp() }
+                        "Then: navigationEvent should be OnBackPress" {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(ChoosePlayerEvent.OnBackPressed)
+                                    awaitItem() shouldBe ChoosePlayerNavigationEvent.OnBackPress
+                                    cancelAndIgnoreRemainingEvents()
+                                }
+                            }
                         }
                     }
                 }
@@ -162,16 +167,24 @@ internal class ChoosePlayerViewModelTest : FreeSpec(
             "Scenario: OnStartMatchClick" - {
 
                 "Given: ChoosePlayerViewModel" - {
-                    val sharedRouter = testSharedRouter
-                    val viewModel = testViewModel(sharedRouter = sharedRouter)
+                    val viewModel = testViewModel()
 
                     "When: OnStartMatchClick" - {
-                        viewModel.onEvent(ChoosePlayerEvent.OnPlayerClick(PlayerUI(1, "test")))
-                        viewModel.onEvent(ChoosePlayerEvent.OnPlayerClick(PlayerUI(2, "test")))
-                        viewModel.onEvent(ChoosePlayerEvent.OnStartMatchClick)
 
-                        "Then: navigateToFrame should be called" {
-                            verify { sharedRouter.navigateToFrame(any(), any()) }
+                        "Then: navigationEvent should be OnStartFrameClick" {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(ChoosePlayerEvent.OnPlayerClick(firstPlayer))
+                                    viewModel.onEvent(ChoosePlayerEvent.OnPlayerClick(secondPlayer))
+                                    viewModel.onEvent(ChoosePlayerEvent.OnStartFrameClick)
+                                    awaitItem() shouldBe
+                                        ChoosePlayerNavigationEvent.OnStartFrameClick(
+                                            firstPlayerId = firstPlayer.id,
+                                            secondPlayerId = secondPlayer.id,
+                                        )
+                                    cancelAndIgnoreRemainingEvents()
+                                }
+                            }
                         }
                     }
                 }

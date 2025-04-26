@@ -3,6 +3,7 @@ package com.pepekprodakshn.frame.ui
 import com.pepekprodakshn.frame.ui.model.BallUI
 
 internal sealed class FrameEvent {
+    data object OnBackPressed : FrameEvent()
     data class OnBallClick(val ballUI: BallUI) : FrameEvent()
     data class OnSelectPlayer(val isFirstPlayerSelected: Boolean) : FrameEvent()
 
@@ -35,10 +36,6 @@ internal sealed class FrameEvent {
     data object OnMoreClick : FrameEvent()
     data object OnFrameOptionsBottomSheetClose : FrameEvent()
     data object OnFinishClick : FrameEvent()
-
-    // FinishFrameConfirmation Events
-    data object OnFinishFrameConfirmationClosed : FrameEvent()
-    data object OnFinishFrameConfirm : FrameEvent()
 
     // RestartFrameConfirmation Events
     data object OnRestartFrameConfirmationClosed : FrameEvent()

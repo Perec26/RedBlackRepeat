@@ -1,6 +1,7 @@
 package com.pepekprodakshn.playerlist.ui
 
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
+import com.pepekprodakshn.ui.ListState
 
 private const val MAX_PLAYERS = 2
 
@@ -10,11 +11,15 @@ internal data class ChoosePlayerViewState(
     val newPlayerName: String = "",
     val isNewPlayerError: Boolean = false,
     val selectedPlayers: List<PlayerUI> = emptyList(),
+    val listState: ListState = ListState.LOADING,
 ) {
 
     val isEnabled = selectedPlayers.size < MAX_PLAYERS
 
-    fun updatePlayers(players: List<PlayerUI>) = copy(players = players)
+    fun updatePlayers(players: List<PlayerUI>) = copy(
+        players = players,
+        listState = if (players.isEmpty()) ListState.EMPTY else ListState.READY,
+    )
 
     fun changePlayerSelection(player: PlayerUI): ChoosePlayerViewState {
         val isSelected = selectedPlayers.contains(player)

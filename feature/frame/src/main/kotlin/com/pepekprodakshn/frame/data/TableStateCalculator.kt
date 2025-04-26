@@ -122,7 +122,7 @@ internal class TableStateCalculator @Inject constructor() {
         val lowestPriceBall = if (newRedsCount > 0) lowestPriceBall else Ball.YELLOW
         return copy(
             redsCount = newRedsCount,
-            lowestPriceBall = lowestPriceBall
+            lowestPriceBall = lowestPriceBall,
         )
     }
 }

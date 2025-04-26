@@ -38,7 +38,6 @@ internal class TableStateCalculatorTest : FreeSpec(
                             }
                         }
                     }
-
                 }
             }
 

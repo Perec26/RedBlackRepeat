@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @Composable
-fun DefaultDivider(
+fun DefaultHorizontalDivider(
     modifier: Modifier = Modifier,
     startPadding: Dp = 16.dp,
     endPadding: Dp = 16.dp,
@@ -20,8 +20,8 @@ fun DefaultDivider(
 
 @PreviewLightDark
 @Composable
-private fun DefaultDividerPreview() {
+private fun DefaultHorizontalDividerPreview() {
     RedBlackRepeatTheme {
-        DefaultDivider()
+        DefaultHorizontalDivider()
     }
 }

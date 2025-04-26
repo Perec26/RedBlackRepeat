@@ -19,5 +19,5 @@ internal val testBreakAllColors = FrameBreak(
         Ball.BLUE,
         Ball.PINK,
         Ball.BLACK,
-    )
+    ),
 )

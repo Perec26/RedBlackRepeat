@@ -2,17 +2,30 @@ package com.pepekprodakshn.redblackrepeat.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
-import com.pepekprodakshn.frame.ui.navigation.FrameDestinations
-import com.pepekprodakshn.navigation.RBRNavController
-import com.pepekprodakshn.navigation.getRoute
-import com.pepekprodakshn.playerlist.ui.navigation.PlayerListDestinations
-import com.pepekprodakshn.start.ui.navigation.StartDestinations
+import androidx.navigation.compose.rememberNavController
+import com.pepekprodakshn.frame.ui.navigation.Frame
+import com.pepekprodakshn.frame.ui.navigation.frameNavigation
+import com.pepekprodakshn.frame.ui.navigation.navigateToFrame
+import com.pepekprodakshn.playerlist.ui.navigation.navigateToPlayerList
+import com.pepekprodakshn.playerlist.ui.navigation.playerListNavigation
+import com.pepekprodakshn.start.ui.navigation.Start
+import com.pepekprodakshn.start.ui.navigation.startNavigation
 
 @Composable
-fun RedBlackRepeatApp(navController: RBRNavController) {
-    NavHost(navController = navController, startDestination = StartDestinations.Start.name) {
-        getRoute(StartDestinations.Start)
-        getRoute(PlayerListDestinations.ChoosePlayer)
-        getRoute(FrameDestinations.Frame)
+fun RedBlackRepeatApp() {
+
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Start) {
+        startNavigation(onStartClick = navController::navigateToPlayerList)
+        playerListNavigation(
+            navController = navController,
+            onStartFrameClick = { firstPlayerId, secondPlayerId ->
+                navController.navigateToFrame(Frame(firstPlayerId, secondPlayerId))
+            },
+        )
+        frameNavigation(
+            navController = navController,
+        )
     }
 }

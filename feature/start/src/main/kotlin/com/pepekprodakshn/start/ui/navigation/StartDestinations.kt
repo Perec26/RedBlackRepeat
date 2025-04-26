@@ -1,8 +1,22 @@
 package com.pepekprodakshn.start.ui.navigation
 
-import com.pepekprodakshn.navigation.Destination
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.pepekprodakshn.start.ui.StartNavigationEvent
 import com.pepekprodakshn.start.ui.StartScreen
+import kotlinx.serialization.Serializable
 
-object StartDestinations {
-    val Start = Destination("start") { StartScreen() }
+@Serializable
+data object Start
+
+fun NavGraphBuilder.startNavigation(
+    onStartClick: () -> Unit,
+) {
+    composable<Start> {
+        StartScreen {
+            when (it) {
+                is StartNavigationEvent.OnStartClick -> onStartClick()
+            }
+        }
+    }
 }

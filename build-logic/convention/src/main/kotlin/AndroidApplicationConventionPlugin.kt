@@ -17,6 +17,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.android")
             apply(plugin = "redblackrepeat.ktlint")
             apply(plugin = "redblackrepeat.hilt")
+            apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)

@@ -20,7 +20,6 @@ internal data class FrameUiState(
     val showFoulBottomSheet: Boolean = false,
     val showAddRemoveDialog: Boolean = false,
     val showOptionsBottomSheet: Boolean = false,
-    val showFinishFrameConfirmationDialog: Boolean = false,
     val showRestartFrameConfirmationDialog: Boolean = false,
     val optionElementsOnScreen: Int = 0,
 ) {
@@ -28,8 +27,7 @@ internal data class FrameUiState(
     val isBackHandlerEnabled = !(
         showFoulBottomSheet &&
             showAddRemoveDialog &&
-            showOptionsBottomSheet &&
-            showFinishFrameConfirmationDialog
+            showOptionsBottomSheet
         )
 
     fun initPlayers(
@@ -124,10 +122,6 @@ internal data class FrameUiState(
     fun showOptionsBottomSheet() = copy(showOptionsBottomSheet = true)
 
     fun hideOptionsBottomSheet() = copy(showOptionsBottomSheet = false)
-
-    fun showFinishFrameConfirmationDialog() = copy(showFinishFrameConfirmationDialog = true)
-
-    fun hideFinishFrameConfirmationDialog() = copy(showFinishFrameConfirmationDialog = false)
 
     fun showRestartFrameConfirmationDialog() = copy(showRestartFrameConfirmationDialog = true)
 

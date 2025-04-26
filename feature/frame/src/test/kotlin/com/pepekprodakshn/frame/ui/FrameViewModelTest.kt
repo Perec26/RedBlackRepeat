@@ -1,20 +1,22 @@
 package com.pepekprodakshn.frame.ui
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.toRoute
+import app.cash.turbine.test
 import com.pepekprodakshn.frame.domain.GetPlayerUseCase
 import com.pepekprodakshn.frame.ui.model.BallUI
-import com.pepekprodakshn.frame.ui.navigation.FIRST_PLAYER_ID
-import com.pepekprodakshn.frame.ui.navigation.SECOND_PLAYER_ID
-import com.pepekprodakshn.navigation.RBRNavController
-import io.kotest.assertions.throwables.shouldThrow
+import com.pepekprodakshn.frame.ui.navigation.Frame
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.just
+import io.mockk.mockkStatic
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -22,14 +24,7 @@ internal class FrameViewModelTest : FreeSpec(
     {
         Dispatchers.setMain(Dispatchers.Unconfined)
 
-        fun getNavController(): RBRNavController {
-            val navController = testNavController
-            every { navController.getIntArg(FIRST_PLAYER_ID) } returns 1
-            every { navController.getIntArg(SECOND_PLAYER_ID) } returns 2
-            return navController
-        }
-
-        fun getGetPlayerUseCas(): GetPlayerUseCase {
+        fun getGetPlayerUseCase(): GetPlayerUseCase {
             val getPlayerUseCase = testGetPlayerUseCase
             coEvery { getPlayerUseCase.execute(1) } returns testFirstPlayerUI
             coEvery { getPlayerUseCase.execute(2) } returns testSecondPlayerUI
@@ -38,15 +33,16 @@ internal class FrameViewModelTest : FreeSpec(
 
         "Feature: FrameViewModel" - {
 
+            mockkStatic("androidx.navigation.SavedStateHandleKt")
+            every { any<SavedStateHandle>().toRoute<Frame>() } returns testFrame
+
             "Scenario: init" - {
 
-                "Given: navController and getPlayerUseCase" - {
-                    val navController = getNavController()
-                    val getPlayerUseCase = getGetPlayerUseCas()
+                "Given: getPlayerUseCase" - {
+                    val getPlayerUseCase = getGetPlayerUseCase()
 
                     "When: players ids are passed" - {
                         val viewModel = testFrameViewModel(
-                            navController = navController,
                             getPlayerUseCase = getPlayerUseCase,
                         )
 
@@ -54,28 +50,6 @@ internal class FrameViewModelTest : FreeSpec(
                             with(viewModel.viewState) {
                                 firstPlayerUI shouldBe testFirstPlayerUI
                                 secondPlayerUI shouldBe testSecondPlayerUI
-                            }
-                        }
-                    }
-
-                    "When: first player id is not passed" - {
-                        every { navController.getIntArg(FIRST_PLAYER_ID) } returns null
-                        every { navController.getIntArg(SECOND_PLAYER_ID) } returns 2
-
-                        "Then: first player is null" {
-                            shouldThrow<IllegalStateException> {
-                                testFrameViewModel(navController = navController)
-                            }
-                        }
-                    }
-
-                    "When: second player id is not passed" - {
-                        every { navController.getIntArg(FIRST_PLAYER_ID) } returns 1
-                        every { navController.getIntArg(SECOND_PLAYER_ID) } returns null
-
-                        "Then: second player is null" {
-                            shouldThrow<IllegalStateException> {
-                                testFrameViewModel(navController = navController)
                             }
                         }
                     }
@@ -212,7 +186,6 @@ internal class FrameViewModelTest : FreeSpec(
                         }
                     }
                 }
-
             }
 
             "Scenario: OnFoulConfirmClick" - {
@@ -269,7 +242,6 @@ internal class FrameViewModelTest : FreeSpec(
                         }
                     }
                 }
-
             }
 
             "Scenario: onFoulBottomSheetClosed" - {
@@ -355,9 +327,7 @@ internal class FrameViewModelTest : FreeSpec(
                             }
                         }
                     }
-
                 }
-
             }
 
             "Scenario: OnAddRemoveRedsPlusClick" - {
@@ -374,7 +344,6 @@ internal class FrameViewModelTest : FreeSpec(
                                 addRemoveDialogState.redsCount shouldBe 1
                             }
                         }
-
                     }
                 }
             }
@@ -414,7 +383,6 @@ internal class FrameViewModelTest : FreeSpec(
                             }
                         }
                     }
-
                 }
             }
 
@@ -538,7 +506,6 @@ internal class FrameViewModelTest : FreeSpec(
                         }
                     }
                 }
-
             }
 
             "Scenario: OnFrameOptionsBottomSheetClose" - {
@@ -568,57 +535,15 @@ internal class FrameViewModelTest : FreeSpec(
                     val viewModel = testFrameViewModel()
 
                     "When: finishFrame is clicked" - {
-                        viewModel.onEvent(FrameEvent.OnFinishClick)
 
-                        "Then: finishFrameConfirmationDialog should be shown" {
-                            with(viewModel.viewState) {
-                                showOptionsBottomSheet shouldBe false
-                                showFinishFrameConfirmationDialog shouldBe true
-                            }
-                        }
-                    }
-                }
-            }
-
-            "Scenario: OnFinishConfirmationClosed" - {
-
-                "Given: FrameViewModel" - {
-
-                    val viewModel = testFrameViewModel()
-
-                    "When: OnFinishConfirmationClosed" - {
-
-                        viewModel.onEvent(FrameEvent.OnFinishFrameConfirmationClosed)
-
-                        "Then: showFinishFrameConfirmationDialog should be false" {
-                            with(viewModel.viewState) {
-                                showFinishFrameConfirmationDialog shouldBe false
-                            }
-                        }
-                    }
-                }
-            }
-
-            "Scenario: OnFinishFrameConfirm" - {
-
-                "Given: FrameViewModel" - {
-
-                    val navController = getNavController()
-                    every { navController.navigateUp() } returns true
-                    val viewModel = testFrameViewModel(
-                        navController = navController,
-                    )
-
-                    "When: finishFrameConfirm is clicked" - {
-                        viewModel.onEvent(FrameEvent.OnFinishFrameConfirm)
-
-                        "Then: navigateUp should be called" {
-                            verify { navController.navigateUp() }
-                        }
-
-                        "And: finishFrameConfirmationDialog should be hidden" {
-                            with(viewModel.viewState) {
-                                showFinishFrameConfirmationDialog shouldBe false
+                        "Then: navigationEvent should be OnBackPressed" {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(FrameEvent.OnFinishClick)
+                                    viewModel.viewState.showOptionsBottomSheet shouldBe false
+                                    awaitItem() shouldBe FrameNavigationEvent.OnBackPressed
+                                    cancelAndIgnoreRemainingEvents()
+                                }
                             }
                         }
                     }

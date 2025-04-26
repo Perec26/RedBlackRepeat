@@ -1,25 +1,36 @@
 package com.pepekprodakshn.start.ui
 
-import com.pepekprodakshn.navigation.SharedRouter
+import app.cash.turbine.test
 import io.kotest.core.spec.style.FreeSpec
-import io.mockk.mockk
-import io.mockk.verify
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class StartViewModelTest : FreeSpec(
     {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+
         "Feature: StartViewModel" - {
 
-            "Scenario: Button click" - {
+            "Scenario: OnButtonClick" - {
 
                 "Given: StartViewModel" - {
-                    val sharedRouter = mockk<SharedRouter>(relaxed = true)
-                    val viewModel = StartViewModel(sharedRouter = sharedRouter)
 
-                    "When: Button click" - {
-                        viewModel.onEvent(StartEvent.ButtonClick)
+                    val viewModel = StartViewModel()
 
-                        "Then: sharedRouter.navigateToPlayerList() should be called" {
-                            verify { sharedRouter.navigateToPlayerList() }
+                    "When: OnButtonClick" - {
+
+                        "Then: navigationEvent should be OnStartClick" - {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(StartEvent.ButtonClick)
+                                    awaitItem() shouldBe StartNavigationEvent.OnStartClick
+                                    cancelAndIgnoreRemainingEvents()
+                                }
+                            }
                         }
                     }
                 }

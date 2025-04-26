@@ -1,5 +1,7 @@
 package com.pepekprodakshn.frame.ui
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.toRoute
 import com.pepekprodakshn.frame.domain.AddRedsUseCase
 import com.pepekprodakshn.frame.domain.EndBreakUseCase
 import com.pepekprodakshn.frame.domain.FoulUseCase
@@ -10,16 +12,14 @@ import com.pepekprodakshn.frame.domain.RemoveRedsUseCase
 import com.pepekprodakshn.frame.domain.RestartUseCase
 import com.pepekprodakshn.frame.domain.UndoUseCase
 import com.pepekprodakshn.frame.ui.model.BallUI
-import com.pepekprodakshn.frame.ui.navigation.FIRST_PLAYER_ID
-import com.pepekprodakshn.frame.ui.navigation.SECOND_PLAYER_ID
-import com.pepekprodakshn.navigation.RBRNavController
+import com.pepekprodakshn.frame.ui.navigation.Frame
 import com.pepekprodakshn.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 internal class FrameViewModel @Inject constructor(
-    private val navController: RBRNavController,
+    private val savedStateHandle: SavedStateHandle,
     private val getPlayerUseCase: GetPlayerUseCase,
     private val potBallUseCase: PotBallUseCase,
     private val endBreakUseCase: EndBreakUseCase,
@@ -29,15 +29,14 @@ internal class FrameViewModel @Inject constructor(
     private val addRedsUseCase: AddRedsUseCase,
     private val removeRedsUseCase: RemoveRedsUseCase,
     private val restartUseCase: RestartUseCase,
-) : BaseViewModel<FrameUiState, FrameEvent>(
+) : BaseViewModel<FrameUiState, FrameEvent, FrameNavigationEvent>(
     initialState = FrameUiState(),
 ) {
 
     init {
-        val firstPlayerId =
-            navController.getIntArg(FIRST_PLAYER_ID) ?: error("Can't find argument")
-        val secondPlayerId =
-            navController.getIntArg(SECOND_PLAYER_ID) ?: error("Can't find argument")
+        val route = savedStateHandle.toRoute<Frame>()
+        val firstPlayerId = route.firstPlayerId
+        val secondPlayerId = route.secondPlayerId
         getPlayers(firstPlayerId, secondPlayerId)
     }
 
@@ -76,32 +75,19 @@ internal class FrameViewModel @Inject constructor(
             is FrameEvent.OnMoreClick -> updateState { showOptionsBottomSheet() }
             is FrameEvent.OnOptionsElementsCounted -> updateState { setOptionElements(event.count) }
             FrameEvent.OnFrameOptionsBottomSheetClose -> updateState { hideOptionsBottomSheet() }
-            FrameEvent.OnFinishFrameConfirm -> onFinishFrameConfirm()
-            FrameEvent.OnFinishFrameConfirmationClosed -> {
-                updateState { hideFinishFrameConfirmationDialog() }
-            }
-
             FrameEvent.OnFinishClick -> onFinishClick()
-
             FrameEvent.OnRestartConfirm -> onRestartConfirm()
             FrameEvent.OnRestartFrameConfirmationClosed -> {
                 updateState { hideRestartFrameConfirmationDialog() }
             }
+
+            FrameEvent.OnBackPressed -> onNavigationEvent(FrameNavigationEvent.OnBackPressed)
         }
     }
 
     private fun onRestartClick() {
         updateState { hideOptionsBottomSheet() }
         updateState { showRestartFrameConfirmationDialog() }
-    }
-
-    private fun onFinishFrameConfirm() {
-        updateState { hideFinishFrameConfirmationDialog() }
-        navController.navigateUp()
-    }
-
-    override fun onBackPressed() {
-        updateState { showFinishFrameConfirmationDialog() }
     }
 
     private fun onRestartConfirm() {
@@ -114,7 +100,7 @@ internal class FrameViewModel @Inject constructor(
 
     private fun onFinishClick() {
         updateState { hideOptionsBottomSheet() }
-        updateState { showFinishFrameConfirmationDialog() }
+        onNavigationEvent(FrameNavigationEvent.OnBackPressed)
     }
 
     private fun onAddRedsDialogClick() {
