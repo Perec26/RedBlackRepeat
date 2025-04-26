@@ -19,6 +19,8 @@ class UnitTestConventionPlugin : Plugin<Project> {
                 add("testImplementation", libs.findLibraryString("kotest"))
                 add("testImplementation", libs.findLibraryString("mockk"))
                 add("testImplementation", libs.findLibraryString("coroutines.test"))
+                add("testImplementation", libs.findLibraryString("kotest.assertions.core"))
+                add("testImplementation", libs.findLibraryString("turbine"))
             }
         }
     }

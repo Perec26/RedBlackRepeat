@@ -20,7 +20,9 @@ fun NavGraphBuilder.frameNavigation(navController: NavHostController) {
     composable<Frame> {
         FrameScreen {
             when (it) {
-                FrameNavigationEvent.OnBackPressed -> navController.navigate(FrameFinishConfirmation)
+                FrameNavigationEvent.OnBackPressed -> navController.navigate(
+                    FrameFinishConfirmation,
+                )
             }
         }
     }

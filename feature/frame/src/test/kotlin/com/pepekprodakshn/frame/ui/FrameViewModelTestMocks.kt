@@ -11,11 +11,16 @@ import com.pepekprodakshn.frame.domain.RemoveRedsUseCase
 import com.pepekprodakshn.frame.domain.RestartUseCase
 import com.pepekprodakshn.frame.domain.UndoUseCase
 import com.pepekprodakshn.frame.ui.model.FoulUI
+import com.pepekprodakshn.frame.ui.navigation.Frame
 import io.mockk.mockk
 
 internal val testFirstPlayerUI = PlayerUI(1, "test")
 internal val testSecondPlayerUI = PlayerUI(2, "test2")
 internal val testFoulUI = FoulUI()
+internal val testFrame = Frame(
+    firstPlayerId = testFirstPlayerUI.id,
+    secondPlayerId = testSecondPlayerUI.id,
+)
 
 internal val testGetPlayerUseCase = mockk<GetPlayerUseCase>(relaxed = true)
 internal val testPotBallUseCase = mockk<PotBallUseCase>(relaxed = true)

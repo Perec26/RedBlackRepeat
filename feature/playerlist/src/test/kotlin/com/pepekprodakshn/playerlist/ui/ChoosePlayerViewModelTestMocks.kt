@@ -1,14 +1,15 @@
 package com.pepekprodakshn.playerlist.ui
 
-import com.pepekprodakshn.navigation.RBRNavController
 import com.pepekprodakshn.playerlist.domain.AddPlayerUseCase
 import com.pepekprodakshn.playerlist.domain.GetAllPlayersUseCase
 import com.pepekprodakshn.playerlist.domain.ValidateNameUseCase
+import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 import io.mockk.mockk
 
-internal val testNavController = mockk<RBRNavController>(relaxed = true)
 internal val testValidateNameUseCase = mockk<ValidateNameUseCase>()
 internal val testAddPlayerUseCase = mockk<AddPlayerUseCase>(relaxed = true)
+internal val firstPlayer = PlayerUI(1, "test")
+internal val secondPlayer = PlayerUI(2, "test")
 
 internal fun testViewModel(
     getAllPlayersUseCase: GetAllPlayersUseCase = mockk<GetAllPlayersUseCase>(relaxed = true),
