@@ -6,9 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -50,100 +54,112 @@ private fun FrameScreenContent(
     state: FrameUiState,
     onEvent: (FrameEvent) -> Unit,
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-        ) {
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing,
+        containerColor = MaterialTheme.colorScheme.surface,
+    ) { paddingValues ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+            ) {
 
-            if (isPortrait()) {
-                BallsWidget(
-                    ballsState = state.tableState.ballState,
-                    onClick = { onEvent(FrameEvent.OnBallClick(it)) },
-                )
-
-                FrameOptions(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .align(Alignment.End),
-                    onEvent = onEvent,
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(16.dp)
-                        .weight(1f),
-                )
-            } else {
-                Row(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
+                if (isPortrait()) {
                     BallsWidget(
-                        modifier = Modifier.padding(top = 16.dp),
+                        safeContentPadding = paddingValues,
                         ballsState = state.tableState.ballState,
                         onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                     )
 
                     FrameOptions(
-                        modifier = Modifier.padding(top = 16.dp),
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .align(Alignment.End),
                         onEvent = onEvent,
                     )
-                }
-            }
 
-            PlayersCounters(
-                modifier = Modifier.padding(bottom = 16.dp),
-                firstPlayerUI = state.firstPlayerUI,
-                firstPlayerPoints = state.tableState.firstPlayerPoints,
-                secondPlayerUI = state.secondPlayerUI,
-                secondPlayerPoints = state.tableState.secondPlayerPoints,
-                isFirstPlayerSelected = state.tableState.isFirstPlayerSelected,
-                breakUI = state.tableState.breakUI,
-                previousBreakUI = state.previousBreakUI,
-                onClick = { onEvent(FrameEvent.OnSelectPlayer(it)) },
+                    Spacer(
+                        modifier = Modifier
+                            .height(16.dp)
+                            .weight(1f),
+                    )
+                } else {
+                    Row(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                            .padding(top = paddingValues.calculateTopPadding()),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        BallsWidget(
+                            modifier = Modifier.padding(top = 16.dp),
+                            safeContentPadding = paddingValues,
+                            ballsState = state.tableState.ballState,
+                            onClick = { onEvent(FrameEvent.OnBallClick(it)) },
+                        )
+
+                        FrameOptions(
+                            modifier = Modifier.padding(top = 16.dp),
+                            safeContentPadding = paddingValues,
+                            onEvent = onEvent,
+                        )
+                    }
+                }
+
+                PlayersCounters(
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
+                        .padding(bottom = paddingValues.calculateBottomPadding()),
+                    firstPlayerUI = state.firstPlayerUI,
+                    firstPlayerPoints = state.tableState.firstPlayerPoints,
+                    secondPlayerUI = state.secondPlayerUI,
+                    secondPlayerPoints = state.tableState.secondPlayerPoints,
+                    isFirstPlayerSelected = state.tableState.isFirstPlayerSelected,
+                    breakUI = state.tableState.breakUI,
+                    previousBreakUI = state.previousBreakUI,
+                    safeContentPadding = paddingValues,
+                    onClick = { onEvent(FrameEvent.OnSelectPlayer(it)) },
+                )
+            }
+        }
+
+        if (state.showFoulBottomSheet) {
+            FoulDialog(
+                foulUI = state.foulUI,
+                onEvent = onEvent,
             )
         }
-    }
 
-    if (state.showFoulBottomSheet) {
-        FoulDialog(
-            foulUI = state.foulUI,
-            onEvent = onEvent,
-        )
-    }
+        if (state.showAddRemoveDialog) {
+            AddRemoveRedDialog(
+                state = state.addRemoveDialogState,
+                onEvent = onEvent,
+            )
+        }
 
-    if (state.showAddRemoveDialog) {
-        AddRemoveRedDialog(
-            state = state.addRemoveDialogState,
-            onEvent = onEvent,
-        )
-    }
+        if (state.showOptionsBottomSheet) {
+            FrameOptionsBottomSheet(
+                options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
+                onEvent = onEvent,
+            )
+        }
 
-    if (state.showOptionsBottomSheet) {
-        FrameOptionsBottomSheet(
-            options = FrameOptionUI.entries.drop(state.optionElementsOnScreen),
-            onEvent = onEvent,
-        )
-    }
-
-    if (state.showRestartFrameConfirmationDialog) {
-        ThreeButtonsDialog(
-            title = stringResource(id = R.string.frame_restart_frame_dialog_title),
-            description = stringResource(id = R.string.frame_restart_frame_dialog_description),
-            okButtonDescription = ButtonDescription(
-                text = stringResource(id = R.string.frame_finish_frame_dialog_yes),
-                onClick = { onEvent(FrameEvent.OnRestartConfirm) },
-            ),
-            noButtonDescription = ButtonDescription(
-                text = stringResource(id = R.string.frame_finish_frame_dialog_no),
-                onClick = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
-            ),
-            onDismissRequest = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
-        )
+        if (state.showRestartFrameConfirmationDialog) {
+            ThreeButtonsDialog(
+                title = stringResource(id = R.string.frame_restart_frame_dialog_title),
+                description = stringResource(id = R.string.frame_restart_frame_dialog_description),
+                okButtonDescription = ButtonDescription(
+                    text = stringResource(id = R.string.frame_finish_frame_dialog_yes),
+                    onClick = { onEvent(FrameEvent.OnRestartConfirm) },
+                ),
+                noButtonDescription = ButtonDescription(
+                    text = stringResource(id = R.string.frame_finish_frame_dialog_no),
+                    onClick = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
+                ),
+                onDismissRequest = { onEvent(FrameEvent.OnRestartFrameConfirmationClosed) },
+            )
+        }
     }
 }
 

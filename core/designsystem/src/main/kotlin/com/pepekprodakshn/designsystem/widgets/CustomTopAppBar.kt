@@ -48,7 +48,11 @@ fun CustomTopAppBar(
 }
 
 @Composable
-private fun Title(title: String) = Text(
+private fun Title(
+    modifier: Modifier = Modifier,
+    title: String,
+) = Text(
+    modifier = modifier,
     text = title,
     style = MaterialTheme.typography.titleLarge,
 )
@@ -73,17 +77,14 @@ private fun CustomTopAppBarPreviewContent() {
             SpacerHeight(height = 8.dp)
             CustomTopAppBar("Title")
             SpacerHeight(height = 8.dp)
-            CustomTopAppBar(
-                title = "Title",
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            contentDescription = "",
-                        )
-                    }
-                },
-            )
+            CustomTopAppBar(title = "Title") {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = "",
+                    )
+                }
+            }
         }
     }
 }

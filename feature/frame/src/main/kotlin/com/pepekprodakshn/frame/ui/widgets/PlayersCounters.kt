@@ -3,6 +3,7 @@ package com.pepekprodakshn.frame.ui.widgets
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,6 +33,7 @@ internal fun PlayersCounters(
     isFirstPlayerSelected: Boolean,
     breakUI: BreakUI? = null,
     previousBreakUI: BreakUI? = null,
+    safeContentPadding: PaddingValues = PaddingValues(),
     onClick: (Boolean) -> Unit,
 ) {
     if (isPortrait()) {
@@ -56,6 +58,7 @@ internal fun PlayersCounters(
             isFirstPlayerSelected = isFirstPlayerSelected,
             breakUI = breakUI,
             previousBreakUI = previousBreakUI,
+            safeContentPadding = safeContentPadding,
             onClick = onClick,
         )
     }
@@ -110,7 +113,7 @@ private fun PlayersCountersPortrait(
         SpacerHeight(height = 16.dp)
 
         PlayerLabel(
-            modifier = modifier.padding(end = 16.dp),
+            modifier = Modifier.padding(end = 16.dp),
             isActive = isFirstPlayerSelected,
             name = firstPlayerUI.name,
             points = firstPlayerPoints,
@@ -122,7 +125,7 @@ private fun PlayersCountersPortrait(
         SpacerHeight(height = 8.dp)
 
         PlayerLabel(
-            modifier = modifier.padding(start = 16.dp),
+            modifier = Modifier.padding(start = 16.dp),
             isActive = !isFirstPlayerSelected,
             name = secondPlayerUI.name,
             points = secondPlayerPoints,
@@ -143,6 +146,7 @@ private fun PlayersCountersLandscape(
     isFirstPlayerSelected: Boolean,
     breakUI: BreakUI? = null,
     previousBreakUI: BreakUI? = null,
+    safeContentPadding: PaddingValues,
     onClick: (Boolean) -> Unit,
 ) {
     Row(
@@ -159,6 +163,7 @@ private fun PlayersCountersLandscape(
             isFirst = true,
             breakUI = breakUI,
             previousBreakUI = previousBreakUI,
+            safeContentPadding = safeContentPadding,
             onClick = { onClick(true) },
         )
 
@@ -171,6 +176,7 @@ private fun PlayersCountersLandscape(
             isFirst = false,
             breakUI = breakUI,
             previousBreakUI = previousBreakUI,
+            safeContentPadding = safeContentPadding,
             onClick = { onClick(false) },
         )
     }
@@ -200,7 +206,8 @@ private fun PlayersCountersSecondPlayerSelectedPreview() {
             secondPlayerUI = secondPlayerUIMock,
             secondPlayerPoints = 77,
             isFirstPlayerSelected = false,
-        ) {}
+            onClick = {},
+        )
     }
 }
 

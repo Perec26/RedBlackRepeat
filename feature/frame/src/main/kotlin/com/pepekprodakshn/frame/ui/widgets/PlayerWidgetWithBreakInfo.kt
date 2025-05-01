@@ -3,6 +3,7 @@ package com.pepekprodakshn.frame.ui.widgets
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +25,7 @@ internal fun PlayerWidgetWithBreakInfo(
     isFirst: Boolean = true,
     breakUI: BreakUI? = null,
     previousBreakUI: BreakUI? = null,
+    safeContentPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
 ) {
 
@@ -40,12 +42,14 @@ internal fun PlayerWidgetWithBreakInfo(
                 modifier = Modifier.alpha(0f),
                 breakUI = breakUI ?: previousBreakUI,
                 isRight = isFirst,
+                safeContentPadding = safeContentPadding,
             )
 
             AnimatedBreakWidget(
                 breakUI = breakUI ?: previousBreakUI,
                 isFirst = isFirst,
                 isVisible = isActive && breakUI != null,
+                safeContentPadding = safeContentPadding,
             )
         }
 
@@ -55,6 +59,7 @@ internal fun PlayerWidgetWithBreakInfo(
             points = points,
             difference = difference,
             isFirst = isFirst,
+            safeContentPadding = safeContentPadding,
             onClick = onClick,
         )
     }

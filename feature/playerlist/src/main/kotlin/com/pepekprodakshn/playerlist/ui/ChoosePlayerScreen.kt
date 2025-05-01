@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -21,6 +23,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -61,57 +64,39 @@ private fun ChoosePlayerContent(
     state: ChoosePlayerViewState,
     onEvent: (ChoosePlayerEvent) -> Unit,
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        Column(modifier = Modifier.fillMaxSize()) {
-
-            CustomTopAppBar(
-                title = stringResource(R.string.choose_players_title),
-                onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
-            ) {
-
-                IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = "",
-                    )
-                }
-            }
-
-            when (state.listState) {
-                ListState.LOADING -> LoadingPlayerList()
-                ListState.EMPTY -> EmptyPlayerList(onEvent)
-                ListState.READY -> PlayerList(state, onEvent)
-            }
-        }
-        AnimatedVisibility(
-            modifier = Modifier.align(Alignment.BottomEnd),
-            visible = !state.isEnabled,
-            enter = scaleIn(),
-            exit = scaleOut(),
+    Scaffold(
+        topBar = { TopAppBar(onEvent = onEvent) },
+        floatingActionButton = {
+            FloatingActionButton(
+                onEvent = onEvent,
+                isEnabled = !state.isEnabled,
+            )
+        },
+        contentWindowInsets = WindowInsets.safeDrawing,
+        containerColor = MaterialTheme.colorScheme.surface,
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
         ) {
 
-            FloatingActionButton(
-                modifier = Modifier.padding(16.dp),
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = { onEvent(ChoosePlayerEvent.OnStartFrameClick) },
-            ) {
-
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "",
-                )
+            Column(modifier = Modifier.fillMaxSize()) {
+                when (state.listState) {
+                    ListState.LOADING -> LoadingPlayerList()
+                    ListState.EMPTY -> EmptyPlayerList(onEvent)
+                    ListState.READY -> PlayerList(state, onEvent)
+                }
             }
         }
-    }
 
-    if (state.showNewPlayerBottomSheet) {
-        NewPlayerBottomSheet(
-            name = state.newPlayerName,
-            isError = state.isNewPlayerError,
-            onEvent = onEvent,
-        )
+        if (state.showNewPlayerBottomSheet) {
+            NewPlayerBottomSheet(
+                name = state.newPlayerName,
+                isError = state.isNewPlayerError,
+                onEvent = onEvent,
+            )
+        }
     }
 }
 
@@ -139,6 +124,49 @@ private fun EmptyPlayerList(onEvent: (ChoosePlayerEvent) -> Unit) {
             text = stringResource(R.string.choose_players_empty_players_button),
             onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) },
         )
+    }
+}
+
+@Composable
+private fun TopAppBar(
+    onEvent: (ChoosePlayerEvent) -> Unit,
+) {
+    CustomTopAppBar(
+        title = stringResource(R.string.choose_players_title),
+        onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
+    ) {
+        IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "",
+            )
+        }
+    }
+}
+
+@Composable
+private fun FloatingActionButton(
+    isEnabled: Boolean,
+    onEvent: (ChoosePlayerEvent) -> Unit,
+) {
+    AnimatedVisibility(
+        visible = isEnabled,
+        enter = scaleIn(),
+        exit = scaleOut(),
+    ) {
+
+        FloatingActionButton(
+            modifier = Modifier.padding(16.dp),
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            onClick = { onEvent(ChoosePlayerEvent.OnStartFrameClick) },
+        ) {
+
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = "",
+            )
+        }
     }
 }
 

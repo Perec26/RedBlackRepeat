@@ -65,7 +65,7 @@ internal fun PlayerItem(
         )
 
         Checkbox(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(16.dp),
             checked = isSelected,
             enabled = enabled,
             onCheckedChange = null,
