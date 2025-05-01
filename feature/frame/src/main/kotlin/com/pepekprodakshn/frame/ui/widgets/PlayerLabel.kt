@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -24,6 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
@@ -39,6 +42,7 @@ internal fun PlayerLabel(
     points: Int = 102,
     difference: Int = 0,
     isFirst: Boolean = true,
+    safeContentPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
 ) {
 
@@ -112,21 +116,37 @@ internal fun PlayerLabel(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (isFirst) {
-                RightRow(name = name, points = points, textColor = textColor)
+                LeftRow(
+                    name = name,
+                    points = points,
+                    textColor = textColor,
+                    safeContentPadding = safeContentPadding.calculateLeftPadding(
+                        LayoutDirection.Ltr,
+                    ),
+                )
             } else {
-                LeftRow(name = name, points = points, textColor = textColor)
+                RightRow(
+                    name = name,
+                    points = points,
+                    textColor = textColor,
+                    safeContentPadding = safeContentPadding.calculateRightPadding(
+                        LayoutDirection.Ltr,
+                    ),
+                )
             }
         }
     }
 }
 
 @Composable
-private fun RightRow(
+private fun LeftRow(
     name: String,
     points: Int,
     textColor: Color,
+    safeContentPadding: Dp = 0.dp,
 ) {
     PlayerText(
+        modifier = Modifier.padding(start = safeContentPadding),
         text = name,
         color = textColor,
     )
@@ -138,10 +158,11 @@ private fun RightRow(
 }
 
 @Composable
-private fun LeftRow(
+private fun RightRow(
     name: String,
     points: Int,
     textColor: Color,
+    safeContentPadding: Dp = 0.dp,
 ) {
     PlayerText(
         modifier = Modifier.padding(start = 8.dp),
@@ -149,6 +170,7 @@ private fun LeftRow(
         color = textColor,
     )
     PlayerText(
+        modifier = Modifier.padding(end = safeContentPadding),
         text = name,
         color = textColor,
     )

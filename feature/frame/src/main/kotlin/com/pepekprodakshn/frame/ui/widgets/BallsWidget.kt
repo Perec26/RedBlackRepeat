@@ -3,8 +3,10 @@ package com.pepekprodakshn.frame.ui.widgets
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
@@ -27,6 +30,7 @@ import com.pepekprodakshn.frame.ui.model.BallsStateUI
 @Composable
 internal fun BallsWidget(
     modifier: Modifier = Modifier,
+    safeContentPadding: PaddingValues = PaddingValues(),
     ballsState: BallsStateUI,
     onClick: (BallUI) -> Unit,
 ) {
@@ -38,47 +42,63 @@ internal fun BallsWidget(
         RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
     }
 
-    Column(
+    Box(
         modifier = modifier
-            .width(IntrinsicSize.Max)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerLow,
                 shape = shape,
             ),
-        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Text(
-            modifier = Modifier.padding(top = 16.dp),
-            text = stringResource(R.string.frame_balls),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Ball(
-                ball = BallUI.RED,
-                onClick = onClick,
-                count = ballsState.redsCount,
-                showCount = ballsState.showRedsCount,
-                isEnabled = ballsState.redsEnabled,
-            )
-            Ball(ball = BallUI.YELLOW, onClick = onClick, isEnabled = ballsState.yellowEnabled)
-            Ball(ball = BallUI.GREEN, onClick = onClick, isEnabled = ballsState.greenEnabled)
-            Ball(ball = BallUI.BROWN, onClick = onClick, isEnabled = ballsState.brownEnabled)
+        val startPadding = if (isLandscape) {
+            safeContentPadding.calculateLeftPadding(LayoutDirection.Ltr)
+        } else {
+            0.dp
         }
-        Row(
+        val topPadding = if (isLandscape) 0.dp else safeContentPadding.calculateTopPadding()
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp, start = 16.dp, end = 16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
+                .width(IntrinsicSize.Max)
+                .padding(
+                    top = topPadding,
+                    start = startPadding,
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Ball(ball = BallUI.BLUE, onClick = onClick, isEnabled = ballsState.blueEnabled)
-            Ball(ball = BallUI.PINK, onClick = onClick, isEnabled = ballsState.pinkEnabled)
-            Ball(ball = BallUI.BLACK, onClick = onClick, isEnabled = ballsState.blackEnabled)
+
+            Text(
+                modifier = Modifier.padding(top = 16.dp),
+                text = stringResource(R.string.frame_balls),
+                style = MaterialTheme.typography.titleMedium,
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Ball(
+                    ball = BallUI.RED,
+                    onClick = onClick,
+                    count = ballsState.redsCount,
+                    showCount = ballsState.showRedsCount,
+                    isEnabled = ballsState.redsEnabled,
+                )
+                Ball(ball = BallUI.YELLOW, onClick = onClick, isEnabled = ballsState.yellowEnabled)
+                Ball(ball = BallUI.GREEN, onClick = onClick, isEnabled = ballsState.greenEnabled)
+                Ball(ball = BallUI.BROWN, onClick = onClick, isEnabled = ballsState.brownEnabled)
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp, start = 16.dp, end = 16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                Ball(ball = BallUI.BLUE, onClick = onClick, isEnabled = ballsState.blueEnabled)
+                Ball(ball = BallUI.PINK, onClick = onClick, isEnabled = ballsState.pinkEnabled)
+                Ball(ball = BallUI.BLACK, onClick = onClick, isEnabled = ballsState.blackEnabled)
+            }
         }
     }
 }

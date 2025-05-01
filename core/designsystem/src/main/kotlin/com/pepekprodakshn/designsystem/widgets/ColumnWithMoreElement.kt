@@ -72,7 +72,7 @@ fun ColumnWithMoreElement(
                     offset += dividerHeight
                 }
             }
-            if (showMore) {
+            if (showMore && count > 0) {
                 dividerPlaceable[count - 1].place(0, offset)
                 offset += dividerHeight
                 morePlaceables.place(0, offset)

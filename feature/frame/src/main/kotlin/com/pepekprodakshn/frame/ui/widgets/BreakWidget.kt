@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
@@ -38,6 +42,7 @@ internal fun AnimatedBreakWidget(
     breakUI: BreakUI?,
     isFirst: Boolean,
     isVisible: Boolean,
+    safeContentPadding: PaddingValues = PaddingValues(),
 ) {
 
     AnimatedVisibility(
@@ -52,6 +57,7 @@ internal fun AnimatedBreakWidget(
             BreakWidget(
                 breakUI = breakUI,
                 isRight = isFirst,
+                safeContentPadding = safeContentPadding,
             )
         }
     }
@@ -62,6 +68,7 @@ internal fun BreakWidget(
     modifier: Modifier = Modifier,
     breakUI: BreakUI?,
     isRight: Boolean,
+    safeContentPadding: PaddingValues = PaddingValues(),
 ) {
 
     val shape = when {
@@ -70,13 +77,24 @@ internal fun BreakWidget(
         !isRight && isPortrait() -> RoundedCornerShape(topStart = 28.dp, bottomStart = 28.dp)
         else -> RoundedCornerShape(topStart = 28.dp)
     }
+    val startPadding = if (isRight) {
+        safeContentPadding.calculateStartPadding(LayoutDirection.Ltr)
+    } else {
+        0.dp
+    }
+    val endPadding = if (isRight) {
+        0.dp
+    } else {
+        safeContentPadding.calculateEndPadding(LayoutDirection.Ltr)
+    }
 
     Column(
         modifier = modifier
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 shape = shape,
-            ),
+            )
+            .padding(start = startPadding, end = endPadding),
         horizontalAlignment = if (isRight) Alignment.Start else Alignment.End,
     ) {
         Text(
