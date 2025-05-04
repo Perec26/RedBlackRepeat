@@ -15,15 +15,19 @@ navigationCompose = "2.8.9"
 roomVersion = "2.7.1"
 coroutinesTest = "1.9.0"
 serialization = "1.7.3"
+uiTooling = "1.8.0"
+turbine = "1.2.0"
+firebaseBom = "33.13.0"
 
 androidGradlePlugin = "8.9.2"
-kotlinPlugin = "2.0.20"
+kotlinPlugin = "2.1.0"
 hiltPlugin = "2.52"
 kspPlugin = "2.0.20-1.0.25"
 ktlintPlugin = "12.1.1"
 ktlintGradlePlugin = "12.1.1"
-uiTooling = "1.8.0"
-turbine = "1.2.0"
+firebasePlugin = "4.4.2"
+crashlyticsPlugin = "3.0.3"
+
 
 
 [libraries]
@@ -50,7 +54,9 @@ junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.r
 kotest = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
-
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -71,6 +77,8 @@ devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintPlugin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinPlugin" }
+firebase = { id = "com.google.gms.google-services", version.ref = "firebasePlugin" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyticsPlugin" }
 
 
 #Project plugins

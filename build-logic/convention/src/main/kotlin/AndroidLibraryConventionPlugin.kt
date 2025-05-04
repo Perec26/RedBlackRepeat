@@ -14,7 +14,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.android")
             apply(plugin = "redblackrepeat.ktlint")
 
-
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = libs.findVersionInt("targetSdk")

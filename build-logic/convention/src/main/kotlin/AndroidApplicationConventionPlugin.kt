@@ -18,6 +18,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             apply(plugin = "redblackrepeat.ktlint")
             apply(plugin = "redblackrepeat.hilt")
             apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
+            apply(plugin = "com.google.gms.google-services")
+            apply(plugin = "com.google.firebase.crashlytics")
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
@@ -28,6 +30,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibraryString("androidx.core.ktx"))
                 add("implementation", libs.findLibraryString("androidx.hilt.navigation.compose"))
                 add("implementation", libs.findLibraryString("androidx.navigation.compose"))
+                add("implementation", platform(libs.findLibraryString("firebase.bom")))
+                add("implementation", libs.findLibraryString("firebase.crashlytics"))
             }
         }
     }
