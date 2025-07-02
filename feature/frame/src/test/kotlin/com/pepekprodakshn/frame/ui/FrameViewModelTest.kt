@@ -113,7 +113,7 @@ internal class FrameViewModelTest : FreeSpec(
 
                         "Then: foul points should be set" {
                             with(viewModel.viewState) {
-                                foulUI.points shouldBe 1
+                                foulUI.points shouldBe 2
                             }
                         }
                     }
