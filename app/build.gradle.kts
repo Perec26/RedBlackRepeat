@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId = "com.pepekprodakshn.redblackrepeat"
-        versionCode = 3
-        versionName = "0.2.0"
+        versionCode = getBuildNumber()
+        versionName = "0.2." + getBuildNumber()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -56,4 +56,14 @@ dependencies {
     implementation(projects.feature.frame)
     implementation(projects.feature.playerlist)
     implementation(projects.feature.start)
+}
+
+fun getBuildNumber(): Int {
+    if (project.hasProperty("buildNumber")) {
+        val buildNumberString = project.property("buildNumber").toString()
+        if (buildNumberString.all { it.isDigit() }) {
+            return buildNumberString.toInt()
+        }
+    }
+    return 4
 }
