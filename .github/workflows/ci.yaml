@@ -3,10 +3,9 @@ name: Android CI/CD
 on:
   push:
     branches:
-      - master
+      - '**'
   pull_request:
-    branches:
-      - master
+    types: [ opened, synchronize, reopened ]
   workflow_dispatch:
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Set up JDK 21
@@ -26,5 +25,28 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Run Ktlint Check
+        run: ./gradlew ktlintCheck
+
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest
+
+      - name: Send Telegram Notification
+        if: always()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            🔔 *GitHub Actions Notification* 🔔
+            
+            *Репозиторий:* `${{ github.repository }}`
+            *Ветка:* `${{ github.ref_name }}`
+            *Коммит:* `${{ github.sha }}`
+            *Автор:* `${{ github.actor }}`
+            
+            *Статус CI:* ${{ job.status == 'success' && '✅ Успешно' || '❌ Ошибка' }}
+            *Ссылка на запуск:* `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`
+            
+            ${{ job.status == 'success' && 'Все проверки пройдены! ✨' || 'Обнаружены ошибки! 🚨 Проверьте логи.' }}
+          format: markdown
