@@ -84,11 +84,33 @@ jobs:
             -Pandroid.injected.signing.key.alias=${KEY_ALIAS} \
             -Pandroid.injected.signing.key.password=${KEY_PASSWORD} \
             -PbuildNumber=${{ github.run_number }}
+      - name: List AAB Output Directory
+        run: |
+            echo "Listing contents of app/build/outputs/bundle/release/:"
+            ls -R app/build/outputs/bundle/release/ || true # Используем '|| true', чтобы шаг не падал, если директории нет
+            echo "Listing contents of app/build/outputs/bundle/:"
+            ls -R app/build/outputs/bundle/ || true
+            echo "Listing contents of app/build/outputs/:"
+            ls -R app/build/outputs/ || true
+            echo "Listing contents of app/build/: (This might be too much, but good for debugging)"
+            ls -R app/build/ || true
+            echo "Listing contents of current directory:"
+            ls -R . || true
+            
       - name: Upload Release AAB Artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: app/build/outputs/bundle/release/app-release.aab
+
+      - name: Verify Release AAB Exists
+        run: |
+          if [ ! -f app/build/outputs/bundle/release/app-release.aab ]; then
+            echo "Release AAB not found!"
+            exit 1
+          else
+            ls -lh app/build/outputs/bundle/release/app-release.aab
+          fi
 
       - name: Deploy to Google Play Store
         uses: r0adkll/upload-google-play@v1
