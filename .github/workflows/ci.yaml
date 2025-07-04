@@ -70,7 +70,7 @@ jobs:
         env:
           UPLOAD_KEYSTORE: ${{ secrets.UPLOAD_KEYSTORE }}
         run: |
-          echo "UPLOAD_KEYSTORE" | base64 --decode > keystore.jks
+          echo "$UPLOAD_KEYSTORE" | base64 --decode > keystore.jks
 
       - name: Build Release AAB
         env:
