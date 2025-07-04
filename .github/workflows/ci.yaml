@@ -11,6 +11,7 @@ on:
 jobs:
   check_code_and_test:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/master') || github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout Code
@@ -79,7 +80,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           ./gradlew bundleRelease \
-            -Pandroid.injected.signing.store.file=keystore.jks \
+            -Pandroid.injected.signing.store.file="${{ github.workspace }}/keystore.jks" \
             -Pandroid.injected.signing.store.password=${KEYSTORE_PASSWORD} \
             -Pandroid.injected.signing.key.alias=${KEY_ALIAS} \
             -Pandroid.injected.signing.key.password=${KEY_PASSWORD}
