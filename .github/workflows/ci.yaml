@@ -82,7 +82,7 @@ jobs:
             -Pandroid.injected.signing.store.file="${{ github.workspace }}/keystore.jks" \
             -Pandroid.injected.signing.store.password=${KEYSTORE_PASSWORD} \
             -Pandroid.injected.signing.key.alias=${KEY_ALIAS} \
-            -Pandroid.injected.signing.key.password=${KEY_PASSWORD}
+            -Pandroid.injected.signing.key.password=${KEY_PASSWORD} \
             -PbuildNumber=${{ github.run_number }}
       - name: Upload Release AAB Artifact
         uses: actions/upload-artifact@v4
@@ -111,6 +111,5 @@ jobs:
             *Ветка:* `${{ github.ref_name }}`
             *Коммит:* `${{ github.sha }}`
             *Автор:* `${{ github.actor }}`
-            *Version Code:* `${{ github.run_number }}
             [Ссылка на запуск](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           format: markdown
