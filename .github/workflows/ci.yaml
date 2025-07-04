@@ -68,7 +68,7 @@ jobs:
 
       - name: Decode Keystore
         env:
-          KEYSTORE_BASE64: ${{ secrets.UPLOAD_KEYSTORE }}
+          UPLOAD_KEYSTORE: ${{ secrets.UPLOAD_KEYSTORE }}
         run: |
           echo "UPLOAD_KEYSTORE" | base64 --decode > keystore.jks
 
