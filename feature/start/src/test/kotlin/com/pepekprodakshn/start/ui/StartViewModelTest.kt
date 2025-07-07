@@ -26,7 +26,7 @@ internal class StartViewModelTest : FreeSpec(
                         "Then: navigationEvent should be OnStartClick" - {
                             runTest {
                                 viewModel.navigationEvent.test {
-                                    viewModel.onEvent(StartEvent.ButtonClick)
+                                    viewModel.onEvent(StartEvent.OnStartClick)
                                     awaitItem() shouldBe StartNavigationEvent.OnStartClick
                                     cancelAndIgnoreRemainingEvents()
                                 }
