@@ -5,6 +5,8 @@ internal data class SettingsUiState(
     val useDarkTheme: Boolean = true,
 ) {
 
+    val useDarkThemeSwitchEnabled = !useSystemTheme
+
     fun updateUseSystemTheme(useSystemTheme: Boolean) = copy(useSystemTheme = useSystemTheme)
 
     fun updateUseDarkTheme(useDarkTheme: Boolean) = copy(useDarkTheme = useDarkTheme)

@@ -54,7 +54,7 @@ private fun SettingsScreenContent(
             SettingElement(
                 title = stringResource(R.string.settings_use_dark_theme),
                 value = state.useDarkTheme,
-                enabled = !state.useSystemTheme,
+                enabled = state.useDarkThemeSwitchEnabled,
                 onClick = { onEvent(SettingsEvent.OnUseDarkThemeClick) },
             )
         }
