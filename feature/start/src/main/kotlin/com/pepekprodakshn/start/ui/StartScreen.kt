@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,10 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
+import com.pepekprodakshn.designsystem.widgets.SpacerHeight
 import com.pepekprodakshn.start.R
 
 @Composable
@@ -42,19 +43,21 @@ private fun StartScreenContent(state: StartUiState, onEvent: (StartEvent) -> Uni
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(onClick = { onEvent(StartEvent.ButtonClick) }) {
-                Text(
-                    modifier = Modifier.padding(32.dp),
-                    text = stringResource(R.string.start_start),
-                    fontSize = 36.sp,
-                )
+            Button(onClick = { onEvent(StartEvent.OnStartClick) }) {
+                Text(text = stringResource(R.string.start_start))
+            }
+
+            SpacerHeight(8.dp)
+
+            TextButton(onClick = { onEvent(StartEvent.OnSettingsClick) }) {
+                Text(text = stringResource(R.string.start_settings))
             }
         }
 
         Text(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(8.dp),
+                .padding(32.dp),
             text = state.version,
         )
     }

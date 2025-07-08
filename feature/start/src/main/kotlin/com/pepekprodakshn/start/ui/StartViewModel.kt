@@ -10,7 +10,8 @@ internal class StartViewModel @Inject constructor() :
 
     override fun onEvent(event: StartEvent) {
         when (event) {
-            StartEvent.ButtonClick -> onNavigationEvent(StartNavigationEvent.OnStartClick)
+            StartEvent.OnStartClick -> onNavigationEvent(StartNavigationEvent.OnStartClick)
+            StartEvent.OnSettingsClick -> onNavigationEvent(StartNavigationEvent.OnSettingsClick)
         }
     }
 }

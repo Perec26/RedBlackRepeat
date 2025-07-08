@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
 data object PlayerList
 
 fun NavGraphBuilder.playerListNavigation(
-    navController: NavController,
     onStartFrameClick: (Int, Int) -> Unit,
+    onBackPress: () -> Unit = {},
 ) {
     composable<PlayerList> {
         ChoosePlayerScreen {
@@ -22,7 +22,7 @@ fun NavGraphBuilder.playerListNavigation(
                     it.secondPlayerId,
                 )
 
-                ChoosePlayerNavigationEvent.OnBackPress -> navController.navigateUp()
+                ChoosePlayerNavigationEvent.OnBackPress -> onBackPress()
             }
         }
     }

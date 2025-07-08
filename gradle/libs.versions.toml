@@ -7,11 +7,11 @@ activityCompose = "1.10.1"
 coreKtx = "1.16.0"
 hiltAndroid = "2.56.2"
 hiltNavigationCompose = "1.2.0"
-junitJupiter = "5.13.2"
+junitJupiter = "5.13.3"
 kotest = "5.9.1"
 mock = "1.14.4"
 androidxLifecycle = "2.9.1"
-navigationCompose = "2.9.0"
+navigationCompose = "2.9.1"
 roomVersion = "2.7.2"
 coroutinesTest = "1.10.2"
 serialization = "1.9.0"
@@ -27,6 +27,7 @@ ktlintPlugin = "12.3.0"
 ktlintGradlePlugin = "12.3.0"
 firebasePlugin = "4.4.3"
 crashlyticsPlugin = "3.0.4"
+datastore = "1.1.7"
 
 
 
@@ -57,6 +58,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

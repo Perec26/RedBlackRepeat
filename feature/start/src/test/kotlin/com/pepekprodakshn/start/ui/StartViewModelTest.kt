@@ -15,19 +15,39 @@ internal class StartViewModelTest : FreeSpec(
 
         "Feature: StartViewModel" - {
 
-            "Scenario: OnButtonClick" - {
+            "Scenario: OnStartClick" - {
 
                 "Given: StartViewModel" - {
 
                     val viewModel = StartViewModel()
 
-                    "When: OnButtonClick" - {
+                    "When: OnStartClick" - {
 
                         "Then: navigationEvent should be OnStartClick" - {
                             runTest {
                                 viewModel.navigationEvent.test {
-                                    viewModel.onEvent(StartEvent.ButtonClick)
+                                    viewModel.onEvent(StartEvent.OnStartClick)
                                     awaitItem() shouldBe StartNavigationEvent.OnStartClick
+                                    cancelAndIgnoreRemainingEvents()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            "Scenario: OnSettingsClick" - {
+
+                "Given: StartViewModel" - {
+
+                    val viewModel = StartViewModel()
+
+                    "When: OnSettingsClick" - {
+
+                        "Then: navigationEvent should be OnSettingsClick" - {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(StartEvent.OnSettingsClick)
+                                    awaitItem() shouldBe StartNavigationEvent.OnSettingsClick
                                     cancelAndIgnoreRemainingEvents()
                                 }
                             }
