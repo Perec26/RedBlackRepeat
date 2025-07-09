@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 import com.pepekprodakshn.convention.findLibraryString
 import com.pepekprodakshn.convention.libs
 import org.gradle.api.Plugin

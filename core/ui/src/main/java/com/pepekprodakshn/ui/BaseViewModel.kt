@@ -36,6 +36,4 @@ abstract class BaseViewModel<STATE : Any, EVENT : Any, NAVIGATION_EVENT : Any>(
     protected fun onNavigationEvent(event: NAVIGATION_EVENT) {
         launch { _navigationEvent.emit(event) }
     }
-
-    open fun onBackPressed() {}
 }

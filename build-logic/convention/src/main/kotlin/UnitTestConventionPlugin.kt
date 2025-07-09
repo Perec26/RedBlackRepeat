@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 import com.android.build.api.dsl.LibraryExtension
 import com.pepekprodakshn.convention.findLibraryString
 import com.pepekprodakshn.convention.libs
