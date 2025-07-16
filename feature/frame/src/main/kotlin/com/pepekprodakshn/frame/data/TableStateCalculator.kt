@@ -68,7 +68,7 @@ internal class TableStateCalculator @Inject constructor() {
         )
         return copy(
             frameBreak = newBreak,
-            nextIsColor = redsCount != 0,
+            nextIsColor = false,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
