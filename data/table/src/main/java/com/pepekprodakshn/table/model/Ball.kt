@@ -1,6 +1,6 @@
 package com.pepekprodakshn.table.model
 
-enum class Ball(val value: Int) {
+enum class Ball(val points: Int) {
     RED(1),
     YELLOW(2),
     GREEN(3),

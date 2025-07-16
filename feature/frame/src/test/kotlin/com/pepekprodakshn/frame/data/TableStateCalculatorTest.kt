@@ -34,7 +34,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                         "Then: state should be correct" {
                             with(state) {
                                 redsCount shouldBe 0
-                                lowestPriceBall shouldBe Ball.YELLOW
+                                lowestValueBall shouldBe Ball.YELLOW
                             }
                         }
                     }
@@ -55,7 +55,7 @@ internal class TableStateCalculatorTest : FreeSpec(
 
                             with(state) {
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 frameBreak shouldBe null
                                 isFirstPlayerSelected shouldBe false
                             }
@@ -69,7 +69,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                         "Then: state should be correct" {
                             with(state) {
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 frameBreak shouldBe null
                                 isFirstPlayerSelected shouldBe true
                             }
@@ -92,7 +92,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe null
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 isFirstPlayerSelected shouldBe false
                                 firstPlayerPoints shouldBe 0
                                 secondPlayerPoints shouldBe 4
@@ -109,7 +109,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe null
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 isFirstPlayerSelected shouldBe true
                                 firstPlayerPoints shouldBe 4
                                 secondPlayerPoints shouldBe 0
@@ -126,7 +126,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe null
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 isFirstPlayerSelected shouldBe true
                                 firstPlayerPoints shouldBe 0
                                 secondPlayerPoints shouldBe 4
@@ -146,7 +146,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe null
                                 nextIsColor shouldBe true
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 isFirstPlayerSelected shouldBe true
                                 firstPlayerPoints shouldBe 1
                                 secondPlayerPoints shouldBe 4
@@ -167,7 +167,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe null
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.YELLOW
+                                lowestValueBall shouldBe Ball.YELLOW
                                 isFirstPlayerSelected shouldBe false
                                 firstPlayerPoints shouldBe 1
                                 secondPlayerPoints shouldBe 4
@@ -186,7 +186,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                             with(state) {
                                 frameBreak shouldBe FrameBreak(isFreeBall = true)
                                 nextIsColor shouldBe false
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 isFirstPlayerSelected shouldBe false
                                 firstPlayerPoints shouldBe 0
                                 secondPlayerPoints shouldBe 4
@@ -213,7 +213,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                                 redsCount shouldBe 14
                                 nextIsColor shouldBe true
                                 frameBreak shouldBe FrameBreak(listOf(Ball.RED))
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 firstPlayerPoints shouldBe 1
                                 secondPlayerPoints shouldBe 0
                             }
@@ -274,7 +274,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                                 redsCount shouldBe 14
                                 nextIsColor shouldBe false
                                 frameBreak shouldBe FrameBreak(listOf(Ball.RED, Ball.BLACK))
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 firstPlayerPoints shouldBe 8
                                 secondPlayerPoints shouldBe 0
                             }
@@ -294,7 +294,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                                 redsCount shouldBe 0
                                 nextIsColor shouldBe false
                                 frameBreak shouldBe FrameBreak(listOf(Ball.RED, Ball.BLACK))
-                                lowestPriceBall shouldBe Ball.YELLOW
+                                lowestValueBall shouldBe Ball.YELLOW
                                 firstPlayerPoints shouldBe 8
                                 secondPlayerPoints shouldBe 0
                             }
@@ -318,7 +318,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                                 redsCount shouldBe 0
                                 nextIsColor shouldBe false
                                 frameBreak shouldBe testBreakAllColors
-                                lowestPriceBall shouldBe Ball.RED
+                                lowestValueBall shouldBe Ball.RED
                                 firstPlayerPoints shouldBe 27
                                 secondPlayerPoints shouldBe 0
                             }
@@ -354,7 +354,7 @@ internal class TableStateCalculatorTest : FreeSpec(
                                 redsCount shouldBe 0
                                 nextIsColor shouldBe false
                                 frameBreak shouldBe testBreakAllColors
-                                lowestPriceBall shouldBe Ball.BLACK
+                                lowestValueBall shouldBe Ball.BLACK
                                 firstPlayerPoints shouldBe 27
                                 secondPlayerPoints shouldBe 27
                             }

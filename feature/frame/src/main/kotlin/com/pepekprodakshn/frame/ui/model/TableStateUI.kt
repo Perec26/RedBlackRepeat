@@ -6,4 +6,5 @@ internal data class TableStateUI(
     val ballState: BallsStateUI = BallsStateUI(),
     val breakUI: BreakUI? = null,
     val isFirstPlayerSelected: Boolean = true,
+    val frameInfoUI: FrameInfoUI = FrameInfoUI(),
 )

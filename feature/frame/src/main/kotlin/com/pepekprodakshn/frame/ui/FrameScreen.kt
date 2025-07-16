@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -29,6 +30,7 @@ import com.pepekprodakshn.designsystem.widgets.ThreeButtonsDialog
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.FrameOptionUI
 import com.pepekprodakshn.frame.ui.widgets.BallsWidget
+import com.pepekprodakshn.frame.ui.widgets.FrameInfoWidget
 import com.pepekprodakshn.frame.ui.widgets.FrameOptions
 import com.pepekprodakshn.frame.ui.widgets.PlayersCounters
 
@@ -72,12 +74,22 @@ private fun FrameScreenContent(
                         onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                     )
 
-                    FrameOptions(
+                    Row(
                         modifier = Modifier
                             .padding(top = 16.dp)
-                            .align(Alignment.End),
-                        onEvent = onEvent,
-                    )
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        FrameInfoWidget(
+                            modifier = Modifier,
+                            safeContentPadding = paddingValues,
+                            info = state.tableState.frameInfoUI,
+                        )
+                        FrameOptions(
+                            modifier = Modifier,
+                            onEvent = onEvent,
+                        )
+                    }
 
                     Spacer(
                         modifier = Modifier
@@ -88,19 +100,26 @@ private fun FrameScreenContent(
                     Row(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxSize()
-                            .padding(top = paddingValues.calculateTopPadding()),
+                            .fillMaxSize(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         BallsWidget(
-                            modifier = Modifier.padding(top = 16.dp),
+                            modifier = Modifier
+                                .padding(top = paddingValues.calculateTopPadding() + 16.dp),
                             safeContentPadding = paddingValues,
                             ballsState = state.tableState.ballState,
                             onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                         )
 
+                        FrameInfoWidget(
+                            modifier = Modifier,
+                            safeContentPadding = paddingValues,
+                            info = state.tableState.frameInfoUI,
+                        )
+
                         FrameOptions(
-                            modifier = Modifier.padding(top = 16.dp),
+                            modifier = Modifier
+                                .padding(top = paddingValues.calculateTopPadding() + 16.dp),
                             safeContentPadding = paddingValues,
                             onEvent = onEvent,
                         )

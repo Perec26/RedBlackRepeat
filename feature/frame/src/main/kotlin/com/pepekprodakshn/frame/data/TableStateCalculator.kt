@@ -31,8 +31,8 @@ internal class TableStateCalculator @Inject constructor() {
 
         val isRed = ball == Ball.RED
 
-        val addFirstPlayerPoints = if (isFirstPlayerSelected) ball.value else 0
-        val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else ball.value
+        val addFirstPlayerPoints = if (isFirstPlayerSelected) ball.points else 0
+        val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else ball.points
 
         val newFirstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints
         val newSecondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints
@@ -43,32 +43,32 @@ internal class TableStateCalculator @Inject constructor() {
         val isNextInFinal = (redsCount == 0 && !isRed)
 
         val lowestPriceBall = if (isNextInFinal) {
-            lowestPriceBall.getNextValueBall() ?: if (isDraw) Ball.BLACK else Ball.RED
+            lowestValueBall.getNextValueBall() ?: if (isDraw) Ball.BLACK else Ball.RED
         } else {
-            lowestPriceBall
+            lowestValueBall
         }
 
         return copy(
             redsCount = redsCount - if (isRed) 1 else 0,
             nextIsColor = isRed,
             frameBreak = newBreak,
-            lowestPriceBall = lowestPriceBall,
+            lowestValueBall = lowestPriceBall,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
     }
 
     private fun TableState.onFreeBallPotted(): TableState {
-        val addFirstPlayerPoints = if (isFirstPlayerSelected) lowestPriceBall.value else 0
-        val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else lowestPriceBall.value
+        val addFirstPlayerPoints = if (isFirstPlayerSelected) lowestValueBall.points else 0
+        val addSecondPlayerPoints = if (isFirstPlayerSelected) 0 else lowestValueBall.points
 
         val newBreak = frameBreak?.copy(
             isFreeBall = false,
-            freeBallScore = lowestPriceBall.value,
+            freeBallScore = lowestValueBall.points,
         )
         return copy(
             frameBreak = newBreak,
-            nextIsColor = redsCount != 0,
+            nextIsColor = redsCount > 0,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
         )
@@ -76,15 +76,15 @@ internal class TableStateCalculator @Inject constructor() {
 
     private fun TableState.onBreakEnded(): TableState {
 
-        val lowestPriceBall = if (redsCount == 0 && lowestPriceBall == Ball.RED) {
-            lowestPriceBall.getNextValueBall() ?: Ball.RED
+        val lowestPriceBall = if (redsCount == 0 && lowestValueBall == Ball.RED) {
+            lowestValueBall.getNextValueBall() ?: Ball.RED
         } else {
-            lowestPriceBall
+            lowestValueBall
         }
 
         return copy(
             nextIsColor = false,
-            lowestPriceBall = lowestPriceBall,
+            lowestValueBall = lowestPriceBall,
             frameBreak = null,
             isFirstPlayerSelected = !isFirstPlayerSelected,
         )
@@ -98,16 +98,16 @@ internal class TableStateCalculator @Inject constructor() {
         val newNextIsColor = if (foul.isMiss) nextIsColor else false
 
         val lowestPriceBall =
-            if (redsCount == 0 && lowestPriceBall == Ball.RED && !newNextIsColor) {
-                lowestPriceBall.getNextValueBall() ?: Ball.RED
+            if (redsCount == 0 && lowestValueBall == Ball.RED && !newNextIsColor) {
+                lowestValueBall.getNextValueBall() ?: Ball.RED
             } else {
-                lowestPriceBall
+                lowestValueBall
             }
 
         return copy(
             frameBreak = FrameBreak(isFreeBall = true).takeIf { foul.isFreeBall },
             nextIsColor = newNextIsColor,
-            lowestPriceBall = lowestPriceBall,
+            lowestValueBall = lowestPriceBall,
             isFirstPlayerSelected = foul.isMiss == isFirstPlayerSelected,
             firstPlayerPoints = firstPlayerPoints + addFirstPlayerPoints,
             secondPlayerPoints = secondPlayerPoints + addSecondPlayerPoints,
@@ -119,10 +119,10 @@ internal class TableStateCalculator @Inject constructor() {
 
     private fun TableState.onRemoveReds(count: Int): TableState {
         val newRedsCount = redsCount - count
-        val lowestPriceBall = if (newRedsCount > 0) lowestPriceBall else Ball.YELLOW
+        val lowestPriceBall = if (newRedsCount > 0) lowestValueBall else Ball.YELLOW
         return copy(
             redsCount = newRedsCount,
-            lowestPriceBall = lowestPriceBall,
+            lowestValueBall = lowestPriceBall,
         )
     }
 }
