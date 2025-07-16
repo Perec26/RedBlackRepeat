@@ -7,11 +7,11 @@ activityCompose = "1.10.1"
 coreKtx = "1.16.0"
 hiltAndroid = "2.56.2"
 hiltNavigationCompose = "1.2.0"
-junitJupiter = "5.13.2"
+junitJupiter = "5.13.3"
 kotest = "5.9.1"
 mock = "1.14.4"
 androidxLifecycle = "2.9.1"
-navigationCompose = "2.9.0"
+navigationCompose = "2.9.1"
 roomVersion = "2.7.2"
 coroutinesTest = "1.10.2"
 serialization = "1.9.0"
@@ -19,7 +19,7 @@ uiTooling = "1.8.3"
 turbine = "1.2.1"
 firebaseBom = "33.16.0"
 
-androidGradlePlugin = "8.11.0"
+androidGradlePlugin = "8.11.1"
 kotlinPlugin = "2.2.0"
 hiltPlugin = "2.56.2"
 kspPlugin = "2.2.0-2.0.2"
@@ -27,6 +27,7 @@ ktlintPlugin = "12.3.0"
 ktlintGradlePlugin = "12.3.0"
 firebasePlugin = "4.4.3"
 crashlyticsPlugin = "3.0.4"
+datastore = "1.1.7"
 
 
 
@@ -57,13 +58,14 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 #build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlinPlugin" }
 compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlinPlugin" }
 ktlint-gradlePlugin = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlintGradlePlugin" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 
 [plugins]

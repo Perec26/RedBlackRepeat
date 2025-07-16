@@ -1,6 +1,5 @@
 package com.pepekprodakshn.frame.ui.widgets
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,10 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 import com.pepekprodakshn.frame.R
@@ -35,11 +34,10 @@ internal fun BallsWidget(
     onClick: (BallUI) -> Unit,
 ) {
 
-    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
-    val shape = if (isLandscape) {
-        RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
-    } else {
+    val shape = if (isPortrait()) {
         RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
+    } else {
+        RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
     }
 
     Box(
@@ -50,12 +48,12 @@ internal fun BallsWidget(
             ),
     ) {
 
-        val startPadding = if (isLandscape) {
-            safeContentPadding.calculateLeftPadding(LayoutDirection.Ltr)
-        } else {
+        val startPadding = if (isPortrait()) {
             0.dp
+        } else {
+            safeContentPadding.calculateLeftPadding(LayoutDirection.Ltr)
         }
-        val topPadding = if (isLandscape) 0.dp else safeContentPadding.calculateTopPadding()
+        val topPadding = if (isPortrait()) safeContentPadding.calculateTopPadding() else 0.dp
         Column(
             modifier = Modifier
                 .width(IntrinsicSize.Max)

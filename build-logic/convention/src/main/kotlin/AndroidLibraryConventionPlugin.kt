@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 import com.android.build.gradle.LibraryExtension
 import com.pepekprodakshn.convention.configureKotlinAndroid
 import com.pepekprodakshn.convention.findVersionInt

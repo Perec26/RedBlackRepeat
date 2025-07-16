@@ -11,11 +11,13 @@ data object Start
 
 fun NavGraphBuilder.startNavigation(
     onStartClick: () -> Unit,
+    onSettingsClick: () -> Unit,
 ) {
     composable<Start> {
         StartScreen {
             when (it) {
-                is StartNavigationEvent.OnStartClick -> onStartClick()
+                StartNavigationEvent.OnStartClick -> onStartClick()
+                StartNavigationEvent.OnSettingsClick -> onSettingsClick()
             }
         }
     }

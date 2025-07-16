@@ -8,6 +8,8 @@ import com.pepekprodakshn.frame.ui.navigation.frameNavigation
 import com.pepekprodakshn.frame.ui.navigation.navigateToFrame
 import com.pepekprodakshn.playerlist.ui.navigation.navigateToPlayerList
 import com.pepekprodakshn.playerlist.ui.navigation.playerListNavigation
+import com.pepekprodakshn.settings.ui.navigation.navigateToSettings
+import com.pepekprodakshn.settings.ui.navigation.settingsNavigation
 import com.pepekprodakshn.start.ui.navigation.Start
 import com.pepekprodakshn.start.ui.navigation.startNavigation
 
@@ -17,15 +19,17 @@ fun RedBlackRepeatApp() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Start) {
-        startNavigation(onStartClick = navController::navigateToPlayerList)
+        startNavigation(
+            onStartClick = navController::navigateToPlayerList,
+            onSettingsClick = navController::navigateToSettings,
+        )
         playerListNavigation(
-            navController = navController,
+            onBackPress = navController::navigateUp,
             onStartFrameClick = { firstPlayerId, secondPlayerId ->
                 navController.navigateToFrame(Frame(firstPlayerId, secondPlayerId))
             },
         )
-        frameNavigation(
-            navController = navController,
-        )
+        frameNavigation(navController = navController)
+        settingsNavigation(onBackPress = navController::navigateUp)
     }
 }

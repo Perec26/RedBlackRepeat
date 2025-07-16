@@ -29,13 +29,11 @@ abstract class BaseViewModel<STATE : Any, EVENT : Any, NAVIGATION_EVENT : Any>(
         _state.value = block.invoke(_state.value)
     }
 
-    fun launch(block: suspend CoroutineScope.() -> Unit): Job {
-        return viewModelScope.launch { block.invoke(this) }
+    fun launch(block: suspend CoroutineScope.() -> Unit): Job = viewModelScope.launch {
+        block.invoke(this)
     }
 
     protected fun onNavigationEvent(event: NAVIGATION_EVENT) {
         launch { _navigationEvent.emit(event) }
     }
-
-    open fun onBackPressed() {}
 }

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -18,12 +20,13 @@ rootProject.name = "RedBlackRepeat"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
-include(":core:database")
 include(":data:player")
+include(":data:preferences")
 include(":data:table")
-include(":feature:frame")
+include(":core:database")
 include(":core:designsystem")
-include(":core:navigation")
 include(":core:ui")
+include(":feature:frame")
 include(":feature:playerlist")
+include(":feature:settings")
 include(":feature:start")

@@ -44,7 +44,7 @@ internal fun PlayerItem(
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .size(40.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = getBackgroundColor(player),
                     shape = CircleShape,
                 ),
             contentAlignment = Alignment.Center,
@@ -53,7 +53,7 @@ internal fun PlayerItem(
                 modifier = Modifier.padding(8.dp),
                 text = player.name.firstOrNull()?.uppercase() ?: "R",
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = getAvatarTextColor(player),
             )
         }
 
@@ -73,14 +73,32 @@ internal fun PlayerItem(
     }
 }
 
+@Composable
+private fun getBackgroundColor(player: PlayerUI) = when (player.hashCode() % 3) {
+    0 -> MaterialTheme.colorScheme.primaryContainer
+    1 -> MaterialTheme.colorScheme.secondaryContainer
+    2 -> MaterialTheme.colorScheme.tertiaryContainer
+    else -> MaterialTheme.colorScheme.primary
+}
+
+@Composable
+private fun getAvatarTextColor(player: PlayerUI) = when (player.hashCode() % 3) {
+    0 -> MaterialTheme.colorScheme.onPrimaryContainer
+    1 -> MaterialTheme.colorScheme.onSecondaryContainer
+    2 -> MaterialTheme.colorScheme.onTertiaryContainer
+    else -> MaterialTheme.colorScheme.onPrimary
+}
+
 @PreviewLightDark
 @Composable
 private fun PlayerItemPreview() {
     RedBlackRepeatTheme {
         Column {
             PlayerItem(firstPlayerUIMock)
-            PlayerItem(firstPlayerUIMock, isSelected = false)
-            PlayerItem(firstPlayerUIMock, isSelected = false, enabled = false)
+            PlayerItem(firstPlayerUIMock.copy(id = 2), isSelected = false)
+            PlayerItem(firstPlayerUIMock.copy(id = 3), isSelected = false)
+            PlayerItem(firstPlayerUIMock.copy(name = "Name"), enabled = false, isSelected = false)
+            PlayerItem(firstPlayerUIMock.copy(id = 257), isSelected = false, enabled = false)
         }
     }
 }

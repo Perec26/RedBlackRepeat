@@ -50,12 +50,13 @@ dependencies {
     implementation(projects.core.database)
     implementation(projects.data.player)
     implementation(projects.data.table)
+    implementation(projects.data.preferences)
     implementation(projects.core.designsystem)
-    implementation(projects.core.navigation)
     implementation(projects.core.ui)
     implementation(projects.feature.frame)
     implementation(projects.feature.playerlist)
     implementation(projects.feature.start)
+    implementation(projects.feature.settings)
 }
 
 fun getBuildNumber(): Int {

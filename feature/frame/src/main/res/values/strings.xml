@@ -23,4 +23,7 @@
     <string name="frame_finish_frame_dialog_no">No</string>
     <string name="frame_restart_frame_dialog_title">Restart frame</string>
     <string name="frame_restart_frame_dialog_description">Do you want to restart this frame?</string>
+    <string name="frame_points_on_table">Points on table</string>
+    <string name="frame_snookers_required">Snookers required</string>
+    <string name="frame_info">Info</string>
 </resources>

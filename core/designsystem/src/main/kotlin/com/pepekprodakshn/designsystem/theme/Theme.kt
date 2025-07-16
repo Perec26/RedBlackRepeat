@@ -87,10 +87,17 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun RedBlackRepeatTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    useSystemTheme: Boolean = true,
+    useDarkTheme: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val isSystemInDarkTheme: Boolean = isSystemInDarkTheme()
+
+    val colorScheme = if (useSystemTheme) {
+        if (isSystemInDarkTheme) DarkColorScheme else LightColorScheme
+    } else {
+        if (useDarkTheme) DarkColorScheme else LightColorScheme
+    }
 
     MaterialTheme(
         colorScheme = colorScheme,
