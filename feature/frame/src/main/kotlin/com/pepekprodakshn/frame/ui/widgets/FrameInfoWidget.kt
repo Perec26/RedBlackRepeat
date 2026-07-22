@@ -29,7 +29,6 @@ internal fun FrameInfoWidget(
     safeContentPadding: PaddingValues = PaddingValues(),
     info: FrameInfoUI,
 ) {
-
     val topPadding = if (isPortrait()) 0.dp else safeContentPadding.calculateTopPadding()
 
     val shape = if (isPortrait()) {
@@ -47,7 +46,6 @@ internal fun FrameInfoWidget(
             .padding(top = topPadding)
             .width(IntrinsicSize.Max),
     ) {
-
         Text(
             modifier = Modifier
                 .padding(16.dp)

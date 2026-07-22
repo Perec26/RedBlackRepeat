@@ -30,10 +30,7 @@ internal data class FrameUiState(
             showOptionsBottomSheet
         )
 
-    fun initPlayers(
-        firstPlayerUI: PlayerUI,
-        secondPlayerUI: PlayerUI,
-    ) = copy(
+    fun initPlayers(firstPlayerUI: PlayerUI, secondPlayerUI: PlayerUI) = copy(
         firstPlayerUI = firstPlayerUI,
         secondPlayerUI = secondPlayerUI,
     )
@@ -128,7 +125,4 @@ internal data class FrameUiState(
     fun hideRestartFrameConfirmationDialog() = copy(showRestartFrameConfirmationDialog = false)
 }
 
-data class PlayerUI(
-    val id: Int,
-    val name: String,
-)
+data class PlayerUI(val id: Int, val name: String)

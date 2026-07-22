@@ -24,16 +24,12 @@ import com.pepekprodakshn.frame.ui.model.FoulUI
 import com.pepekprodakshn.frame.ui.widgets.Foul
 
 @Composable
-internal fun FoulDialog(
-    foulUI: FoulUI,
-    onEvent: (FrameEvent) -> Unit,
-) {
+internal fun FoulDialog(foulUI: FoulUI, onEvent: (FrameEvent) -> Unit) {
     DefaultDialog(onDismissRequest = { onEvent(FrameEvent.OnFoulBottomSheetClosed) }) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(R.string.frame_fouls),
@@ -60,7 +56,6 @@ internal fun FoulDialog(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
             ) {
-
                 CheckBoxWithText(
                     isChecked = foulUI.isMiss,
                     text = stringResource(R.string.frame_miss),

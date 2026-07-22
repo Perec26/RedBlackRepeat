@@ -20,11 +20,7 @@ import com.pepekprodakshn.frame.ui.widgets.FrameOptionGridItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun FrameOptionsBottomSheet(
-    options: List<FrameOptionUI>,
-    onEvent: (FrameEvent) -> Unit,
-) {
-
+internal fun FrameOptionsBottomSheet(options: List<FrameOptionUI>, onEvent: (FrameEvent) -> Unit) {
     ModalBottomSheet(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = { onEvent(FrameEvent.OnFrameOptionsBottomSheetClose) },
@@ -38,10 +34,11 @@ private fun FrameOptionsBottomSheetContent(
     options: List<FrameOptionUI>,
     onEvent: (FrameEvent) -> Unit,
 ) {
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
@@ -49,7 +46,7 @@ private fun FrameOptionsBottomSheetContent(
         items(options) {
             FrameOptionGridItem(
                 name = it.text,
-                iconImageVector = it.icon,
+                icon = it.icon,
                 onClick = { onEvent(it.event) },
             )
         }

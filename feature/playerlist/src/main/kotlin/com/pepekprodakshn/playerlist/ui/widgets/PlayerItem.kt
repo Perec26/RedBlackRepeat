@@ -38,7 +38,6 @@ internal fun PlayerItem(
             .background(color = MaterialTheme.colorScheme.surfaceContainer),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-
         Box(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)

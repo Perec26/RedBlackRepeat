@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.R.drawable
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ColumnWithMoreElement
 import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
@@ -32,7 +31,6 @@ internal fun FrameOptions(
     safeContentPadding: PaddingValues = PaddingValues(),
     onEvent: (FrameEvent) -> Unit,
 ) {
-
     val endPadding = safeContentPadding.calculateEndPadding(LayoutDirection.Ltr)
     Column(
         modifier = modifier
@@ -58,17 +56,16 @@ internal fun FrameOptions(
                 FrameOptionListItem(
                     modifier = Modifier.padding(bottom = 8.dp),
                     name = R.string.frame_more,
-                    iconImageVector = Icons.Filled.MoreHoriz,
+                    icon = drawable.more_horiz_24,
                     safeEndContentPadding = endPadding,
                     onClick = { onEvent(FrameEvent.OnMoreClick) },
                 )
             },
         ) {
-
             FrameOptionUI.entries.forEach {
                 FrameOptionListItem(
                     name = it.text,
-                    iconImageVector = it.icon,
+                    icon = it.icon,
                     safeEndContentPadding = endPadding,
                     onClick = { onEvent(it.event) },
                 )

@@ -14,11 +14,7 @@ import androidx.compose.ui.window.Dialog
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @Composable
-fun DefaultDialog(
-    onDismissRequest: () -> Unit,
-    content: @Composable () -> Unit,
-) {
-
+fun DefaultDialog(onDismissRequest: () -> Unit, content: @Composable () -> Unit) {
     Dialog(onDismissRequest = onDismissRequest) {
         Card(
             modifier = Modifier.padding(24.dp),

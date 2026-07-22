@@ -15,7 +15,6 @@ import com.pepekprodakshn.start.ui.navigation.startNavigation
 
 @Composable
 fun RedBlackRepeatApp() {
-
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Start) {

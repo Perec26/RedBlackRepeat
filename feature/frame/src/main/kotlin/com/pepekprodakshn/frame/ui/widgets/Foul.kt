@@ -27,7 +27,6 @@ internal fun Foul(
     isSelected: Boolean = false,
     onClick: (Int) -> Unit = {},
 ) {
-
     val color = if (isSelected) {
         MaterialTheme.colorScheme.primary
     } else {

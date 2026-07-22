@@ -29,7 +29,6 @@ internal fun TableState.toUI() = TableStateUI(
 )
 
 private fun getFrameInfo(state: TableState): FrameInfoUI {
-
     val pointsOnTable = calculatePointsOnTable(state)
     val difference = abs(state.firstPlayerPoints - state.secondPlayerPoints)
     val snookersRequired = calculateSnookersRequired(

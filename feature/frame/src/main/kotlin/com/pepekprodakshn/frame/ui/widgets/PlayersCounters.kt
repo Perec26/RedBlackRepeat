@@ -76,11 +76,9 @@ private fun PlayersCountersPortrait(
     previousBreakUI: BreakUI? = null,
     onClick: (Boolean) -> Unit,
 ) {
-
     Column(
         modifier = modifier.fillMaxWidth(),
     ) {
-
         Box(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -94,7 +92,6 @@ private fun PlayersCountersPortrait(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-
                 AnimatedBreakWidget(
                     breakUI = breakUI ?: previousBreakUI,
                     isFirst = true,

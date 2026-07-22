@@ -15,9 +15,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -30,10 +27,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.pepekprodakshn.designsystem.R.drawable
 import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
@@ -80,7 +79,6 @@ private fun ChoosePlayerContent(
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {
-
             Column(modifier = Modifier.fillMaxSize()) {
                 when (state.listState) {
                     ListState.LOADING -> LoadingPlayerList()
@@ -128,16 +126,14 @@ private fun EmptyPlayerList(onEvent: (ChoosePlayerEvent) -> Unit) {
 }
 
 @Composable
-private fun TopAppBar(
-    onEvent: (ChoosePlayerEvent) -> Unit,
-) {
+private fun TopAppBar(onEvent: (ChoosePlayerEvent) -> Unit) {
     CustomTopAppBar(
         title = stringResource(R.string.choose_players_title),
         onNavigationClick = { onEvent(ChoosePlayerEvent.OnBackPressed) },
     ) {
         IconButton(onClick = { onEvent(ChoosePlayerEvent.OnAddPlayerClick) }) {
             Icon(
-                imageVector = Icons.Filled.Add,
+                painter = painterResource(drawable.add_24),
                 contentDescription = "",
             )
         }
@@ -145,25 +141,20 @@ private fun TopAppBar(
 }
 
 @Composable
-private fun FloatingActionButton(
-    isEnabled: Boolean,
-    onEvent: (ChoosePlayerEvent) -> Unit,
-) {
+private fun FloatingActionButton(isEnabled: Boolean, onEvent: (ChoosePlayerEvent) -> Unit) {
     AnimatedVisibility(
         visible = isEnabled,
         enter = scaleIn(),
         exit = scaleOut(),
     ) {
-
         FloatingActionButton(
             modifier = Modifier.padding(16.dp),
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             onClick = { onEvent(ChoosePlayerEvent.OnStartFrameClick) },
         ) {
-
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                painter = painterResource(drawable.arrow_forward_24),
                 contentDescription = "",
             )
         }
@@ -225,9 +216,7 @@ private fun ChoosePlayerScreenLoadingPreview() {
 }
 
 @Composable
-private fun ChoosePlayerScreenPreviewContent(
-    listState: ListState = ListState.READY,
-) {
+private fun ChoosePlayerScreenPreviewContent(listState: ListState = ListState.READY) {
     RedBlackRepeatTheme {
         ChoosePlayerContent(
             state = choosePlayerViewStateMock.copy(

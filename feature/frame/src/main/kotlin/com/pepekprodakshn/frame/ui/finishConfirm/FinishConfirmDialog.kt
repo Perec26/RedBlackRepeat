@@ -9,10 +9,7 @@ import com.pepekprodakshn.designsystem.widgets.ThreeButtonsDialog
 import com.pepekprodakshn.frame.R
 
 @Composable
-internal fun FinishConfirmDialog(
-    onConfirmClick: () -> Unit,
-    onDismissClick: () -> Unit,
-) {
+internal fun FinishConfirmDialog(onConfirmClick: () -> Unit, onDismissClick: () -> Unit) {
     ThreeButtonsDialog(
         title = stringResource(id = R.string.frame_finish_frame_dialog_title),
         description = stringResource(id = R.string.frame_finish_frame_dialog_description),
