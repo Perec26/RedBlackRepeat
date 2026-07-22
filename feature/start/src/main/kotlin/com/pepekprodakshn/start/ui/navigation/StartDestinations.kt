@@ -9,10 +9,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object Start
 
-fun NavGraphBuilder.startNavigation(
-    onStartClick: () -> Unit,
-    onSettingsClick: () -> Unit,
-) {
+fun NavGraphBuilder.startNavigation(onStartClick: () -> Unit, onSettingsClick: () -> Unit) {
     composable<Start> {
         StartScreen {
             when (it) {

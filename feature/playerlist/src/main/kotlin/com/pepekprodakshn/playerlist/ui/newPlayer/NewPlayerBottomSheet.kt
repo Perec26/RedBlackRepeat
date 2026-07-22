@@ -12,8 +12,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,10 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.R.drawable
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.playerlist.R
 import com.pepekprodakshn.playerlist.ui.ChoosePlayerEvent
@@ -41,7 +41,6 @@ internal fun NewPlayerBottomSheet(
     isError: Boolean = false,
     onEvent: (ChoosePlayerEvent) -> Unit,
 ) {
-
     ModalBottomSheet(
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         onDismissRequest = { onEvent(ChoosePlayerEvent.OnNewPlayerBottomSheetClosed) },
@@ -111,7 +110,7 @@ private fun NewPlayerBottomSheetContent(
                 onClick = { onEvent(ChoosePlayerEvent.OnNewPlayerDoneClick) },
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Add,
+                    painter = painterResource(drawable.add_24),
                     contentDescription = "",
                 )
             }
@@ -122,12 +121,10 @@ private fun NewPlayerBottomSheetContent(
 private fun getErrorSupportingText(
     isError: Boolean,
     errorText: String,
-): @Composable (() -> Unit)? {
-    return if (isError) {
-        { ErrorSupportingText(errorText) }
-    } else {
-        null
-    }
+): @Composable (() -> Unit)? = if (isError) {
+    { ErrorSupportingText(errorText) }
+} else {
+    null
 }
 
 @Composable

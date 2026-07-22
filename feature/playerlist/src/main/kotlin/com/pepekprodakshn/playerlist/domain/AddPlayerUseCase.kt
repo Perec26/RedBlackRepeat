@@ -5,9 +5,7 @@ import com.pepekprodakshn.playerlist.domain.mapper.toDomain
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
 import javax.inject.Inject
 
-internal class AddPlayerUseCase @Inject constructor(
-    private val repository: PlayersRepository,
-) {
+internal class AddPlayerUseCase @Inject constructor(private val repository: PlayersRepository) {
 
     suspend fun execute(playerUI: PlayerUI) = repository.addPlayer(playerUI.toDomain())
 }

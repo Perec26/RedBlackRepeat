@@ -15,7 +15,6 @@ internal class PreferencesModule {
 
     @Singleton
     @Provides
-    fun providePreferencesDataSource(
-        @ApplicationContext context: Context,
-    ): PreferencesDataSource = PreferencesDataSource(context)
+    fun providePreferencesDataSource(@ApplicationContext context: Context): PreferencesDataSource =
+        PreferencesDataSource(context)
 }

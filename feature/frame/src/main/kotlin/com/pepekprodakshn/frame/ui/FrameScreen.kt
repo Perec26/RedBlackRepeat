@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ButtonDescription
@@ -52,10 +52,7 @@ internal fun FrameScreen(
 }
 
 @Composable
-private fun FrameScreenContent(
-    state: FrameUiState,
-    onEvent: (FrameEvent) -> Unit,
-) {
+private fun FrameScreenContent(state: FrameUiState, onEvent: (FrameEvent) -> Unit) {
     Scaffold(
         contentWindowInsets = WindowInsets.safeDrawing,
         containerColor = MaterialTheme.colorScheme.surface,
@@ -66,7 +63,6 @@ private fun FrameScreenContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
-
                 if (isPortrait()) {
                     BallsWidget(
                         safeContentPadding = paddingValues,

@@ -7,7 +7,7 @@ import com.pepekprodakshn.frame.R
 internal enum class BallUI(
     val value: Int,
     @DrawableRes val icon: Int,
-    val textColor: Color,
+    val textColor: Color
 ) {
     RED(1, R.drawable.ic_ball_full_red, Color.White),
     YELLOW(2, R.drawable.ic_ball_full_yellow, Color.Black),

@@ -15,11 +15,7 @@ import com.pepekprodakshn.designsystem.widgets.SpacerWidth
 import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 
 @Composable
-internal fun FrameInfoItem(
-    modifier: Modifier = Modifier,
-    name: String,
-    value: String,
-) {
+internal fun FrameInfoItem(modifier: Modifier = Modifier, name: String, value: String) {
     Row(
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)

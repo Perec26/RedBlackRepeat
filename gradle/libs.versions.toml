@@ -1,33 +1,33 @@
 [versions]
 minSdk = "26"
-targetSdk = "35"
-compileSdk = "35"
-composeBom = "2025.06.01"
-activityCompose = "1.10.1"
-coreKtx = "1.16.0"
-hiltAndroid = "2.56.2"
-hiltNavigationCompose = "1.2.0"
-junitJupiter = "5.13.3"
-kotest = "5.9.1"
-mock = "1.14.4"
-androidxLifecycle = "2.9.1"
-navigationCompose = "2.9.1"
-roomVersion = "2.7.2"
-coroutinesTest = "1.10.2"
-serialization = "1.9.0"
-uiTooling = "1.8.3"
+targetSdk = "37"
+compileSdk = "37"
+composeBom = "2026.06.01"
+activityCompose = "1.13.0"
+coreKtx = "1.19.0"
+hiltAndroid = "2.60.1"
+hiltNavigationCompose = "1.4.0"
+junitJupiter = "6.1.2"
+kotest = "6.2.2"
+mock = "1.14.11"
+androidxLifecycle = "2.11.0"
+navigationCompose = "2.9.8"
+roomVersion = "2.8.4"
+coroutinesTest = "1.11.0"
+serialization = "1.11.0"
+uiTooling = "1.11.4"
 turbine = "1.2.1"
-firebaseBom = "33.16.0"
+firebaseBom = "34.16.0"
 
-androidGradlePlugin = "8.11.1"
-kotlinPlugin = "2.2.0"
-hiltPlugin = "2.56.2"
-kspPlugin = "2.2.0-2.0.2"
-ktlintPlugin = "12.3.0"
-ktlintGradlePlugin = "12.3.0"
-firebasePlugin = "4.4.3"
-crashlyticsPlugin = "3.0.4"
-datastore = "1.1.7"
+androidGradlePlugin = "9.3.0"
+kotlinPlugin = "2.4.10"
+hiltPlugin = "2.60.1"
+kspPlugin = "2.3.4"
+ktlintPlugin = "14.2.0"
+ktlintGradlePlugin = "14.2.0"
+firebasePlugin = "4.5.0"
+crashlyticsPlugin = "3.0.7"
+datastore = "1.2.1"
 
 
 
@@ -36,7 +36,6 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" } # Fundamental components of compose UI needed to interact with the device, including layout, drawing, and input.
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" } #Target the latest platform features and APIs while also supporting older devices.
@@ -92,7 +91,3 @@ redblackrepeat-android-library = { id = "redblackrepeat.android.library", versio
 redblackrepeat-android-feature = { id = "redblackrepeat.android.feature", version = "unspecified" }
 redblackrepeat-android-library-compose = { id = "redblackrepeat.android.library.compose", version = "unspecified" }
 redblackrepeat-unittest = { id = "redblackrepeat.unittest", version = "unspecified" }
-
-
-
-

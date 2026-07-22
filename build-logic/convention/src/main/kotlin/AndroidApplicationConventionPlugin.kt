@@ -16,7 +16,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = "com.android.application")
-            apply(plugin = "org.jetbrains.kotlin.android")
             apply(plugin = "redblackrepeat.ktlint")
             apply(plugin = "redblackrepeat.hilt")
             apply(plugin = "org.jetbrains.kotlin.plugin.serialization")

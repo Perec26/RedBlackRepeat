@@ -9,52 +9,53 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 
 @OptIn(ExperimentalCoroutinesApi::class)
-internal class StartViewModelTest : FreeSpec(
-    {
-        Dispatchers.setMain(Dispatchers.Unconfined)
+internal class StartViewModelTest :
+    FreeSpec(
+        {
+            Dispatchers.setMain(Dispatchers.Unconfined)
 
-        "Feature: StartViewModel" - {
+            "Feature: StartViewModel" - {
 
-            "Scenario: OnStartClick" - {
+                "Scenario: OnStartClick" - {
 
-                "Given: StartViewModel" - {
+                    "Given: StartViewModel" - {
 
-                    val viewModel = StartViewModel()
+                        val viewModel = StartViewModel()
 
-                    "When: OnStartClick" - {
+                        "When: OnStartClick" - {
 
-                        "Then: navigationEvent should be OnStartClick" - {
-                            runTest {
-                                viewModel.navigationEvent.test {
-                                    viewModel.onEvent(StartEvent.OnStartClick)
-                                    awaitItem() shouldBe StartNavigationEvent.OnStartClick
-                                    cancelAndIgnoreRemainingEvents()
+                            "Then: navigationEvent should be OnStartClick" - {
+                                runTest {
+                                    viewModel.navigationEvent.test {
+                                        viewModel.onEvent(StartEvent.OnStartClick)
+                                        awaitItem() shouldBe StartNavigationEvent.OnStartClick
+                                        cancelAndIgnoreRemainingEvents()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                "Scenario: OnSettingsClick" - {
+
+                    "Given: StartViewModel" - {
+
+                        val viewModel = StartViewModel()
+
+                        "When: OnSettingsClick" - {
+
+                            "Then: navigationEvent should be OnSettingsClick" - {
+                                runTest {
+                                    viewModel.navigationEvent.test {
+                                        viewModel.onEvent(StartEvent.OnSettingsClick)
+                                        awaitItem() shouldBe StartNavigationEvent.OnSettingsClick
+                                        cancelAndIgnoreRemainingEvents()
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            "Scenario: OnSettingsClick" - {
-
-                "Given: StartViewModel" - {
-
-                    val viewModel = StartViewModel()
-
-                    "When: OnSettingsClick" - {
-
-                        "Then: navigationEvent should be OnSettingsClick" - {
-                            runTest {
-                                viewModel.navigationEvent.test {
-                                    viewModel.onEvent(StartEvent.OnSettingsClick)
-                                    awaitItem() shouldBe StartNavigationEvent.OnSettingsClick
-                                    cancelAndIgnoreRemainingEvents()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-)
+        },
+    )

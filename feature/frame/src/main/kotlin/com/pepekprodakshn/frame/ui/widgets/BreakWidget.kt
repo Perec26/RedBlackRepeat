@@ -44,7 +44,6 @@ internal fun AnimatedBreakWidget(
     isVisible: Boolean,
     safeContentPadding: PaddingValues = PaddingValues(),
 ) {
-
     AnimatedVisibility(
         visible = isVisible,
         enter = slideInHorizontally(initialOffsetX = { if (isFirst) -it else it }),
@@ -70,7 +69,6 @@ internal fun BreakWidget(
     isRight: Boolean,
     safeContentPadding: PaddingValues = PaddingValues(),
 ) {
-
     val shape = when {
         isRight && isPortrait() -> RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
         isRight -> RoundedCornerShape(topEnd = 28.dp)
@@ -125,10 +123,7 @@ internal fun BreakWidget(
 }
 
 @Composable
-private fun BreakBall(
-    count: Int,
-    ballUI: BallUI,
-) {
+private fun BreakBall(count: Int, ballUI: BallUI) {
     if (count > 0) {
         Ball(ball = ballUI, size = 28.dp, count = count, showCount = count > 1)
     }

@@ -1,7 +1,7 @@
 package com.pepekprodakshn.frame.ui.widgets
 
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -45,9 +46,8 @@ internal fun PlayerLabel(
     safeContentPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
 ) {
-
-    val differenceOffset by animateDpAsState(
-        targetValue = if (difference > 0) 0.dp else 51.dp,
+    val differenceOffset by animateIntAsState(
+        targetValue = if (difference > 0) 0 else 51,
         label = "differenceOffset",
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioNoBouncy,
@@ -77,7 +77,6 @@ internal fun PlayerLabel(
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
-
         val startPadding = if (isFirst) 0.dp else DIFFERENCE_PADDING.dp
         val endPadding = if (isFirst) DIFFERENCE_PADDING.dp else 0.dp
 
@@ -86,9 +85,12 @@ internal fun PlayerLabel(
         Box(
             modifier = Modifier
                 .align(align)
-                .offset(
-                    x = if (isFirst) -differenceOffset else differenceOffset,
-                )
+                .offset {
+                    IntOffset(
+                        x = if (isFirst) -differenceOffset else differenceOffset,
+                        y = 0
+                    )
+                }
                 .border(
                     width = 2.dp,
                     color = MaterialTheme.colorScheme.primary,
@@ -139,12 +141,7 @@ internal fun PlayerLabel(
 }
 
 @Composable
-private fun LeftRow(
-    name: String,
-    points: Int,
-    textColor: Color,
-    safeContentPadding: Dp = 0.dp,
-) {
+private fun LeftRow(name: String, points: Int, textColor: Color, safeContentPadding: Dp = 0.dp) {
     PlayerText(
         modifier = Modifier.padding(start = safeContentPadding),
         text = name,
@@ -158,12 +155,7 @@ private fun LeftRow(
 }
 
 @Composable
-private fun RightRow(
-    name: String,
-    points: Int,
-    textColor: Color,
-    safeContentPadding: Dp = 0.dp,
-) {
+private fun RightRow(name: String, points: Int, textColor: Color, safeContentPadding: Dp = 0.dp) {
     PlayerText(
         modifier = Modifier.padding(start = 8.dp),
         text = points.toString(),
@@ -177,11 +169,7 @@ private fun RightRow(
 }
 
 @Composable
-private fun PlayerText(
-    modifier: Modifier = Modifier,
-    text: String,
-    color: Color,
-) {
+private fun PlayerText(modifier: Modifier = Modifier, text: String, color: Color) {
     Text(
         modifier = modifier.padding(16.dp),
         text = text,

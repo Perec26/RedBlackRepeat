@@ -10,9 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object Settings
 
-fun NavGraphBuilder.settingsNavigation(
-    onBackPress: () -> Unit = {},
-) {
+fun NavGraphBuilder.settingsNavigation(onBackPress: () -> Unit = {}) {
     composable<Settings> {
         SettingsScreen {
             when (it) {

@@ -4,9 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,8 +14,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pepekprodakshn.designsystem.R
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +37,7 @@ fun CustomTopAppBar(
             onNavigationClick?.let {
                 IconButton(onClick = it) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        painter = painterResource(R.drawable.arrow_back_24),
                         contentDescription = "",
                     )
                 }
@@ -48,10 +47,7 @@ fun CustomTopAppBar(
 }
 
 @Composable
-private fun Title(
-    modifier: Modifier = Modifier,
-    title: String,
-) = Text(
+private fun Title(modifier: Modifier = Modifier, title: String) = Text(
     modifier = modifier,
     text = title,
     style = MaterialTheme.typography.titleLarge,
@@ -80,7 +76,7 @@ private fun CustomTopAppBarPreviewContent() {
             CustomTopAppBar(title = "Title") {
                 IconButton(onClick = {}) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(R.drawable.arrow_forward_24),
                         contentDescription = "",
                     )
                 }

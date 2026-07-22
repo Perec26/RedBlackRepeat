@@ -11,7 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.CustomTopAppBar
 import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
@@ -33,10 +33,7 @@ internal fun SettingsScreen(
 }
 
 @Composable
-private fun SettingsScreenContent(
-    state: SettingsUiState,
-    onEvent: (SettingsEvent) -> Unit,
-) {
+private fun SettingsScreenContent(state: SettingsUiState, onEvent: (SettingsEvent) -> Unit) {
     Scaffold(
         topBar = { TopAppBar(onEvent = onEvent) },
     ) { paddingValues ->
@@ -62,9 +59,7 @@ private fun SettingsScreenContent(
 }
 
 @Composable
-private fun TopAppBar(
-    onEvent: (SettingsEvent) -> Unit,
-) {
+private fun TopAppBar(onEvent: (SettingsEvent) -> Unit) {
     CustomTopAppBar(
         title = stringResource(R.string.settings_title),
         onNavigationClick = { onEvent(SettingsEvent.OnBackPressed) },

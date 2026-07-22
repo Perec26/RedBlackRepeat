@@ -6,9 +6,7 @@ import com.pepekprodakshn.player.mapper.toEntity
 import com.pepekprodakshn.player.model.Player
 import javax.inject.Inject
 
-class PlayersRepository @Inject constructor(
-    private val dao: PlayersDao,
-) {
+class PlayersRepository @Inject constructor(private val dao: PlayersDao) {
 
     suspend fun getAllPlayers() = dao.getAll().toDomain()
 

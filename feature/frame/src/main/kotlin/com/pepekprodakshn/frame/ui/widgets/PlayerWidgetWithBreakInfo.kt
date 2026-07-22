@@ -28,16 +28,13 @@ internal fun PlayerWidgetWithBreakInfo(
     safeContentPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
 ) {
-
     val alignment = if (isFirst) Alignment.Start else Alignment.End
 
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = alignment,
     ) {
-
         Box {
-
             BreakWidget(
                 modifier = Modifier.alpha(0f),
                 breakUI = breakUI ?: previousBreakUI,

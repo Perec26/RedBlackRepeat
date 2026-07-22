@@ -47,7 +47,6 @@ internal fun BallsWidget(
                 shape = shape,
             ),
     ) {
-
         val startPadding = if (isPortrait()) {
             0.dp
         } else {
@@ -63,7 +62,6 @@ internal fun BallsWidget(
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(R.string.frame_balls),
