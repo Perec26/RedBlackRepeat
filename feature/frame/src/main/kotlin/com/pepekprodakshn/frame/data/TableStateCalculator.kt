@@ -15,10 +15,7 @@ internal class TableStateCalculator @Inject constructor() {
         return resultState
     }
 
-    private fun updateFrameState(
-        action: FrameActionsDTO,
-        resultState: TableState,
-    ) = when (action) {
+    private fun updateFrameState(action: FrameActionsDTO, resultState: TableState) = when (action) {
         is FrameActionsDTO.BallPotted -> resultState.onBallPotted(action.ball)
         is FrameActionsDTO.Fouled -> resultState.onFoul(action.foul)
         is FrameActionsDTO.AddReds -> resultState.onAddReds(action.count)
@@ -75,7 +72,6 @@ internal class TableStateCalculator @Inject constructor() {
     }
 
     private fun TableState.onBreakEnded(): TableState {
-
         val lowestPriceBall = if (redsCount == 0 && lowestValueBall == Ball.RED) {
             lowestValueBall.getNextValueBall() ?: Ball.RED
         } else {
@@ -91,7 +87,6 @@ internal class TableStateCalculator @Inject constructor() {
     }
 
     private fun TableState.onFoul(foul: Foul): TableState {
-
         val addFirstPlayerPoints = if (isFirstPlayerSelected) 0 else foul.points
         val addSecondPlayerPoints = if (isFirstPlayerSelected) foul.points else 0
 

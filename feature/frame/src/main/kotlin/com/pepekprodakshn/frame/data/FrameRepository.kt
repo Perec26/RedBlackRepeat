@@ -6,9 +6,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @ViewModelScoped
-internal class FrameRepository @Inject constructor(
-    private val calculator: TableStateCalculator,
-) {
+internal class FrameRepository @Inject constructor(private val calculator: TableStateCalculator) {
 
     private val actions = mutableListOf<FrameActionsDTO>()
 

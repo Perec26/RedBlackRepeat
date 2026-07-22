@@ -1,5 +1,6 @@
 package com.pepekprodakshn.frame.ui.widgets
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
@@ -39,7 +39,7 @@ internal fun Ball(
 ) {
     Ball(
         modifier = modifier,
-        ballIcon = painterResource(id = ball.icon),
+        ballIcon = ball.icon,
         ballTextColor = ball.textColor,
         size = size,
         count = count,
@@ -50,13 +50,10 @@ internal fun Ball(
 }
 
 @Composable
-internal fun FreeBall(
-    modifier: Modifier = Modifier,
-    count: Int = 0,
-) {
+internal fun FreeBall(modifier: Modifier = Modifier, count: Int = 0) {
     Ball(
         modifier = modifier,
-        ballIcon = painterResource(id = R.drawable.ic_ball_full_white),
+        ballIcon = R.drawable.ic_ball_full_white,
         ballTextColor = MaterialTheme.colorScheme.scrim,
         size = 28.dp,
         count = count,
@@ -68,7 +65,7 @@ internal fun FreeBall(
 @Composable
 private fun Ball(
     modifier: Modifier = Modifier,
-    ballIcon: Painter,
+    @DrawableRes ballIcon: Int,
     ballTextColor: Color,
     size: Dp = 64.dp,
     count: Int = 0,
@@ -87,7 +84,7 @@ private fun Ball(
                 .clip(CircleShape)
                 .alpha(alpha)
                 .clickable(onClick = onClick, enabled = isEnabled),
-            painter = ballIcon,
+            painter = painterResource(ballIcon),
             tint = Color.Unspecified,
             contentDescription = "",
         )

@@ -8,9 +8,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-class PreferencesDataSource @Inject constructor(
-    private val context: Context,
-) {
+class PreferencesDataSource @Inject constructor(private val context: Context) {
     val Context.dataStore by preferencesDataStore(name = "preferences")
 
     fun getUseSystemThemeFlow() = context.dataStore.data.map { it[USE_SYSTEM_THEME] ?: true }

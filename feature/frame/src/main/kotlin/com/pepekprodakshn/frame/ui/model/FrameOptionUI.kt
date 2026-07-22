@@ -1,55 +1,49 @@
 package com.pepekprodakshn.frame.ui.model
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Undo
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.RemoveCircle
-import androidx.compose.material.icons.filled.RestartAlt
-import androidx.compose.material.icons.rounded.HighlightOff
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.pepekprodakshn.designsystem.R.drawable
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.FrameEvent
 
 internal enum class FrameOptionUI(
     @StringRes val text: Int,
-    val icon: ImageVector,
+    @DrawableRes val icon: Int,
     val event: FrameEvent,
 ) {
     FOUL(
         text = R.string.frame_foul,
-        icon = Icons.Rounded.HighlightOff,
+        icon = drawable.highlight_off_24,
         event = FrameEvent.OnFoulClick,
     ),
 
     UNDO(
         text = R.string.frame_undo,
-        icon = Icons.AutoMirrored.Filled.Undo,
+        icon = drawable.undo_24,
         event = FrameEvent.OnUndoClick,
     ),
 
     ADD_REDS(
         text = R.string.frame_add_reds,
-        icon = Icons.Filled.AddCircle,
+        icon = drawable.add_circle_24,
         event = FrameEvent.OnAddRedsClick,
     ),
 
     REMOVE_REDS(
         text = R.string.frame_remove_reds,
-        icon = Icons.Filled.RemoveCircle,
+        icon = drawable.remove_circle_24,
         event = FrameEvent.OnRemoveRedsClick,
     ),
 
     RESTART(
         text = R.string.frame_restart,
-        icon = Icons.Filled.RestartAlt,
+        icon = drawable.restart_alt_24,
         event = FrameEvent.OnRestartClick,
     ),
 
     FINISH(
         text = R.string.frame_finish,
-        icon = Icons.Filled.Close,
+        icon = drawable.close_24,
         event = FrameEvent.OnFinishClick,
     ),
 }

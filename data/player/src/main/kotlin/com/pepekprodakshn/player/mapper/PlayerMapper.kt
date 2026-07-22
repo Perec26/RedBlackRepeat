@@ -8,6 +8,7 @@ internal fun List<Player>.toEntity() = map(Player::toEntity)
 internal fun List<PlayerEntity>.toDomain() = map(PlayerEntity::toDomain)
 
 internal fun Player.toEntity() = PlayerEntity(
+
     name = name,
 )
 

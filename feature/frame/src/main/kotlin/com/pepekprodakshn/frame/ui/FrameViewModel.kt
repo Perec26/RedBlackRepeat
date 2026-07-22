@@ -40,10 +40,7 @@ internal class FrameViewModel @Inject constructor(
         getPlayers(firstPlayerId, secondPlayerId)
     }
 
-    private fun getPlayers(
-        firstPlayerId: Int,
-        secondPlayerId: Int,
-    ) {
+    private fun getPlayers(firstPlayerId: Int, secondPlayerId: Int) {
         launch {
             val firstPlayer = getPlayerUseCase.execute(firstPlayerId)
             val secondPlayer = getPlayerUseCase.execute(secondPlayerId)
@@ -54,29 +51,53 @@ internal class FrameViewModel @Inject constructor(
     override fun onEvent(event: FrameEvent) {
         when (event) {
             is FrameEvent.OnBallClick -> onBallClick(event.ballUI)
+
             is FrameEvent.OnFoulClick -> updateState { openFoulBottomSheet() }
+
             is FrameEvent.OnSelectPlayer -> onSelectPlayerClick(event.isFirstPlayerSelected)
+
             FrameEvent.OnFoulBottomSheetClosed -> updateState { closeFoulBottomSheet() }
+
             is FrameEvent.OnFoulPointClick -> updateState { setFoulPoints(event.points) }
+
             FrameEvent.OnFoulIsMissClick -> updateState { setFoulIsMiss() }
+
             FrameEvent.OnFoulIsFreeBallClick -> updateState { setFoulFreeBall() }
+
             FrameEvent.OnFoulAddRedsClick -> updateState { addFoulRedBall() }
+
             FrameEvent.OnFoulRemoveRedsClick -> updateState { removeFoulRedBall() }
+
             FrameEvent.OnFoulConfirmClick -> onFoulConfirm()
+
             FrameEvent.OnUndoClick -> onUndoClick()
+
             FrameEvent.OnAddRedsClick -> updateState { openAddRedsDialog() }
+
             FrameEvent.OnRemoveRedsClick -> updateState { openRemoveRedsDialog() }
+
             FrameEvent.OnAddRemoveRedsDialogClose -> updateState { closeAddRemoveRedsDialog() }
+
             FrameEvent.OnAddRemoveRedsPlusClick -> updateState { plusAddRemoveRedsDialog() }
+
             FrameEvent.OnAddRemoveRedsMinusClick -> updateState { minusAddRemoveRedsDialog() }
+
             FrameEvent.OnAddRedsDialogClick -> onAddRedsDialogClick()
+
             FrameEvent.OnRemoveRedsDialogClick -> onRemoveRedsDialogClick()
+
             FrameEvent.OnRestartClick -> onRestartClick()
+
             is FrameEvent.OnMoreClick -> updateState { showOptionsBottomSheet() }
+
             is FrameEvent.OnOptionsElementsCounted -> updateState { setOptionElements(event.count) }
+
             FrameEvent.OnFrameOptionsBottomSheetClose -> updateState { hideOptionsBottomSheet() }
+
             FrameEvent.OnFinishClick -> onFinishClick()
+
             FrameEvent.OnRestartConfirm -> onRestartConfirm()
+
             FrameEvent.OnRestartFrameConfirmationClosed -> {
                 updateState { hideRestartFrameConfirmationDialog() }
             }

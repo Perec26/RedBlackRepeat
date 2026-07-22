@@ -1,5 +1,8 @@
 package com.pepekprodakshn.frame.ui.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 internal data class BreakUI(
     val balls: List<BallUI> = emptyList(),
     val isFreeBall: Boolean = false,

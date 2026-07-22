@@ -21,17 +21,11 @@ import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.AddRemoveDialogState
 
 @Composable
-internal fun AddRemoveRedDialog(
-    state: AddRemoveDialogState,
-    onEvent: (FrameEvent) -> Unit,
-) {
-
+internal fun AddRemoveRedDialog(state: AddRemoveDialogState, onEvent: (FrameEvent) -> Unit) {
     DefaultDialog(onDismissRequest = { onEvent(FrameEvent.OnAddRemoveRedsDialogClose) }) {
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             val titleRes = if (state.isAdd) R.string.frame_add_reds else R.string.frame_remove_reds
 
             Text(
@@ -45,7 +39,6 @@ internal fun AddRemoveRedDialog(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-
                 Text(
                     text = stringResource(id = R.string.frame_reds),
                     style = MaterialTheme.typography.bodyMedium,
@@ -65,7 +58,6 @@ internal fun AddRemoveRedDialog(
                     .padding(16.dp),
                 horizontalArrangement = Arrangement.End,
             ) {
-
                 val (event, buttonName) = if (state.isAdd) {
                     FrameEvent.OnAddRedsDialogClick to R.string.frame_add
                 } else {
