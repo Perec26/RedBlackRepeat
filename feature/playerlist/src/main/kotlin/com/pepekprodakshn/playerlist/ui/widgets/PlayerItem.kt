@@ -23,6 +23,7 @@ import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.WidgetPreviews
 import com.pepekprodakshn.playerlist.ui.firstPlayerUIMock
 import com.pepekprodakshn.playerlist.ui.model.PlayerUI
+import kotlin.math.abs
 
 @Composable
 internal fun PlayerItem(
@@ -78,7 +79,7 @@ internal fun PlayerItem(
 }
 
 @Composable
-private fun getBackgroundColor(player: PlayerUI) = when (player.hashCode() % 3) {
+private fun getBackgroundColor(player: PlayerUI) = when (abs(player.hashCode()) % 3) {
     0 -> MaterialTheme.colorScheme.primaryContainer
     1 -> MaterialTheme.colorScheme.secondaryContainer
     2 -> MaterialTheme.colorScheme.tertiaryContainer
@@ -94,7 +95,11 @@ private fun PlayerItemPreview() {
             PlayerItem(firstPlayerUIMock)
             PlayerItem(firstPlayerUIMock.copy(id = 2), isSelected = false)
             PlayerItem(firstPlayerUIMock.copy(id = 3), isSelected = false)
-            PlayerItem(firstPlayerUIMock.copy(name = "Name"), enabled = false, isSelected = false)
+            PlayerItem(
+                firstPlayerUIMock.copy(name = "Name"),
+                enabled = false,
+                isSelected = false
+            )
             PlayerItem(firstPlayerUIMock.copy(id = 257), isSelected = false, enabled = false)
         }
     }

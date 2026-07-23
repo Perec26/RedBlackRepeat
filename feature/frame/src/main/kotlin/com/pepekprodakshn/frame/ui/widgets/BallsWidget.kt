@@ -71,7 +71,7 @@ internal fun BallsWidget(
                 val spacing = 8.dp
                 val ballSizeByWidth = (maxWidth - spacing * 3) / 4
                 val ballSizeByHeight = (maxHeight - spacing) / 2
-                val ballSize = minOf(ballSizeByHeight, ballSizeByWidth)
+                val ballSize = minOf(ballSizeByHeight, ballSizeByWidth, 100.dp)
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
