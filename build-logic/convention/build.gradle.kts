@@ -49,5 +49,10 @@ gradlePlugin {
             id = "redblackrepeat.unittest"
             implementationClass = "UnitTestConventionPlugin"
         }
+
+        register("jvmLibrary") {
+            id = "redblackrepeat.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }
