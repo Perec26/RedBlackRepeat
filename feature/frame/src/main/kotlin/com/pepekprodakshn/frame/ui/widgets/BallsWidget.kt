@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
@@ -36,15 +37,19 @@ internal fun BallsWidget(
         RoundedCornerShape(topEnd = 28.dp, bottomEnd = 28.dp)
     }
 
+    val startPadding = if (isPortrait()) {
+        0.dp
+    } else {
+        safeContentPadding.calculateLeftPadding(LayoutDirection.Ltr)
+    }
+    val topPadding = if (isPortrait()) safeContentPadding.calculateTopPadding() else 0.dp
+
     val horizontalPadding = if (isPortrait()) 16.dp else 0.dp
     val verticalPadding = if (isPortrait()) 0.dp else 16.dp
 
     Box(
         modifier = modifier
-            .padding(
-                horizontal = horizontalPadding,
-                vertical = verticalPadding
-            )
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerLow,
                 shape = shape,
@@ -52,7 +57,7 @@ internal fun BallsWidget(
     ) {
         Column(
             modifier = Modifier
-                .padding(safeContentPadding)
+                .padding(start = startPadding, top = topPadding)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
