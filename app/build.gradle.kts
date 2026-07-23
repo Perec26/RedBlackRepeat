@@ -49,10 +49,11 @@ dependencies {
     testImplementation(libs.junit.jupiter)
     // Project
     implementation(projects.core.database)
+    implementation(projects.core.config)
+    implementation(projects.core.designsystem)
     implementation(projects.data.player)
     implementation(projects.data.table)
     implementation(projects.data.preferences)
-    implementation(projects.core.designsystem)
     implementation(projects.core.ui)
     implementation(projects.feature.frame)
     implementation(projects.feature.playerlist)

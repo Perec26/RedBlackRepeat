@@ -101,9 +101,11 @@ private fun ChoosePlayerContent(
 @Composable
 private fun EmptyPlayerList(onEvent: (ChoosePlayerEvent) -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
     ) {
         Text(
             text = stringResource(R.string.choose_players_empty_players_title),
@@ -111,7 +113,6 @@ private fun EmptyPlayerList(onEvent: (ChoosePlayerEvent) -> Unit) {
         )
 
         Text(
-            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
             text = stringResource(R.string.choose_players_empty_players_description),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,

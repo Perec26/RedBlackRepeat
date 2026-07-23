@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +24,7 @@ import com.pepekprodakshn.designsystem.isPortrait
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.ButtonDescription
 import com.pepekprodakshn.designsystem.widgets.ScreenPreviews
+import com.pepekprodakshn.designsystem.widgets.SpacerWidth
 import com.pepekprodakshn.designsystem.widgets.ThreeButtonsDialog
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.FrameOptionUI
@@ -61,7 +60,7 @@ private fun FrameScreenContent(state: FrameUiState, onEvent: (FrameEvent) -> Uni
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 if (isPortrait()) {
                     BallsWidget(
@@ -72,26 +71,23 @@ private fun FrameScreenContent(state: FrameUiState, onEvent: (FrameEvent) -> Uni
 
                     Row(
                         modifier = Modifier
-                            .padding(top = 16.dp)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .weight(1f),
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         FrameInfoWidget(
-                            modifier = Modifier,
+                            modifier = Modifier.weight(1f, fill = false),
                             safeContentPadding = paddingValues,
                             info = state.tableState.frameInfoUI,
                         )
+
+                        SpacerWidth(16.dp)
+
                         FrameOptions(
                             modifier = Modifier,
                             onEvent = onEvent,
                         )
                     }
-
-                    Spacer(
-                        modifier = Modifier
-                            .height(16.dp)
-                            .weight(1f),
-                    )
                 } else {
                     Row(
                         modifier = Modifier
@@ -101,21 +97,21 @@ private fun FrameScreenContent(state: FrameUiState, onEvent: (FrameEvent) -> Uni
                     ) {
                         BallsWidget(
                             modifier = Modifier
-                                .padding(top = paddingValues.calculateTopPadding() + 16.dp),
+                                .padding(top = paddingValues.calculateTopPadding()),
                             safeContentPadding = paddingValues,
                             ballsState = state.tableState.ballState,
                             onClick = { onEvent(FrameEvent.OnBallClick(it)) },
                         )
 
                         FrameInfoWidget(
-                            modifier = Modifier,
+                            modifier = Modifier.weight(1f, fill = false),
                             safeContentPadding = paddingValues,
                             info = state.tableState.frameInfoUI,
                         )
 
                         FrameOptions(
                             modifier = Modifier
-                                .padding(top = paddingValues.calculateTopPadding() + 16.dp),
+                                .padding(top = paddingValues.calculateTopPadding()),
                             safeContentPadding = paddingValues,
                             onEvent = onEvent,
                         )

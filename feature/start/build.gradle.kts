@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.pepekprodakshn.start"
 }
+
+dependencies {
+    implementation(projects.core.config)
+}

@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,13 +21,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.frame.R
 import com.pepekprodakshn.frame.ui.model.BallUI
-import kotlin.math.sqrt
 
 @Composable
 internal fun Ball(
@@ -75,26 +78,32 @@ private fun Ball(
 ) {
     val alpha = if (isEnabled) 1f else 0.5f
     Box(
-        modifier = modifier,
+        modifier = modifier
+            .size(size)
+            .alpha(alpha),
         contentAlignment = Alignment.Center,
     ) {
         Icon(
             modifier = Modifier
                 .size(size)
                 .clip(CircleShape)
-                .alpha(alpha)
                 .clickable(onClick = onClick, enabled = isEnabled),
             painter = painterResource(ballIcon),
             tint = Color.Unspecified,
             contentDescription = "",
         )
 
-        val textSize = MaterialTheme.typography.titleLarge.fontSize / sqrt((64.0 / size.value))
         if (showCount) {
             Text(
-                text = count.toString(),
-                color = ballTextColor.copy(alpha),
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = textSize),
+                modifier = Modifier.width(size - 12.dp),
+                text = " $count ",
+                textAlign = TextAlign.Center,
+                color = ballTextColor,
+                maxLines = 1,
+                autoSize = TextAutoSize.StepBased(
+                    maxFontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    minFontSize = 1.sp
+                )
             )
         }
     }
@@ -123,6 +132,7 @@ private fun BallRowPreview(isEnabled: Boolean, size: Dp = 64.dp) {
     ) {
         BallUI.entries.forEach {
             Ball(
+                modifier = Modifier.weight(1f),
                 ball = it,
                 count = it.value * 2,
                 size = size,

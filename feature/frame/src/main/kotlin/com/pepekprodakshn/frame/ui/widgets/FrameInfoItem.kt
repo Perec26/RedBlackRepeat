@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.SpacerWidth
@@ -23,14 +24,19 @@ internal fun FrameInfoItem(modifier: Modifier = Modifier, name: String, value: S
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
+            modifier = Modifier.weight(1f),
             text = name,
             style = MaterialTheme.typography.bodyMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
 
-        SpacerWidth(16.dp)
+        SpacerWidth(8.dp)
+
         Text(
             text = value,
             style = MaterialTheme.typography.bodyMedium,
+            maxLines = 1,
         )
     }
 }
@@ -42,7 +48,7 @@ private fun FrameInfoItemPreview() {
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            FrameInfoItem(name = "name1", value = "value1")
+            FrameInfoItem(name = "Very long text that not fit to space", value = "value1")
             FrameInfoItem(name = "name2", value = "value2")
             FrameInfoItem(name = "name3", value = "value3")
             FrameInfoItem(name = "name4", value = "value4")

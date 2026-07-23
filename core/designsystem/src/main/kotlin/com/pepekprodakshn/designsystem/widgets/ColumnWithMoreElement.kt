@@ -80,19 +80,6 @@ fun ColumnWithMoreElement(
     }
 }
 
-@PreviewLightDark
-@Composable
-private fun ColumnWithMoreElementPreview() {
-    RedBlackRepeatTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            ColumnWithMoreElement(
-                elements = { (1..8).forEach { GetPreviewElement(it) } },
-                moreElement = { Text(text = "more") },
-            )
-        }
-    }
-}
-
 @Composable
 private fun GetPreviewElement(
     i: Int,
@@ -117,5 +104,18 @@ private fun PreviewElement(index: Int, textColor: Color, backgroundColor: Color)
             text = "${index * 50}",
             color = textColor,
         )
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun ColumnWithMoreElementPreview() {
+    RedBlackRepeatTheme {
+        Box(modifier = Modifier.fillMaxSize()) {
+            ColumnWithMoreElement(
+                elements = { (1..8).forEach { GetPreviewElement(it) } },
+                moreElement = { GetPreviewElement(100) },
+            )
+        }
     }
 }

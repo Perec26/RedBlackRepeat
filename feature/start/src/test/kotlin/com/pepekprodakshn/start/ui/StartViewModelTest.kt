@@ -16,41 +16,37 @@ internal class StartViewModelTest :
 
             "Feature: StartViewModel" - {
 
-                "Scenario: OnStartClick" - {
+                "Given: StartViewModel" - {
 
-                    "Given: StartViewModel" - {
+                    val viewModel = testStartViewModel()
 
-                        val viewModel = StartViewModel()
+                    "When: OnStartClick" - {
 
-                        "When: OnStartClick" - {
-
-                            "Then: navigationEvent should be OnStartClick" - {
-                                runTest {
-                                    viewModel.navigationEvent.test {
-                                        viewModel.onEvent(StartEvent.OnStartClick)
-                                        awaitItem() shouldBe StartNavigationEvent.OnStartClick
-                                        cancelAndIgnoreRemainingEvents()
-                                    }
+                        "Then: navigationEvent should be OnStartClick" - {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(StartEvent.OnStartClick)
+                                    awaitItem() shouldBe StartNavigationEvent.OnStartClick
+                                    cancelAndIgnoreRemainingEvents()
                                 }
                             }
                         }
                     }
-                }
-                "Scenario: OnSettingsClick" - {
 
-                    "Given: StartViewModel" - {
+                    "When: initial" - {
+                        "Then: state should be initial" - {
+                            viewModel.state.value.version shouldBe "0.0.1 (dev)"
+                        }
+                    }
 
-                        val viewModel = StartViewModel()
+                    "When: OnSettingsClick" - {
 
-                        "When: OnSettingsClick" - {
-
-                            "Then: navigationEvent should be OnSettingsClick" - {
-                                runTest {
-                                    viewModel.navigationEvent.test {
-                                        viewModel.onEvent(StartEvent.OnSettingsClick)
-                                        awaitItem() shouldBe StartNavigationEvent.OnSettingsClick
-                                        cancelAndIgnoreRemainingEvents()
-                                    }
+                        "Then: navigationEvent should be OnSettingsClick" - {
+                            runTest {
+                                viewModel.navigationEvent.test {
+                                    viewModel.onEvent(StartEvent.OnSettingsClick)
+                                    awaitItem() shouldBe StartNavigationEvent.OnSettingsClick
+                                    cancelAndIgnoreRemainingEvents()
                                 }
                             }
                         }

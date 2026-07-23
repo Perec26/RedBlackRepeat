@@ -1,39 +1,39 @@
 package com.pepekprodakshn.frame.ui.widgets
 
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.pepekprodakshn.designsystem.theme.RedBlackRepeatTheme
 import com.pepekprodakshn.designsystem.widgets.SpacerHeight
-
-private const val DIFFERENCE_PADDING = 50
 
 @Composable
 internal fun PlayerLabel(
@@ -41,30 +41,15 @@ internal fun PlayerLabel(
     isActive: Boolean = false,
     name: String = "Ronnie O'Sullivan",
     points: Int = 102,
-    difference: Int = 0,
+    difference: Int = 1,
     isFirst: Boolean = true,
     safeContentPadding: PaddingValues = PaddingValues(),
     onClick: () -> Unit,
 ) {
-    val differenceOffset by animateIntAsState(
-        targetValue = if (difference > 0) 0 else 51,
-        label = "differenceOffset",
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioNoBouncy,
-            stiffness = Spring.StiffnessMedium,
-        ),
-    )
-
     val backgroundColor = if (isActive) {
         MaterialTheme.colorScheme.secondaryContainer
     } else {
-        MaterialTheme.colorScheme.surfaceContainerLow
-    }
-
-    val textColor = if (isActive) {
-        MaterialTheme.colorScheme.onSecondaryContainer
-    } else {
-        MaterialTheme.colorScheme.onSurface
+        MaterialTheme.colorScheme.surfaceContainer
     }
 
     val backgroundShape = RoundedCornerShape(
@@ -74,43 +59,30 @@ internal fun PlayerLabel(
         bottomEnd = if (isFirst) 50.dp else 0.dp,
     )
 
+    val paddingValues = PaddingValues(
+        start = if (isFirst) 0.dp else 80.dp,
+        end = if (isFirst) 80.dp else 0.dp,
+    )
+    val align = if (isFirst) Alignment.CenterEnd else Alignment.CenterStart
+
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
-        val startPadding = if (isFirst) 0.dp else DIFFERENCE_PADDING.dp
-        val endPadding = if (isFirst) DIFFERENCE_PADDING.dp else 0.dp
-
-        val align = if (isFirst) Alignment.CenterEnd else Alignment.CenterStart
-
-        Box(
-            modifier = Modifier
-                .align(align)
-                .offset {
-                    IntOffset(
-                        x = if (isFirst) -differenceOffset else differenceOffset,
-                        y = 0
-                    )
-                }
-                .border(
-                    width = 2.dp,
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = backgroundShape,
-                ),
+        val direction = if (isFirst) -1 else 1
+        AnimatedVisibility(
+            modifier = Modifier.align(align),
+            visible = difference > 0,
+            enter = slideInHorizontally(initialOffsetX = { direction * it / 2 }),
+            exit = slideOutHorizontally(targetOffsetX = { direction * it / 2 })
         ) {
-            Row {
-                PlayerText(
-                    modifier = Modifier.padding(start = endPadding * 2, end = startPadding * 2),
-                    text = "+$difference",
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
+            Difference(align, difference)
         }
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(paddingValues)
                 .zIndex(1f)
-                .padding(start = startPadding, end = endPadding)
                 .clip(backgroundShape)
                 .clickable(onClick = onClick)
                 .background(color = backgroundColor),
@@ -121,7 +93,7 @@ internal fun PlayerLabel(
                 LeftRow(
                     name = name,
                     points = points,
-                    textColor = textColor,
+                    textColor = contentColorFor(backgroundColor),
                     safeContentPadding = safeContentPadding.calculateLeftPadding(
                         LayoutDirection.Ltr,
                     ),
@@ -130,7 +102,7 @@ internal fun PlayerLabel(
                 RightRow(
                     name = name,
                     points = points,
-                    textColor = textColor,
+                    textColor = contentColorFor(backgroundColor),
                     safeContentPadding = safeContentPadding.calculateRightPadding(
                         LayoutDirection.Ltr,
                     ),
@@ -141,9 +113,39 @@ internal fun PlayerLabel(
 }
 
 @Composable
-private fun LeftRow(name: String, points: Int, textColor: Color, safeContentPadding: Dp = 0.dp) {
+fun BoxScope.Difference(align: Alignment, difference: Int) {
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .width(150.dp)
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(50.dp),
+            )
+            .align(align),
+    ) {
+        PlayerText(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .align(align),
+            text = "+$difference",
+            color = MaterialTheme.colorScheme.primary,
+        )
+    }
+}
+
+@Composable
+private fun RowScope.LeftRow(
+    name: String,
+    points: Int,
+    textColor: Color,
+    safeContentPadding: Dp = 0.dp
+) {
     PlayerText(
-        modifier = Modifier.padding(start = safeContentPadding),
+        modifier = Modifier
+            .padding(start = safeContentPadding)
+            .weight(1f),
         text = name,
         color = textColor,
     )
@@ -155,14 +157,21 @@ private fun LeftRow(name: String, points: Int, textColor: Color, safeContentPadd
 }
 
 @Composable
-private fun RightRow(name: String, points: Int, textColor: Color, safeContentPadding: Dp = 0.dp) {
+private fun RowScope.RightRow(
+    name: String,
+    points: Int,
+    textColor: Color,
+    safeContentPadding: Dp = 0.dp
+) {
     PlayerText(
         modifier = Modifier.padding(start = 8.dp),
         text = points.toString(),
         color = textColor,
     )
     PlayerText(
-        modifier = Modifier.padding(end = safeContentPadding),
+        modifier = Modifier
+            .padding(end = safeContentPadding)
+            .weight(1f),
         text = name,
         color = textColor,
     )
@@ -181,6 +190,7 @@ private fun PlayerText(modifier: Modifier = Modifier, text: String, color: Color
 }
 
 @PreviewLightDark
+@Preview(device = "spec:width=600px,height=2340px,dpi=440")
 @Composable
 private fun PlayerLabelPreview() {
     RedBlackRepeatTheme {
@@ -189,7 +199,7 @@ private fun PlayerLabelPreview() {
             SpacerHeight(height = 8.dp)
             PlayerLabel(isActive = true, difference = 29) {}
             SpacerHeight(height = 8.dp)
-            PlayerLabel(isFirst = false, difference = 29) {}
+            PlayerLabel(isFirst = false, difference = 290) {}
             SpacerHeight(height = 8.dp)
             PlayerLabel(isFirst = false, isActive = true) {}
         }
