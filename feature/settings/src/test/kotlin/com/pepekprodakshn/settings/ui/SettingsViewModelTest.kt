@@ -5,15 +5,25 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.coVerify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class SettingsViewModelTest :
     FreeSpec(
         {
             "Feature: SettingsViewModel" - {
 
+                val testDispatcher = StandardTestDispatcher()
                 val getUseSystemThemeUseCase = testGetUseSystemThemeUseCase
                 val getUseDarkThemeUseCase = testGetUseDarkThemeUseCase
+
+                beforeSpec { Dispatchers.setMain(testDispatcher) }
+                afterSpec { Dispatchers.resetMain() }
 
                 beforeTest {
                     coEvery { getUseSystemThemeUseCase.execute() } returns true
@@ -55,6 +65,7 @@ internal class SettingsViewModelTest :
                         "When: OnUseSystemThemeClick" - {
 
                             viewModel.onEvent(SettingsEvent.OnUseSystemThemeClick)
+                            testDispatcher.scheduler.advanceUntilIdle()
 
                             "Then: updateUseSystemThemeUseCase should be called" {
                                 with(viewModel.state.value) {
@@ -83,6 +94,7 @@ internal class SettingsViewModelTest :
                         "When: OnUseDarkThemeClick" - {
 
                             viewModel.onEvent(SettingsEvent.OnUseDarkThemeClick)
+                            testDispatcher.scheduler.advanceUntilIdle()
 
                             "Then: useDarkTheme should be changed" {
                                 with(viewModel.state.value) {
@@ -109,6 +121,7 @@ internal class SettingsViewModelTest :
                                 runTest {
                                     viewModel.navigationEvent.test {
                                         viewModel.onEvent(SettingsEvent.OnBackPressed)
+                                        testDispatcher.scheduler.advanceUntilIdle()
                                         awaitItem() shouldBe SettingsNavigationEvent.OnBackPress
                                         cancelAndIgnoreRemainingEvents()
                                     }
